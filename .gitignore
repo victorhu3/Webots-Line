@@ -1,3 +1,6 @@
+*.wbproj
+build/
+
 # Prerequisites
 *.d
 
@@ -27,6 +30,6 @@
 *.lib
 
 # Executables
-*.exe
+# *.exe
 *.out
 *.app
