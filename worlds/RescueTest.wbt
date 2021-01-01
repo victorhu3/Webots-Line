@@ -3554,3 +3554,7 @@ Solid {
 }
 TexturedBackground {
 }
+Robot {
+  name "Supervisor"
+  window "scoring_window"
+}
