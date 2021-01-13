@@ -14,10 +14,10 @@ void createGreen(float x, float y){//x and y locations in cm; denote top left co
 
 void setup() {
   size(900, 900);
-  //regular line cases: 1-8
+  //regular line cases: 0-10
   //intersection cases: 20-33
   //special tiles: 50
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i <= 10; i++){
     background(255);
     strokeCap(SQUARE);
     noFill();
@@ -29,10 +29,10 @@ void setup() {
     lineByCM(30,0,0,0);
     strokeWeight(CMToPix*2);
     switch(i){
+      case 0:
+        break;
       case 1:
-        fill(0);
-        noStroke();
-        rect(0, height/2, height, LINE_WIDTH);
+        line(0, height/2, height, height/2);
         break;
       case 2: 
         line(-20,height/2-20,height/2+20,height+20);
@@ -73,6 +73,15 @@ void setup() {
         lineByCM(0,15,11,25);
         lineByCM(11,25,19,5);
         lineByCM(19,5,30,15);
+        break;
+      case 9: 
+        strokeCap(PROJECT);
+        lineByCM(0,15,15,15);
+        lineByCM(15,15,15,30);
+        break;
+      case 10: 
+        strokeCap(PROJECT);
+        arc(CMToPix*30,CMToPix*30,CMToPix*30,CMToPix*30,PI,2*PI);
         break;
       case 20: 
         lineByCM(0,15,30,15);
