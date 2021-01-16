@@ -1,9 +1,42 @@
 <html>
-
-    <head>
+    <head> 
+        <div style="margin-left:20px;">
+            <h1 id="score"> Total Score: 0</h1>
+        </div>
     </head>
 
-    <body>
+    <body style="margin-left:20px;">
+        <div>
+            <h3 style="display:inline-block">Obstacle</h3>
+            <button>Add</button>
+            <button>Remove</button>
+            <br>
+            <label for="obstacle1">Obstacle 1: </label>
+            <input type="checkbox" id="obstacle1" name="obstacle1" onclick="clickScoringBox()">
+            <br>
+            <label for="obstacle2">Obstacle 2: </label>
+            <input type="checkbox" id="obstacle2" name="obstacle2" onclick="clickScoringBox()">
+            <br>
+            <label for="obstacle3">Obstacle 3: </label>
+            <input type="checkbox" id="obstacle3" name="obstacle3" onclick="clickScoringBox()">
+            <br>
+        </div>
+
+        <div>
+            <h3 style ="display: inline-block">Intersection</h3>
+            <button>Add</button>
+            <button>Remove</button>
+            <br>
+            <label for="intersection1">Intersection 1: </label>
+            <input type="checkbox" id="intersection1" name="intersection1" onclick="clickScoringBox()">
+            <br>
+            <label for="intersection2">Intersection 2: </label>
+            <input type="checkbox" id="intersection2" name="intersection2" onclick="clickScoringBox()">
+            <br>
+            <label for="intersection3">Intersection 3: </label>
+            <input type="checkbox" id="intersection3" name="intersection3" onclick="clickScoringBox()">
+            <br>
+        </div>
     </body>
 
 </html>
