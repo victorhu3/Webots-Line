@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+    <link rel = "stylesheet" href="main.css">
+
+    <script src="google-blockly-31ee4ea/blockly_uncompressed.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python.js"></script>
+    <script src="google-blockly-31ee4ea/msg/js/en.js"></script>
+
+    <script src="google-blockly-31ee4ea/blocks/logic.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/loops.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/math.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/text.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/lists.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/colour.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/variables.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/procedures.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/motors.js"></script>
+		<script src="google-blockly-31ee4ea/blocks/time.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/sensors.js"></script>
+    <script src="google-blockly-31ee4ea/blocks/other.js"></script>
+		<script src="google-blockly-31ee4ea/blocks/camera.js"></script>
+    
+    <script src="google-blockly-31ee4ea/generators/python/logic.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/loops.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/math.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/text.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/lists.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/colour.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/variables.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/procedures.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/motors.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/time.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/sensors.js"></script>
+    <script src="google-blockly-31ee4ea/generators/python/other.js"></script>
+		<script src="google-blockly-31ee4ea/generators/python/camera.js"></script>
+    
+    <head>
+        <div>
+            <h1 id = "projectTitle" contenteditable="true" style = "display: inline-block">Untitled</h1>
+           <!-- <button onclick = "document.getElementById('projectTitle').focus()">rename</button>-->
+            <div id = "editorButtons">
+                <button id = "submit">Submit</button>
+                <button id = "save">Save</button>
+                <button id = "restore">Restore</button>
+            </div>
+        </div>
+
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="closeButton">&times;</span>
+                <div id = "saveList" style="margin-top: 50px;">
+               <a style = "display:block;">f</a>
+               <a style = "display:block;">f </a>
+                </div>
+            </div>
+
+        </div>
+    </head>
+    <body>
+
+	<xml id="toolbox" style="display: none">
+    <category name="Variables" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
+	<category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+	<category name="Motors" colour=120>
+      <block type="motors_setupmotor"></block>
+      <block type="motors_setspeed"></block>
+      <block type="motors_resetencoders"></block>
+      <block type="motors_getencoders"></block>
+    </category>
+	<category name="Time" colour=80>
+      <block type="time_delay"></block>
+      <block type="time_gettime"></block>
+      <block type="time_resettime"></block>
+    </category>
+    <category name="Sensors" colour=60>
+      <block type="sensors_initializegyro"></block>
+      <block type="sensors_initializegps"></block>
+      <block type="sensors_initializesensor"></block>
+      <block type="sensors_getgyrovals"></block>
+      <block type="sensors_getgpsvals"></block>
+      <block type="sensors_getdistvals"></block>
+      <block type="sensors_getcolor"></block>
+      <block type="sensors_getgray"></block>
+    </category>
+	<category name="Control" colour=240>
+	  <block type="logic_boolean"></block>
+	  <block type="controls_if"></block>
+	  <block type="controls_repeat_ext"></block>
+	  <block type="logic_compare"></block>
+	  <block type="logic_operation"></block>
+	  <block type="controls_whileUntil"></block> 
+		<block type="controls_flow_statements"></block>
+	</category>
+	<category name="Lists" colour=210>
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with"></block>
+      <block type="lists_length"></block>
+      <block type="lists_getIndex">
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+	  <block type="lists_append">
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR">{listVariable}</field>
+          </block>
+        </value>
+      </block>
+    </category>
+	<category name="Math" colour=180>
+	  <block type="math_number"></block>
+	  <block type="math_arithmetic"></block>
+	  <block type="math_abs"></block>
+	  <block type="math_mod"></block>
+	  <block type="math_round2"></block>
+	</category>
+	<category name="Camera" colour="#AABBCC"> <!-- Change color -->
+		<block type="camera_initializecamera"></block>
+	  <block type="camera_getrecognitionobjects"></block>
+		<block type="camera_getnumobj"></block>
+		<block type="camera_getobjcolors"></block>
+		<block type="camera_getobjpos"></block>
+		<block type="camera_getobjang"></block>
+	</category>
+	<category name="Other" colour=0>
+		<block type="other_start"></block>
+		<block type="other_end"></block>
+		<block type="text"></block>
+		<block type="concattext"></block>
+		<block type="concattext2"></block>
+		<block type="text_print"></block>
+	</category>
+        </xml>
+        <div id = "blocklyContainer">
+        <div id="blocklyDiv" style="height:98%;"></div>
+        </div>
+        <div id ="textCodeArea">
+            <h3>Text Output</h3>
+            <div id = "codeBox"> 
+                <code id="textCode">
+
+                </code>
+            </div>
+        </div>
+
+    </body>
+</html>
+<script src="main.js"></script>
+    <script>
+    var workspace = Blockly.inject(blocklyDiv,
+        {toolbox: document.getElementById('toolbox')});
+    workspace.addChangeListener(realTimeUpdate);
+</script>

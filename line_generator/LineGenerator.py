@@ -19,23 +19,32 @@ dir['N'] = dir['n'] = 0
 dir['E'] = dir['e'] = 4.71
 dir['S'] = dir['s'] = 3.15
 dir['W'] = dir['w'] = 1.57
+file.write('    Solid {\n      translation')
+file.write(' ' + str(numCol / 2 * 0.3 - 0.15) + ' 0 ' + str(numRow / 2 * 0.3 - 0.15) + '\n')
+file.write('      boundingObject Plane {\n')
+file.write('        size ' + str(numCol * 0.3) + ' ' + str(numRow * 0.3) + '\n      }\n    }\n')
 for x in range(numRow):
     for y in range(numCol):
         print('\nTile #' + str(x * numCol + y) + ':')
-        imgNum = input('Enter image number (Press enter for empty tile): ')
+        imgNum = input('Enter image number (Press enter for blank tile): ')
         if (imgNum != ''):
             imgNum = int(imgNum)
             orientation = input('Enter orientation (N, E, S, W): ')
+        else:
+            imgNum = '0'
+            orientation = 'N'
 
-            file.write('    Solid {\n      translation')
-            file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
-            file.write('      rotation 0 1 0 ' + str(dir[orientation]) + '\n')		#rotation
-            file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
-            file.write(str(imgNum) + '.png\"\n')		#imgNum
-            file.write('              ]\n            }\n          }\n          geometry Plane {\n')
-            file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
-            file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n      boundingObject Shape {\n        geometry Plane {\n          size 0.3 0.3\n        }\n      }\n    }\n')
+        file.write('    Solid {\n      translation')
+        file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
+        file.write('      rotation 0 1 0 ' + str(dir[orientation]) + '\n')		#rotation
+        file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
+        file.write(str(imgNum) + '.png\"\n')		#imgNum
+        file.write('              ]\n            }\n          }\n          geometry Plane {\n')
+        file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
+        file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
 file.write('  ]\n}')
 
 file.close()
 header.close()
+
+#      boundingObject Shape {\n        geometry Plane {\n          size 0.3 0.3\n        }\n      }\n    
