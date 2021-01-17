@@ -1,4 +1,4 @@
-#VRML_SIM R2020b utf8
+#VRML_SIM R2021a utf8
 WorldInfo {
   coordinateSystem "NUE"
 }
@@ -504,14 +504,14 @@ DEF cornerTile Solid {
   locked TRUE
 }
 Viewpoint {
-  orientation 0.5185226150844304 0.7192813731645727 0.4623511694204852 4.486088235328394
-  position -0.7334428865849866 1.9154592795807326 0.7324693084788514
+  orientation 0.5097330978346329 0.7192614718879116 0.4720541325203534 4.449474973181432
+  position -0.5949734594079981 1.835015007740885 0.5157667211014918
 }
 TexturedBackgroundLight {
 }
 Robot {
-  translation -0.014838 0.0813941 0.740569
-  rotation 0 1 0 3.14159
+  translation -0.014822961531475757 0.06820990711473675 0.7383034280364554
+  rotation 0.00011114823118386998 0.9998624795582503 -0.016583413933770143 3.1415879049731497
   scale 0.7 0.7 0.7
   children [
     Camera {
@@ -1054,20 +1054,23 @@ Robot {
     }
     DEF CASTER_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
+        position 2.7169665452037853e-08
         axis 0 1 0
         anchor 0 -0.0011939 0.191844
         staticFriction 0.05
       }
       endPoint Solid {
         translation 0 -0.0011939 0.191844
+        rotation 0 0.9999999999999999 0 2.9802322387695313e-08
         children [
           DEF casterWheelRim HingeJoint {
             jointParameters HingeJointParameters {
+              position 0.003006961966006079
               anchor 0 -0.0521014 0.012843
             }
             endPoint Solid {
               translation 0 -0.0521014 0.012843
-              rotation 1 0 0 0
+              rotation 1 0 0 0.003006961965946224
               children [
                 DEF CASTER_WHEEL_RIM_SHAPE Shape {
                   appearance PBRAppearance {
@@ -1145,6 +1148,8 @@ Robot {
               }
               physics Physics {
               }
+              linearVelocity 3.408143865465304e-11 -6.652860159127451e-08 6.13289836010115e-09
+              angularVelocity 2.3363422269917268e-07 8.297238387924053e-10 -7.201384349113654e-10
             }
           }
           DEF FORK_SHAPE Shape {
@@ -1202,6 +1207,8 @@ Robot {
         }
         physics Physics {
         }
+        linearVelocity -4.006066807732775e-11 -6.806752351574015e-08 9.47394712260368e-09
+        angularVelocity 2.3380702331464405e-07 8.319832856786263e-10 -7.13137115437282e-10
       }
     }
     DEF GREEN_LED LED {
@@ -1228,6 +1235,7 @@ Robot {
     }
     DEF LEFT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
+        position -7.665258035304483e-09
         axis -1 0 0
         anchor -0.165 -0.0001156 0
       }
@@ -1241,8 +1249,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.1649999932788256 -4.2050079560918365e-05 -2.155532017086236e-06
-        rotation -0.0759688937820327 0.9955533255222754 -0.05569832330575861 1.3234378880962684e-06
+        translation -0.1649999932788256 -4.205007954439565e-05 -2.1555314533071172e-06
+        rotation -0.0702061458730155 0.9959749825329869 -0.05572190996433431 1.3220949776660941e-06
         children [
           DEF BLACK_CYLINDER_SHAPE Shape {
             appearance PBRAppearance {
@@ -1406,6 +1414,8 @@ Robot {
         }
         physics Physics {
         }
+        linearVelocity 4.257740501468803e-11 -9.980513771248362e-08 1.572035125484619e-08
+        angularVelocity 2.3046331643338928e-07 1.4611476824438208e-09 -7.350198574749405e-10
       }
     }
     DEF LOWER_YELLOW_LED LED {
@@ -1505,6 +1515,7 @@ Robot {
     }
     DEF RIGHT_WHEEL HingeJoint {
       jointParameters HingeJointParameters {
+        position 8.043188271663373e-09
         axis -1 0 0
         anchor 0.165032 -0.0001156 0
       }
@@ -1599,6 +1610,8 @@ Robot {
         boundingObject USE BOUNDING_WHEEL
         physics Physics {
         }
+        linearVelocity 4.2570675411657835e-11 -9.974073267939287e-08 1.6194219446658164e-08
+        angularVelocity 2.3714650635313318e-07 1.4596627021057152e-09 -7.349696815387394e-10
       }
     }
     DEF SO_0 DistanceSensor {
@@ -3537,6 +3550,8 @@ Robot {
     ]
   }
   controller "test"
+  linearVelocity 5.370113863406951e-11 -8.968710751562438e-08 2.545042300170772e-08
+  angularVelocity 2.3380627882746887e-07 1.4607693306095753e-09 -7.304698181701306e-10
 }
 Solid {
   translation 0.3 0.12 1.12
@@ -3557,4 +3572,26 @@ TexturedBackground {
 Robot {
   name "Supervisor"
   window "scoring_window"
+}
+DEF Checkpoints Group {
+  children [
+    Solid {
+      translation 0 0 0.05
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0.666667 0
+            }
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.03
+          }
+        }
+      ]
+      name "checkpoint1"
+      description "Hello"
+    }
+  ]
 }
