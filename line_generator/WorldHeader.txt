@@ -1640,5 +1640,3 @@ Robot {
   }
   controller "youbot"
 }
-DEF Tiles Group {
-	children [

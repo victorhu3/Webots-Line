@@ -1,6 +1,5 @@
 *.wbproj
 build/
-
 *.swp
 
 # Prerequisites
