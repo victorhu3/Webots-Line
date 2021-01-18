@@ -1,10 +1,10 @@
-#VRML_SIM R2021a utf8
+#VRML_SIM R2020b utf8
 WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.6830633111339786 0.7152849571727076 0.14762094372115134 0.5868374978311836
-  position 2.891205080425134 2.0192309237357264 4.086333795456365
+  orientation -0.9992641658571878 0.033958318765138835 0.017831416667882044 0.9676524241670658
+  position 1.3402216026784468 3.858117075375084 3.421655325633366
 }
 TexturedBackground {
 }
@@ -598,8 +598,6 @@ Robot {
                                               0 0 8.29319e-07
                                             ]
                                           }
-                                          linearVelocity -1.8407940191929529e-09 -2.6695278292436866e-08 5.348640334623835e-09
-                                          angularVelocity 4.276780532278472e-08 1.8657608402113694e-07 -9.092184703747729e-11
                                         }
                                       }
                                       SliderJoint {
@@ -610,7 +608,7 @@ Robot {
                                         device [
                                           LinearMotor {
                                             name "finger2"
-                                            minPosition -1.9239755775785385e-13
+                                            minPosition -3.849873457356013e-13
                                             maxPosition 0.025
                                             maxForce 100
                                           }
@@ -644,8 +642,6 @@ Robot {
                                           name "finger2"
                                           boundingObject USE FINGER_BO
                                           physics USE FINGER_PH
-                                          linearVelocity -1.8407860378846195e-09 -2.6695823466767785e-08 4.229185689415659e-09
-                                          angularVelocity 4.276783215267412e-08 1.8657608897801967e-07 -9.118030268515809e-11
                                         }
                                       }
                                     ]
@@ -668,8 +664,6 @@ Robot {
                                         0 0 0
                                       ]
                                     }
-                                    linearVelocity -1.8411894613894432e-09 -2.661718867218152e-08 3.9549159951588355e-09
-                                    angularVelocity 4.276781841831612e-08 1.8657608163445215e-07 -9.102878158049269e-11
                                   }
                                 }
                               ]
@@ -705,8 +699,6 @@ Robot {
                                   0 0 -0.00015098
                                 ]
                               }
-                              linearVelocity -1.841809417375604e-09 -2.580205919553123e-08 2.6718536800268903e-09
-                              angularVelocity 4.276779637676453e-08 1.8658478596591417e-07 -9.104909498581282e-11
                             }
                           }
                         ]
@@ -729,8 +721,6 @@ Robot {
                             0 0 -5.99276e-20
                           ]
                         }
-                        linearVelocity -1.8424183314011595e-09 -2.2686299644931672e-08 2.699579376968458e-09
-                        angularVelocity 4.2767867567924954e-08 1.8658478358632116e-07 -9.101975208155926e-11
                       }
                     }
                   ]
@@ -753,8 +743,6 @@ Robot {
                       0 0 1.56701e-20
                     ]
                   }
-                  linearVelocity -1.843715948896802e-09 -1.7123172984452792e-08 -1.4370846750088384e-09
-                  angularVelocity 1.5756875939601472e-08 1.8658458401070591e-07 -1.0753245164827241e-10
                 }
               }
             ]
@@ -778,8 +766,6 @@ Robot {
                 -0.000533052 -0.00082008 -0.00062712
               ]
             }
-            linearVelocity -8.37236687953425e-10 -8.518107238611663e-09 4.4374974931898635e-10
-            angularVelocity -1.7572267564189537e-09 1.865844706200957e-07 -9.676510419325683e-11
           }
         }
       ]
@@ -997,8 +983,6 @@ Robot {
           density -1
           mass 0.4
         }
-        linearVelocity 5.4749964608763e-13 2.8514347755399713e-08 -2.4420507000549393e-11
-        angularVelocity -1.8076982953418634e-09 -2.7581722990331245e-13 -3.436414098684889e-11
       }
     }
     DEF WHEEL2 HingeJoint {
@@ -1192,8 +1176,6 @@ Robot {
           density -1
           mass 0.4
         }
-        linearVelocity 5.480954392639678e-13 2.8600358953561885e-08 -2.4369788119542565e-11
-        angularVelocity -1.8078599415332663e-09 -2.7580968753050717e-13 -3.4039958056814986e-11
       }
     }
     DEF WHEEL3 HingeJoint {
@@ -1387,8 +1369,6 @@ Robot {
           density -1
           mass 0.4
         }
-        linearVelocity 4.997021553097988e-13 2.2455525504906344e-08 -2.4883020458691044e-11
-        angularVelocity -1.4749803854541418e-09 -2.7285053501303524e-13 -3.452609566655471e-11
       }
     }
     DEF WHEEL4 HingeJoint {
@@ -1582,8 +1562,6 @@ Robot {
           density -1
           mass 0.4
         }
-        linearVelocity 4.986048492728879e-13 2.2541543282170555e-08 -2.483524017520633e-11
-        angularVelocity -1.4753429659856528e-09 -2.7355702834395204e-13 -3.458012631502823e-11
       }
     }
     DEF PLATE Solid {
@@ -1705,6 +1683,12 @@ Robot {
   controller "supervisor"
   supervisor TRUE
   window "blockly"
+}
+Robot {
+  name "Game_Supervisor"
+  controller "Game_Supervisor"
+  supervisor TRUE
+  window "scoring_window"
 }
 DEF Checkpoints Group {
   children [
