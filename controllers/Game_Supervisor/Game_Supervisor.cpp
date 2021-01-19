@@ -13,7 +13,7 @@ using namespace std;
 
 int checkpointCmp(Node* a, Node* b) {
 
-   return a->getField("name")->getSFString() > b->getField("name")->getSFString(); 
+   return a->getField("name")->getSFString() < b->getField("name")->getSFString(); 
 }
 
 double findDistance(const double a[], const double b[]) {

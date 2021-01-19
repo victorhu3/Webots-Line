@@ -1705,7 +1705,7 @@ DEF Checkpoints Group {
           }
         }
       ]
-      name "checkpoint0"
+      name "checkpoint2"
       description "W"
     }
     Solid {
@@ -1741,7 +1741,7 @@ DEF Checkpoints Group {
           }
         }
       ]
-      name "checkpoint2"
+      name "checkpoint0"
       description "E"
     }
   ]
