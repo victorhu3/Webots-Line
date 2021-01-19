@@ -38,6 +38,10 @@ const clickScoringBox = function() {
     incrementScore(scoreValue);
 }
 
+const messageSupervisor = function(msg) {
+    window.robotWindow.send(msg);
+}
+
 window.onload = function() {
     window.robotWindow = webots.window("scoring_window");
     window.robotWindow.receive = null;

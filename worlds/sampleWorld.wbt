@@ -10,7 +10,7 @@ TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-Robot {
+DEF player0 Robot {
   translation 2.398529843977586 0.03133464134021855 1.805778202760703
   rotation -0.577423617335406 0.57742075834392 0.5772064050032941 2.094619099771494
   scale 0.3 0.3 0.3
@@ -508,7 +508,7 @@ Robot {
                                   ]
                                   endPoint Solid {
                                     translation 0 0 0.081
-                                    rotation 0.018609952965968242 -0.9865824380588643 0.16219976129585334 -1.7419986164574328e-12
+                                    rotation 0 0 1 0
                                     children [
                                       Shape {
                                         appearance PBRAppearance {
@@ -1675,8 +1675,6 @@ Robot {
     ]
   }
   controller "my_controller"
-  linearVelocity 7.008887739992332e-13 6.486152616812015e-09 -3.2024370131944134e-11
-  angularVelocity -1.6419797692213943e-09 -2.740433388234201e-13 -3.436285500713494e-11
 }
 Robot {
   name "Supervisor"
@@ -2942,8 +2940,6 @@ DEF Objects Group {
       physics Physics {
         mass 7
       }
-      linearVelocity 9.781357028008593e-18 -3.2778256471426927e-09 8.403084841968839e-18
-      angularVelocity 3.7492862165552855e-16 -1.1108248330056392e-16 4.1712685944789076e-17
     }
     Solid {
       translation 0.3 0.05896528080316811 1.47
@@ -2977,8 +2973,6 @@ DEF Objects Group {
       physics Physics {
         mass 7
       }
-      linearVelocity -2.4565739110669647e-18 -3.2778255288144423e-09 4.5520575281531225e-17
-      angularVelocity 1.1247858649665857e-15 -2.0372562625082008e-16 5.598607525746158e-17
     }
     Wall {
       translation 0.45 0 -0.16
@@ -3060,7 +3054,6 @@ DEF Objects Group {
           physics Physics {
             mass 0.01
           }
-          linearVelocity 0 -7.689178184263414e-11 0
         }
         Solid {
           translation 0.352042 0.01998430400984119 0.244455
@@ -3084,7 +3077,6 @@ DEF Objects Group {
           physics Physics {
             mass 0.01
           }
-          linearVelocity 0 -7.689178184263414e-11 0
         }
         Solid {
           translation 0.520666 0.01998430400984119 0.0407639
@@ -3108,7 +3100,6 @@ DEF Objects Group {
           physics Physics {
             mass 0.01
           }
-          linearVelocity 0 -7.689178184263414e-11 0
         }
         Solid {
           translation 0.45056 0.01998430400984119 0.597966
@@ -3133,7 +3124,6 @@ DEF Objects Group {
           physics Physics {
             mass 0.01
           }
-          linearVelocity 0 -7.689178184263414e-11 0
         }
         Solid {
           translation 0.0323628 0.01998430400984119 0.0915155
@@ -3158,7 +3148,6 @@ DEF Objects Group {
           physics Physics {
             mass 0.01
           }
-          linearVelocity 0 -7.689178184263414e-11 0
         }
         Solid {
           translation 0.123229 0.01998430400984119 0.479263
@@ -3183,7 +3172,6 @@ DEF Objects Group {
           physics Physics {
             mass 0.01
           }
-          linearVelocity 0 -7.689178184263414e-11 0
         }
       ]
     }
