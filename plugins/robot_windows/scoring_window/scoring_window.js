@@ -67,28 +67,28 @@ const addScoringElement = function(type) {
 
 const removeScoringElement = function(type) {
 
-    var n = 0;
-    var scoreValue;
+    var elementType;
     switch(type) {
 
         case "obstacle":
-            n = Obstacle.n--;
-            scoreValue = Obstacle.scoreValue;
+            elementType = Obstacle;
             break;
         case "intersection":
-            n = Intersection.n--;
-            scoreValue = Intersection.scoreValue;
+            elementType = Intersection;
             break;
     }
 
-    var div = document.getElementById(type+n);
+    if(elementType.n == 0) 
+        return;
+
+    var div = document.getElementById(type+elementType.n);
     var checkbox = div.getElementsByTagName('input');
 
     if(checkbox[0].checked)
-        incrementScore(-scoreValue);
+        incrementScore(-elementType.scoreValue);
 
     event.srcElement.parentElement.removeChild(div);
-
+    elementType.n--;
 }
 
 const messageSupervisor = function(msg) {
