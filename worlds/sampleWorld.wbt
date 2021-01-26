@@ -3,20 +3,20 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.1088696726735512 0.9653221044576531 0.2372775358465307 3.975489210045585
-  position 0.5551690628255151 0.1083458153362818 0.29995662638031567
+  orientation -0.7227569123662962 -0.6491082736308752 -0.237235947382944 0.9363538766489152
+  position 0.8353590416698117 1.5228224604164664 2.5797921088102056
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-Robot {
+DEF BlocklySupervisor Robot {
   name "Supervisor"
   controller "supervisor"
   supervisor TRUE
   window "blockly"
 }
-Robot {
+DEF GameSupervisor Robot {
   name "Game_Supervisor"
   controller "Game_Supervisor"
   supervisor TRUE
@@ -1517,32 +1517,8 @@ DEF Objects Group {
     }
   ]
 }
-Solid {
-  translation 0.684822 0.0049996 0.40477
-  rotation 0 1 0 -0.1308996938995747
-  children [
-    Shape {
-      appearance Appearance {
-        material Material {
-          diffuseColor 1 0 0
-        }
-      }
-      geometry Box {
-        size 0.01 0.01 0.01
-      }
-    }
-  ]
-  name "solid(1)"
-  boundingObject Box {
-    size 0.01 0.01 0.01
-  }
-  physics Physics {
-    mass 0.01
-  }
-}
 DEF player0 Robot {
-  translation 0.778118 0.02921 0.407249
-  rotation 0.01798410100018131 0.9997020555981814 -0.016503700917849223 1.48537
+  translation 2.3968 0.02921 1.8025
   scale 0.3 0.3 0.3
   children [
     DEF default Group {

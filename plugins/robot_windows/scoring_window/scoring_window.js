@@ -1,5 +1,4 @@
 var scoreDisplay = document.getElementById("score");
-
 var score = 0;
 
 var Obstacle = {scoreValue: 15, n: 3};
@@ -13,7 +12,7 @@ const incrementScore = function(val) {
     scoreDisplay.innerText = text;
 }
 
-const clickScoringBox = function() {
+const clickScoringBox = function(event) {
 
     //strip off numbers from the name of the scoring element
     var scoringElement = event.srcElement.parentElement.id.replace(/[0-9]/g, '');
@@ -38,10 +37,10 @@ const clickScoringBox = function() {
     incrementScore(scoreValue);
 }
 
-const addScoringElement = function(type) {
+const addScoringElement = function(event) {
 
-    console.log(event.srcElement.parentElement);
     var n = 0;
+    var type = event.srcElement.parentElement.id;
     switch(type) {
 
         case "obstacle":
@@ -58,16 +57,19 @@ const addScoringElement = function(type) {
     const upperCasedLabel = type.charAt(0).toUpperCase() + type.slice(1) + " " + n;
     div.innerHTML = `
             <label for="${div.id}">${upperCasedLabel}: </label>
-            <input type="checkbox" name="${div.id}" onclick="clickScoringBox()">
+            <input type="checkbox" name="${div.id}">
             <br>
             `;
 
+
+    div.getElementsByTagName("input")[0].addEventListener('click', clickScoringBox);
     event.srcElement.parentElement.appendChild(div);
 }
 
-const removeScoringElement = function(type) {
+const removeScoringElement = function(event) {
 
     var elementType;
+    var type = event.srcElement.parentElement.id;
     switch(type) {
 
         case "obstacle":
@@ -91,11 +93,28 @@ const removeScoringElement = function(type) {
     elementType.n--;
 }
 
+window.robotWindow = webots.window("scoring_window");
+window.robotWindow.receive = null;
+
 const messageSupervisor = function(msg) {
     window.robotWindow.send(msg);
 }
 
-window.onload = function() {
-    window.robotWindow = webots.window("scoring_window");
-    window.robotWindow.receive = null;
+document.getElementById("LOPButton").addEventListener('click', function() {
+    messageSupervisor("L");
+});
+
+var inputs = document.getElementsByTagName("input");
+for(i = 0; i < inputs.length; i++) {
+    inputs[i].addEventListener('click', clickScoringBox);
+}
+
+var addButtons = document.getElementsByClassName("add");
+for(i = 0; i < addButtons.length; i++) {
+    addButtons[i].addEventListener('click', addScoringElement);
+}
+
+var removeButtons = document.getElementsByClassName("remove");
+for(i = 0; i < removeButtons.length; i++) {
+    removeButtons[i].addEventListener('click', removeScoringElement);
 }
