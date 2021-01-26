@@ -60,7 +60,7 @@ Blockly.Python['other_start'] = function(block) {
 					'    ang = math.degrees(math.atan(coord[0]/math.fabs(coord[2])))\n' +
 					'    return ang\n\n' +
           'myRobot = Robot()\n' +
-          'timeStep = 32\n' +
+          'timeStep = 64\n' +
           'encObj = {}\n' +
           'lastTimeReset = 0\n' +
           'gyroEnable = False\n' +

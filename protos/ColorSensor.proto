@@ -2,7 +2,7 @@
 
 PROTO ColorSensor [
 	field SFVec3f    translation   0 0 0
-  field SFRotation rotation      0 1 0 1.57
+  field SFRotation rotation      0 1 0 0
 	field SFString   name          "colorSensor"
 ]
 {
@@ -11,8 +11,8 @@ PROTO ColorSensor [
 		rotation IS rotation
 		children [
 			Lidar {
-				translation 0.00999992 -0.02 -7.52464e-08
-				rotation 0 0 1 1.57
+				translation 0 0 0
+				rotation 0.577 0.577 0.577 2.09
 				scale 0.5 0.5 0.5
 				children [
 					DEF LINK Transform {
