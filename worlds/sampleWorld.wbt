@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.9992641658571878 0.033958318765138835 0.017831416667882044 0.9676524241670658
-  position 1.3402216026784468 3.858117075375084 3.421655325633366
+  orientation -0.9991061921843495 0.038326985832038876 0.017828597699211576 0.8714804513926939
+  position 1.4061463167256292 3.576554018163713 3.6496248615810374
 }
 TexturedBackground {
 }
@@ -1682,7 +1682,7 @@ Robot {
   supervisor TRUE
   window "blockly"
 }
-Robot {
+DEF Game_Supervisor Robot {
   name "Game_Supervisor"
   controller "Game_Supervisor"
   supervisor TRUE
