@@ -16,7 +16,7 @@ const incrementScore = function(val) {
 const clickScoringBox = function() {
 
     //strip off numbers from the name of the scoring element
-    var scoringElement = event.srcElement.id.replace(/[0-9]/g, '');
+    var scoringElement = event.srcElement.parentElement.id.replace(/[0-9]/g, '');
     var toggledOn = event.srcElement.checked;
     var scoreValue = 0;
 
@@ -36,6 +36,59 @@ const clickScoringBox = function() {
     //Negate the score if the checkbox was toggled off
     if(toggledOn == false) scoreValue = -scoreValue;
     incrementScore(scoreValue);
+}
+
+const addScoringElement = function(type) {
+
+    console.log(event.srcElement.parentElement);
+    var n = 0;
+    switch(type) {
+
+        case "obstacle":
+            n = ++Obstacle.n;
+            break;
+        case "intersection":
+            n = ++Intersection.n; 
+            break;
+    }
+
+    const div = document.createElement('div');
+    div.id = type + n;
+    
+    const upperCasedLabel = type.charAt(0).toUpperCase() + type.slice(1) + " " + n;
+    div.innerHTML = `
+            <label for="${div.id}">${upperCasedLabel}: </label>
+            <input type="checkbox" name="${div.id}" onclick="clickScoringBox()">
+            <br>
+            `;
+
+    event.srcElement.parentElement.appendChild(div);
+}
+
+const removeScoringElement = function(type) {
+
+    var elementType;
+    switch(type) {
+
+        case "obstacle":
+            elementType = Obstacle;
+            break;
+        case "intersection":
+            elementType = Intersection;
+            break;
+    }
+
+    if(elementType.n == 0) 
+        return;
+
+    var div = document.getElementById(type+elementType.n);
+    var checkbox = div.getElementsByTagName('input');
+
+    if(checkbox[0].checked)
+        incrementScore(-elementType.scoreValue);
+
+    event.srcElement.parentElement.removeChild(div);
+    elementType.n--;
 }
 
 const messageSupervisor = function(msg) {
