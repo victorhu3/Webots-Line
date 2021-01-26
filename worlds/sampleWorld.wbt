@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.7227569123662962 -0.6491082736308752 -0.237235947382944 0.9363538766489152
-  position 0.8353590416698117 1.5228224604164664 2.5797921088102056
+  orientation 0.4889196567365475 -0.8502634338315709 -0.1949606687143907 5.406132107600792
+  position 3.4593367119329175 1.3394771345249843 2.9438042920060354
 }
 TexturedBackground {
 }
@@ -1518,7 +1518,8 @@ DEF Objects Group {
   ]
 }
 DEF player0 Robot {
-  translation 2.3968 0.02921 1.8025
+  translation 2.39583 0.02921 1.8116
+  rotation 0 1 0 5.307156870259904e-06
   scale 0.3 0.3 0.3
   children [
     DEF default Group {
@@ -4488,7 +4489,7 @@ DEF player0 Robot {
                 }
               ]
               endPoint Solid {
-                translation 3.0276910608268986e-09 -7.595778806792526e-13 0.07699990824913344
+                translation 3.027691060826899e-09 -7.595778806792527e-13 0.07699990824913344
                 rotation 0 0 1 0
                 children [
                   Group {

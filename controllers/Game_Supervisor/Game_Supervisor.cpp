@@ -21,10 +21,10 @@ double findDistance(const double a[], const double b[]) {
     return sqrt(pow(a[0]-b[0],2) + pow(a[2]-b[2], 2));
 }
 
-const double SOUTH[] = {-.577, .577, .577, 2.095};
-const double EAST[] = {0, 0.707, 0.707, -3.1415};
-const double NORTH[] {-0.5774, -0.5774, -0.5772, 2.0946};
-const double WEST[] = {-1, 0, 0, 1.5712};
+const double SOUTH[] = {0, 1, 0, 0};
+const double EAST[] = {0, 1, 0, 1.57};
+const double NORTH[] {0, 1, 0, 3.15};
+const double WEST[] = {0, 1, 0, 4.72};
 
 int main() {
 
