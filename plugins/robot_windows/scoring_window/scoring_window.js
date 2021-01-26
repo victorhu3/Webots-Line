@@ -4,7 +4,7 @@ var score = 0;
 var Obstacle = {scoreValue: 15, n: 3};
 var Intersection = {scoreValue: 15, n: 3};
 
-const incrementScore = function(val) {
+function incrementScore(val) {
 
     score += val;
     
@@ -12,7 +12,7 @@ const incrementScore = function(val) {
     scoreDisplay.innerText = text;
 }
 
-const clickScoringBox = function(event) {
+function clickScoringBox(event) {
 
     //strip off numbers from the name of the scoring element
     var scoringElement = event.srcElement.parentElement.id.replace(/[0-9]/g, '');
@@ -37,7 +37,7 @@ const clickScoringBox = function(event) {
     incrementScore(scoreValue);
 }
 
-const addScoringElement = function(event) {
+function addScoringElement(event) {
 
     var n = 0;
     var type = event.srcElement.parentElement.id;
@@ -66,7 +66,7 @@ const addScoringElement = function(event) {
     event.srcElement.parentElement.appendChild(div);
 }
 
-const removeScoringElement = function(event) {
+function removeScoringElement(event) {
 
     var elementType;
     var type = event.srcElement.parentElement.id;
@@ -93,28 +93,30 @@ const removeScoringElement = function(event) {
     elementType.n--;
 }
 
-window.robotWindow = webots.window("scoring_window");
-window.robotWindow.receive = null;
-
-const messageSupervisor = function(msg) {
+function messageSupervisor(msg) {
     window.robotWindow.send(msg);
 }
 
-document.getElementById("LOPButton").addEventListener('click', function() {
-    messageSupervisor("L");
-});
+window.onload = function() {
+    window.robotWindow = webots.window("scoring_window");
+    window.robotWindow.receive = null;
 
-var inputs = document.getElementsByTagName("input");
-for(i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener('click', clickScoringBox);
+    document.getElementById("LOPButton").addEventListener('click', function() {
+        messageSupervisor("L");
+    });
+    var inputs = document.getElementsByTagName("input");
+    for(i = 0; i < inputs.length; i++) {
+        inputs[i].addEventListener('click', clickScoringBox);
+    }
+
+    var addButtons = document.getElementsByClassName("add");
+    for(i = 0; i < addButtons.length; i++) {
+        addButtons[i].addEventListener('click', addScoringElement);
+    }
+
+    var removeButtons = document.getElementsByClassName("remove");
+    for(i = 0; i < removeButtons.length; i++) {
+        removeButtons[i].addEventListener('click', removeScoringElement);
+    }
 }
 
-var addButtons = document.getElementsByClassName("add");
-for(i = 0; i < addButtons.length; i++) {
-    addButtons[i].addEventListener('click', addScoringElement);
-}
-
-var removeButtons = document.getElementsByClassName("remove");
-for(i = 0; i < removeButtons.length; i++) {
-    removeButtons[i].addEventListener('click', removeScoringElement);
-}
