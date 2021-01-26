@@ -2,7 +2,7 @@
 
 GitHub Repository for Robocup Junior Rescue Line Simulation competition
 
-![](documentation/sampleWorldImg.PNG)
+![](documentation/sampleWorldImg.png)
 
 Important Features:
 - Custom color and distance sensor
