@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.4889196567365475 -0.8502634338315709 -0.1949606687143907 5.406132107600792
-  position 3.4593367119329175 1.3394771345249843 2.9438042920060354
+  orientation 0.9998318620989117 -0.015724094968130868 -0.009434000702556553 5.202240608446252
+  position 1.4333479614293 3.8125212926755334 2.881339665800228
 }
 TexturedBackground {
 }
@@ -1272,6 +1272,7 @@ DEF Objects Group {
         }
       }
       physics Physics {
+        density -1
         mass 7
       }
     }
@@ -1305,6 +1306,7 @@ DEF Objects Group {
         }
       }
       physics Physics {
+        density -1
         mass 7
       }
     }
@@ -1387,6 +1389,7 @@ DEF Objects Group {
             }
           }
           physics Physics {
+            density -1
             mass 0.01
           }
         }
@@ -1411,6 +1414,7 @@ DEF Objects Group {
             }
           }
           physics Physics {
+            density -1
             mass 0.01
           }
         }
@@ -1435,6 +1439,7 @@ DEF Objects Group {
             }
           }
           physics Physics {
+            density -1
             mass 0.01
           }
         }
@@ -1460,6 +1465,7 @@ DEF Objects Group {
             }
           }
           physics Physics {
+            density -1
             mass 0.01
           }
         }
@@ -1485,6 +1491,7 @@ DEF Objects Group {
             }
           }
           physics Physics {
+            density -1
             mass 0.01
           }
         }
@@ -1510,6 +1517,7 @@ DEF Objects Group {
             }
           }
           physics Physics {
+            density -1
             mass 0.01
           }
         }
