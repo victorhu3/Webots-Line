@@ -1,8 +1,20 @@
 var scoreDisplay = document.getElementById("score");
+var modal = document.getElementById("myModal");
+var modalMessage = document.getElementById("modalMessage");
+
 var score = 0;
 
 var Obstacle = {scoreValue: 15, n: 3};
 var Intersection = {scoreValue: 15, n: 3};
+
+function hideModal() {
+
+    modal.style.display="none";
+
+    var modalConfirmButton = document.getElementById("modalConfirm");
+    var modalConfirmButtonClone = modalConfirmButton.cloneNode(true);
+    modalConfirmButton.parentNode.replaceChild(modalConfirmButtonClone, modalConfirmButton);
+}
 
 function incrementScore(val) {
 
@@ -68,6 +80,17 @@ function addScoringElement(event) {
 
 function removeScoringElement(event) {
 
+    modalMessage.innerHTML = "Are you sure you want to remove <b>" + event.srcElement.parentElement.id + "</b> field?";
+    modal.style.display="block"; 
+    document.getElementById("modalConfirm").addEventListener('click', function() {
+
+        removeScoringElementConfirmed(event);
+        hideModal();
+    });
+}
+
+function removeScoringElementConfirmed(event) {
+
     var elementType;
     var type = event.srcElement.parentElement.id;
     switch(type) {
@@ -118,5 +141,17 @@ window.onload = function() {
     for(i = 0; i < removeButtons.length; i++) {
         removeButtons[i].addEventListener('click', removeScoringElement);
     }
+
+    var closeModalButtons = document.getElementsByClassName("closeButton");
+    for(i = 0; i < closeModalButtons.length; i++) {
+        closeModalButtons[i].addEventListener('click', hideModal);
+    }
+    window.addEventListener('click', function(event) {
+
+        if(event.target == modal) {
+
+            hideModal();
+        }
+    });
 }
 
