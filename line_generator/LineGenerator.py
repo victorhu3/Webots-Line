@@ -13,11 +13,16 @@ file.write('DEF Checkpoints Group {\n  children [\n')
 for x in range(numCheckpoint):
     tile = int(input('Checkpoint ' + str(x + 1) + ' tile number: '))
     direction = input('Checkpoint ' + str(x + 1) + ' direction: ')
+    if x == 0:
+        tileBetween = str(input('Input the number of tiles between start tile and checkpoint 1: '))
+    else:
+        tileBetween = str(input('Input the number of tiles between checkpoints ' + str(x) + ' and ' + str(x + 1) + ': '))
+
     file.write('    Solid {\n')
     file.write('      translation ' + str(int(tile % numCol) * 0.3 - 0.12) + ' 0 ' + str(int(tile / numCol) * 0.3 - 0.12) + '\n')
     file.write('      children [\n        Shape {\n          appearance Appearance {\n            material Material {\n              diffuseColor 1 0.666667 0\n            }\n          }\n          geometry Cylinder {\n            height 0.02\n            radius 0.03\n          }\n        }\n      ]\n')
     file.write('      name \"checkpoint' + str(x) + '\"\n')
-    file.write('      description \"' + direction.upper() + '\"\n    }\n')
+    file.write('      description \"' + direction.upper() + tileBetween + '\"\n    }\n')
 file.write('  ]\n}\n')
 
 print('\nOpen the Webots-Line\\tiles folder')
