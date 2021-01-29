@@ -167,7 +167,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/23.png"
+                "../tiles/25.png"
               ]
             }
           }
@@ -349,7 +349,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/21.png"
+                "../tiles/23.png"
               ]
             }
           }
@@ -367,7 +367,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/13.png"
+                "../tiles/15.png"
               ]
             }
           }
@@ -404,7 +404,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/23.png"
+                "../tiles/25.png"
               ]
             }
           }
@@ -639,7 +639,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/23.png"
+                "../tiles/25.png"
               ]
             }
           }
@@ -712,7 +712,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/12.png"
+                "../tiles/14.png"
               ]
             }
           }
@@ -786,7 +786,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/9.png"
+                "../tiles/11.png"
               ]
             }
           }
@@ -896,7 +896,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/11.png"
+                "../tiles/13.png"
               ]
             }
           }
@@ -1116,7 +1116,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/13.png"
+                "../tiles/15.png"
               ]
             }
           }
@@ -1153,7 +1153,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/19.png"
+                "../tiles/21.png"
               ]
             }
           }
@@ -1227,7 +1227,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/9.png"
+                "../tiles/11.png"
               ]
             }
           }

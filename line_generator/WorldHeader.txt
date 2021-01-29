@@ -12,7 +12,7 @@ TexturedBackgroundLight {
 }
 DEF player0 Robot {
   translation 0 0 0
-  rotation 0 1 0 0
+  rotation 0 1 0 -1.57
   scale 0.3 0.3 0.3
   children [
     DEF default Group {
