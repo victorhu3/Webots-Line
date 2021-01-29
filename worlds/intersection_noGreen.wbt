@@ -10,6 +10,18 @@ TexturedBackground {
 }
 TexturedBackgroundLight {
 }
+DEF BlocklySupervisor Robot {
+  name "Supervisor"
+  controller "supervisor"
+  supervisor TRUE
+  window "blockly"
+}
+DEF GameSupervisor Robot {
+  name "Game_Supervisor"
+  controller "Game_Supervisor"
+  supervisor TRUE
+  window "scoring_window"
+}
 DEF player0 Robot {
   translation 1.10461 -2.22045e-16 0.00265079
   rotation 0 1 0 1.5708
