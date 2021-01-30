@@ -17,6 +17,8 @@ tileSize = 0.3 #in meters
 dir = {}
 imgNum = 0
 walls = []
+generateBounds = True;#to create walls that bound the field
+boundWallHeight = 0.15;
 
 
 orientation = ''
@@ -35,10 +37,20 @@ for x in range(numRow):
         if (imgNum != ''):
             imgNum = int(imgNum)
             orientation = input('Enter orientation (N, E, S, W): ')
-            wallStr = input('Enter wall location(s), separated by commas (N, E, S, W):')
-            wallLocs = wallStr.split(',')
-            for wallLoc in wallLocs:
-                walls.append([x * numCol + y,wallLoc])
+            wallStr = input('Enter wall location(s), separated by commas (N, E, S, W), or leave blank for no wall:')
+            wallOrientations = wallStr.split(',')
+            for wallOrientation in wallOrientations:
+	            if(wallOrientation == 'N' or wallOrientation == 'S' or wallOrientation == 'W' or wallOrientation == 'E')
+				    walls.append([x * numCol + y,wallOrientation,0.15])#location, orientation, height
+            if generateBounds:
+                if (not ('N' in wallOrientations)) and x == 0:
+                    walls.append([x * numCol + y,'N',boundWallHeight])
+                if (not ('S' in wallOrientations)) and x == numRow-1:
+                    walls.append([x * numCol + y,'S',boundWallHeight])
+                if (not ('W' in wallOrientations)) and y == 0:
+                    walls.append([x * numCol + y,'W',boundWallHeight])
+                if (not ('E' in wallOrientations)) and y == numRow-1:
+                    walls.append([x * numCol + y,'E',boundWallHeight])
         else:
             imgNum = '0'
             orientation = 'N'
@@ -93,7 +105,7 @@ for y in range(len(walls)):
         file.write('      rotation 0 1 0 0 \n')
     else:
         file.write('      rotation 0 1 0 -1.57 \n')
-    file.write('      size 0.3 0.15 0.01\n      appearance Roughcast {\n        colorOverride 1 1 1\n        textureTransform TextureTransform {\n          scale 1 2.4\n        }\n      }\n    }\n')
+    file.write('      size 0.3 ' + str(walls[y][2]) + ' 0.01\n      appearance Roughcast {\n        colorOverride 1 1 1\n        textureTransform TextureTransform {\n          scale 1 2.4\n        }\n      }\n    }\n')
 file.write(' ]\n}\n')
 
 file.close()
