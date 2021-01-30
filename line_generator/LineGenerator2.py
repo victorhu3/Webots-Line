@@ -35,7 +35,7 @@ for x in range(numRow):
         if (imgNum != ''):
             imgNum = int(imgNum)
             orientation = input('Enter orientation (N, E, S, W): ')
-            wallStr = input('Enter wall location (N, E, S, W):')
+            wallStr = input('Enter wall location(s), separated by commas (N, E, S, W):')
             wallLocs = wallStr.split(',')
             for wallLoc in wallLocs:
                 walls.append([x * numCol + y,wallLoc])

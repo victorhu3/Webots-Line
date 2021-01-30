@@ -3724,7 +3724,7 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.3 0 0.0
-      rotation 0 1 0 1.57
+      rotation 0 1 0 0
       children [
         Shape{
           appearance Appearance{
@@ -3762,7 +3762,7 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.3 0 0.3
-      rotation 0 1 0 4.71
+      rotation 0 1 0 3.15
       children [
         Shape{
           appearance Appearance{
@@ -3798,8 +3798,8 @@ DEF Obstacles Group {
       }
     }
     Wall {
-      translation 0.15 0 0.0
-      rotation 0 1 0 -1.57 
+      translation 0.3 0 -0.15
+      rotation 0 1 0 0 
       size 0.3 0.15 0.01
       appearance Roughcast {
         colorOverride 1 1 1
@@ -3820,7 +3820,29 @@ DEF Obstacles Group {
       }
     }
     Wall {
-      translation 0.44999999999999996 0 0.3
+      translation -0.15 0 0.3
+      rotation 0 1 0 -1.57 
+      size 0.3 0.15 0.01
+      appearance Roughcast {
+        colorOverride 1 1 1
+        textureTransform TextureTransform {
+          scale 1 2.4
+        }
+      }
+    }
+    Wall {
+      translation 0.3 0 0.44999999999999996
+      rotation 0 1 0 0 
+      size 0.3 0.15 0.01
+      appearance Roughcast {
+        colorOverride 1 1 1
+        textureTransform TextureTransform {
+          scale 1 2.4
+        }
+      }
+    }
+    Wall {
+      translation 0.15 0 0.3
       rotation 0 1 0 -1.57 
       size 0.3 0.15 0.01
       appearance Roughcast {
