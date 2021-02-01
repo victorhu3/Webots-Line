@@ -1,13 +1,14 @@
 checkpoints = []
-numRow = int(input('Number of Rows: '))
-numCol = int(input('Number of Col: '))
-worldName = input('Name of World (exclude .wbt): ')
+numRow = int(input('Number of rows: '))
+numCol = int(input('Number of col: '))
+worldName = input('Name of world to be created (exclude .wbt): ')
+mapName = input('Name of map to be created from your inputs (exclude .wbt): ')
 
 print('\nFor tile numbers: Tile 0 = top left corner, Tile 1 = 1 tile to the right, etc.')
 header = open('worldHeader.txt', 'r')
 file = open('../worlds/' + worldName + '.wbt', 'w')
 file.write(header.read())
-mapFile = open('maps/' + worldName + '.txt','w')
+mapFile = open('maps/' + mapName + '.txt','w')
 
 print('\nOpen the Webots-Line\\tiles folder')
 print('Each image has a number for its name')
@@ -18,7 +19,7 @@ tileSize = 0.3 #in meters
 dir = {}
 imgNum = 0
 walls = []
-generateBounds = True#to create walls that bound the field
+generateBounds = False#to create walls that bound the field
 manualWalls = False#manually input location of walls 
 boundWallHeight = 0.15
 
@@ -138,5 +139,6 @@ for y in range(len(walls)):
     file.write('      size 0.3 ' + str(walls[y][2]) + ' 0.01\n      appearance Roughcast {\n        colorOverride 1 1 1\n        textureTransform TextureTransform {\n          scale 1 2.4\n        }\n      }\n    }\n')
 file.write(' ]\n}\n')
 
+mapFile.close()
 file.close()
 header.close()
