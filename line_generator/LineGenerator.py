@@ -1,4 +1,5 @@
 checkpoints = []
+print('\nTo create world from an existing map, run LineGeneratorFromMap.py instead')
 numRow = int(input('Number of rows: '))
 numCol = int(input('Number of col: '))
 worldName = input('Name of world to be created (exclude .wbt): ')
@@ -9,6 +10,10 @@ header = open('worldHeader.txt', 'r')
 file = open('../worlds/' + worldName + '.wbt', 'w')
 file.write(header.read())
 mapFile = open('maps/' + mapName + '.txt','w')
+mapFile.write('Maintain current formatting when making modifications. Sample formatting for entries:\n')
+mapFile.write('   0:3e where 0 is the column number, 3 is the tile number, and e is the orientation\n')
+mapFile.write('   2-4:5n is equivalent to 2:5n,3:5n,4:5n\n\n' + str(numRow) + 'X' + str(numCol) + '\n')
+
 
 print('\nOpen the Webots-Line\\tiles folder')
 print('Each image has a number for its name')
@@ -142,3 +147,5 @@ file.write(' ]\n}\n')
 mapFile.close()
 file.close()
 header.close()
+
+print('\nTo modify the existing world\'s map, go to the maps folder, select and modify the appropriate map, and then run LineGeneratorFromMap.py')

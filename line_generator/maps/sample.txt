@@ -1,0 +1,11 @@
+Maintain current formatting when making modifications. Sample formatting for entries:
+   0:3e where 0 is the column number, 3 is the tile number, and e is the orientation
+   2-4:5n is equivalent to 2:5n,3:5n,4:5n
+
+6X7
+Row 1: 0-5:1n,6:4e
+Row 2: 0:4n, 1-3:8n, 4-5:3n , 6:1e
+Row 3: 0:1e, 1-5:0e, 6:1e
+Row 4: 0:1e, 1-5:0e, 6:1e
+Row 5: 0:1e, 1-5:0e, 6:1e
+Row 6: 0:4w , 1:8n , 2-5:11n, 6:4s

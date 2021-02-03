@@ -1,3 +1,4 @@
+print('\nTo create world without an existing map, run LineGenerator.py instead')
 mapName = input('Name of map to be used to create the world (exclude .txt): ')
 worldName = input('Name of world to be created (exclude .wbt): ')
 
@@ -11,10 +12,15 @@ map = mapFile.read()
 map = map.split('\n')
 if map[len(map)-1] == '':
     map = map[0:len(map)-1]
-for i in range(0,len(map)):
+i = 0
+while i < len(map):
+    if len(map[i]) < 5 or map[i][0:3] != 'Row':#get rid of extraneous rows
+        del map[i]
+        continue
     map[i] = map[i].replace(' ','')
     map[i] = map[i][5:len(map[i])]
     map[i] = map[i].split(',')
+    i += 1
 
 #calc # of rows and columns
 numRow = len(map)
@@ -41,9 +47,9 @@ for i in range(0,len(map)):
                 currCol = startCol + k
                 map[i].append(str(currCol) + ':' + tileNumOr)
             map[i][j] = str(endCol) + ':' + tileNumOr
-	
-print(numCol)	
-print(map)
+    
+#print(numCol)    
+#print(map)
 
 tileSize = 0.3 #in meters
 dir = {}
