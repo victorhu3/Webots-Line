@@ -1,0 +1,56 @@
+#VRML_SIM R2021a utf8
+
+PROTO speedbump [
+	field SFVec3f    translation   0 0 0
+  	field SFRotation rotation      0 0 1 -1.57
+	field SFString   name          "speedbump"
+]
+{
+	Transform {
+	  translation IS translation
+	  rotation IS rotation
+	  children [
+	    Solid {
+	      rotation 0 0 1 0
+	      children [
+		DEF SPEEDBUMP Shape {
+		  appearance Appearance {
+		   	material Material {
+           		 }
+		  }
+		  geometry Cylinder {
+		    height 0.3
+		    radius 0.01
+		  }
+		}
+	      ]
+	      name IS name
+	      boundingObject USE SPEEDBUMP
+	    }
+	    Solid {
+	      rotation 0 0 1 0
+	      children [
+		DEF SPEEDBUMP Shape {
+		  appearance Appearance {
+		    material Material {
+		      diffuseColor 0 0 0
+		    }
+		  }
+		  geometry Cylinder {
+		    height 0.02
+		    radius 0.0101
+		  }
+		}
+	      ]
+	      
+	      %{
+	      	 local blackLine = fields.name.value .. "black"
+	     	 print(blackLine)
+	      }%
+	      
+	      name IS blackLine
+	      boundingObject USE SPEEDBUMP
+	    }
+	  ]
+	}
+}

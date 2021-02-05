@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9998318620989117 -0.015724094968130868 -0.009434000702556553 5.202240608446252
-  position 1.4333479614293 3.8125212926755334 2.881339665800228
+  orientation -0.998569369277486 0.04447563558363843 0.029683877445426204 1.1783687898670332
+  position 1.8277525079109644 2.2915393837908105 2.149715049338056
 }
 TexturedBackground {
 }
@@ -1242,6 +1242,14 @@ DEF Tiles Group {
 }
 DEF Objects Group {
   children [
+    speedbump {
+      translation 2.4 0.00191074 0.9
+    }
+    speedbump {
+      translation 1.21 0.00096229 2.08167e-17
+      rotation 0.577656895078166 -0.5771968951617173 0.5771968951617173 -2.093935307179586
+      name "speedbump(1)"
+    }
     Solid {
       translation 2.11913 0.06198155094494915 0.301765
       rotation 0.6843817760307394 0.6395596738716391 -0.3501214192165532 1.3876964727491148e-16
@@ -4572,5 +4580,5 @@ DEF player0 Robot {
       0 0.06 0.06
     ]
   }
-  controller "my_controller"
+  controller "exampleLineTracingController"
 }
