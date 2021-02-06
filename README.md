@@ -8,7 +8,7 @@ GitHub Repository for Robocup Junior Rescue Line Simulation competition
 Important Links (make sure to check descriptions of YouTube videos for further important links):
 
 For everyone:
-- [Introduction and Installation Tutorial](https://youtu.be/yGWJ5y5TZ_0): IMPORTANT, introduces all features of Webots-Line
+- [Introduction and Installation Tutorial](https://youtu.be/x2waExn5sEo): IMPORTANT, introduces all features of Webots-Line
 - [Interacting with Webots Tutorial](https://youtu.be/WGLQeFt4Ml8) (6:57 - 19:14)
 
 For those using Blockly (drag-and-drop programming):
