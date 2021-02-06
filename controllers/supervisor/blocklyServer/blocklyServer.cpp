@@ -207,15 +207,21 @@ int main() {
   net::io_context ioc{ 1 };
     
   while(true) {
-    //Set reuse address to false to prevent multiple instances of blocklyServer on Windows
+    try {
+      //Set reuse address to false to prevent multiple instances of blocklyServer on Windows
 #ifdef WINDOWS
-    tcp::acceptor acceptor { ioc, {address, port}, false };
-#elif
-    tcp::acceptor acceptor { ioc, {address, port}, true };
+      tcp::acceptor acceptor { ioc, {address, port}, false };
+#else
+      tcp::acceptor acceptor { ioc, {address, port}, true };
 #endif
-    tcp::socket socket {ioc};
-    acceptor.accept(socket);
-      
-    thread(&do_session, move(socket)).detach();
+
+      tcp::socket socket {ioc};
+      acceptor.accept(socket);
+      thread(&do_session, move(socket)).detach();
+    }
+    catch (beast::system_error const& se) {
+
+      return 0;
+    }
   }
 }

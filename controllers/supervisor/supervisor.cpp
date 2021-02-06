@@ -61,47 +61,8 @@ STARTUPINFO si;
   
     char *args[] = {"./blocklyServer/blocklyServer", NULL};
     execvp(args[0], args);
-    return 0;
   }
 #endif
   
-  // create the Robot instance.
-  Supervisor *supervisor = new Supervisor();
-
-  Node *robot = supervisor->getFromDef("ROBOT");
-  Field *controller = robot->getField("controller");
-  // get the time step of the current world.
-  int timeStep = (int)supervisor->getBasicTimeStep();
-
-
-  // You should insert a getDevice-like function in order to get the
-  // instance of a device of the robot. Something like:
-  //  Motor *motor = robot->getMotor("motorname");
-  //  DistanceSensor *ds = robot->getDistanceSensor("dsname");
-  //  ds->enable(timeStep);
-
-  // Main loop:
-  // - perform simulation steps until Webots is stopping the controller
-  while ((supervisor->step(timeStep)) != -1) {
-
-
-    string message = supervisor->wwiReceiveText();
-    if(message.length() != 0) {
-      cout << message << endl;
-      
-      ofstream out("../my_controller/my_controller.py");
-      
-      out << message << endl;
-
-      out.close();
-      
-      supervisor->simulationReset();
-      robot->restartController();
-    }
-  }
-
-  // Enter here exit cleanup code.
-
-  delete supervisor;
   return 0;
 }
