@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.998569369277486 0.04447563558363843 0.029683877445426204 1.1783687898670332
-  position 1.8277525079109644 2.2915393837908105 2.149715049338056
+  orientation 0.9999291088224652 -0.01009762058200416 -0.006309943588680738 5.166075259461099
+  position 1.282182172279222 3.543992501678655 2.804902319923189
 }
 TexturedBackground {
 }
@@ -1116,7 +1116,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/15.png"
+                "../tiles/0.png"
               ]
             }
           }
@@ -2070,8 +2070,8 @@ DEF player0 Robot {
             staticFriction 0.05
           }
           endPoint Solid {
-            translation 0 -0.0011939 0.191844
-            rotation 0 -0.9999999999999999 0 0.05216071598639966
+            translation 3.0920710949094482e-06 -0.0012443623505272975 0.19189323504177674
+            rotation 5.001831574798794e-06 -0.9999999999835714 -2.7997886250589103e-06 0.060844308077579304
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
@@ -2255,8 +2255,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation -0.165 -0.0001156 0
-            rotation 1 0 0 5.546584289457699
+            translation -0.16500220360576365 -7.565405206623907e-05 -9.272977953403619e-06
+            rotation 0.999999998059653 -1.5383862192832813e-05 6.036580604679767e-05 5.610507985270011
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -2533,8 +2533,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation 0.165032 -0.0001156 0
-            rotation 1 0 0 0.576905851204175
+            translation 0.16503110517477204 -8.842624336959096e-05 -2.3562670917327475e-05
+            rotation -0.9999999978702185 3.68402794789436e-05 5.387352514915598e-05 5.642367495507963
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -4575,10 +4575,14 @@ DEF player0 Robot {
   }
   physics Physics {
     density -1
-    mass 6.73
+    mass 0.8
     centerOfMass [
-      0 0.06 0.06
+      0 0.02 0
     ]
   }
   controller "exampleLineTracingController"
+}
+seesaw {
+  translation 0.595049 0.025 1.79765
+  rotation 0 1 0 1.5708
 }
