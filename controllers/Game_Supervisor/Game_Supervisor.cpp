@@ -49,6 +49,12 @@ int main() {
     //sort checkpoints by name in ascending order (0, 1, 2, etc.)
     sort(checkpoints.begin(), checkpoints.end(), checkpointCmp);
 
+    //send distances between checkpoints
+    string checkpointVal = "D";
+    for (int i = 0; i < checkpoints.size(); i++)
+        checkpointVal += (checkpoints[i]->getField("description")->getSFString()).substr(1) + ",";
+    supervisor->wwiSendText(checkpointVal);
+
     vector<Node*>::iterator nextCheckpoint = checkpoints.begin();
 
     //store robot's pose at beginning of game
@@ -117,6 +123,7 @@ int main() {
                 
                 cout << "Reached checkpoint" << endl;
                 nextCheckpoint++;
+                supervisor->wwiSendText("C");
             }
         }
 
