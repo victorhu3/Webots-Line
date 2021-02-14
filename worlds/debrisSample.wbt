@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.10821188258899472 0.9164640528803923 0.3852062152206157 3.6455534175944964
-  position -0.13573760490112252 1.499386166436604 -0.9536871007790363
+  orientation -0.8079479764292405 0.5609819819433327 0.18033103814603263 0.7573328663892848
+  position 1.6944782576015163 1.0931492425399276 2.0043718369482
 }
 TexturedBackground {
 }
@@ -3303,13 +3303,173 @@ DEF Checkpoints Group {
 DEF Obstacles Group {
   children [
     Solid {
+      translation 1.045 0.00497978 -3.06137e-07
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+      }
+    }
+    Solid {
+      translation 0.155 0.00427111 1.6565e-07
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(2)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+      }
+    }
+    Solid {
+      translation 0.445 0.00450199 1.19211e-08
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(1)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+      }
+    }
+    Solid {
+      translation 0.755 0.0047489 -1.52408e-07
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(3)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+      }
+    }
+    Solid {
       translation 0.20913 0.0019744 0.00177103
       rotation 0.5773489358556708 0.5773509358554485 0.5773509358554485 2.0944
       children [
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3322,7 +3482,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3342,7 +3502,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3355,7 +3515,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3375,7 +3535,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3388,7 +3548,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3408,7 +3568,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3421,7 +3581,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3441,7 +3601,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3454,7 +3614,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3474,7 +3634,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3487,7 +3647,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3507,7 +3667,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3520,7 +3680,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
@@ -3540,7 +3700,7 @@ DEF Obstacles Group {
         Shape {
           appearance Appearance {
             material Material {
-              diffuseColor 0.2 0.2 0.8
+              diffuseColor 0.666667 0.666667 0.498039
             }
           }
           geometry Cylinder {
@@ -3553,7 +3713,7 @@ DEF Obstacles Group {
       boundingObject Shape {
         appearance Appearance {
           material Material {
-            diffuseColor 0.2 0.2 0.8
+            diffuseColor 0.666667 0.666667 0.498039
           }
         }
         geometry Cylinder {
