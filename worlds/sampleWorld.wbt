@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9999291088224652 -0.01009762058200416 -0.006309943588680738 5.166075259461099
-  position 1.0908090238496486 2.896409056359419 2.38133560458443
+  orientation 0.9999291088224652 -0.010097620582006637 -0.006309943588681261 5.166075259461101
+  position 1.1497351860633596 3.9301349651612707 2.8281663587943573
 }
 TexturedBackground {
 }
@@ -1242,6 +1242,13 @@ DEF Tiles Group {
 }
 DEF Objects Group {
   children [
+    obstacle {
+      translation 0.3 0.0619826 1.47
+      name "obstacle(1)"
+    }
+    obstacle {
+      translation 2.12 0.0619826 0.302
+    }
     speedbump {
       translation 2.4 0.00191119 1.49
     }
@@ -1249,74 +1256,6 @@ DEF Objects Group {
       translation 1.21 0.00096229 2.08167e-17
       rotation 0.577656895078166 -0.5771968951617173 0.5771968951617173 -2.093935307179586
       name "speedbump(1)"
-    }
-    Solid {
-      translation 2.11913 0.06198263922492409 0.301765
-      rotation 0.564948472301188 0.8020758668872512 -0.19366860200254069 1.2697357138869592e-16
-      scale 1.3 1.3 1.3
-      children [
-        Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 0.2 0.2 0.8
-            }
-          }
-          geometry Cylinder {
-            height 0.1
-            radius 0.05
-          }
-        }
-      ]
-      name "obstacle2"
-      boundingObject Shape {
-        appearance Appearance {
-          material Material {
-            diffuseColor 0.2 0.2 0.8
-          }
-        }
-        geometry Cylinder {
-          height 0.1
-          radius 0.05
-        }
-      }
-      physics Physics {
-        density -1
-        mass 7
-      }
-    }
-    Solid {
-      translation 0.3 0.06198263922492409 1.47
-      rotation -0.014584450097811886 0.9914419758450832 -0.12973088432498264 2.807873001922047e-16
-      scale 1.3 1.3 1.3
-      children [
-        Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 0.2 0.2 0.8
-            }
-          }
-          geometry Cylinder {
-            height 0.1
-            radius 0.05
-          }
-        }
-      ]
-      name "obstacle1(1)"
-      boundingObject Shape {
-        appearance Appearance {
-          material Material {
-            diffuseColor 0.2 0.2 0.8
-          }
-        }
-        geometry Cylinder {
-          height 0.1
-          radius 0.05
-        }
-      }
-      physics Physics {
-        density -1
-        mass 7
-      }
     }
     Wall {
       translation 0.45 0 -0.16
@@ -1532,6 +1471,10 @@ DEF Objects Group {
       ]
     }
   ]
+}
+seesaw {
+  translation 0.595049 0.025 1.79765
+  rotation 0 1 0 1.5708
 }
 DEF player0 Robot {
   translation 2.3958288824386953 0.029243782636665827 1.8125538108921657
@@ -4581,9 +4524,4 @@ DEF player0 Robot {
     ]
   }
   controller "exampleLineTracingController"
-}
-seesaw {
-  hidden translation_1 0 0.02715612088865854 0.010245890403692655
-  translation 0.595049 0.025 1.79765
-  rotation 0 1 0 1.5708
 }
