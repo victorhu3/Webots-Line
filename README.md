@@ -1,6 +1,6 @@
-# Webots-Line
+# Webots-Rescue-Line
 
-GitHub Repository for Robocup Junior Rescue Line Simulation competition
+GitHub Repository for simulation platform following Robocup Junior Rescue Line competition
 
 ![](documentation/sampleWorldImg.png)
 
