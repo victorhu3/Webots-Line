@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.8079479764292405 0.5609819819433327 0.18033103814603263 0.7573328663892848
-  position 1.6944782576015163 1.0931492425399276 2.0043718369482
+  orientation -0.32471022253004295 -0.8846335506737442 -0.3346442176504088 1.7229227023365155
+  position -0.9006126938861576 1.6153177903185811 0.38126702944136776
 }
 TexturedBackground {
 }
@@ -3303,87 +3303,7 @@ DEF Checkpoints Group {
 DEF Obstacles Group {
   children [
     Solid {
-      translation 1.045 0.00497978 -3.06137e-07
-      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
-      children [
-        Transform {
-          children [
-            Shape {
-              appearance Appearance {
-                material Material {
-                  diffuseColor 0 0 0
-                }
-              }
-              geometry Cylinder {
-                height 0.02
-                radius 0.006
-              }
-            }
-          ]
-        }
-        DEF SPEEDBUMP Shape {
-          appearance Appearance {
-            material Material {
-            }
-          }
-          geometry Cylinder {
-            height 0.3
-            radius 0.003
-          }
-        }
-      ]
-      name "speedbump"
-      boundingObject Cylinder {
-        height 0.3
-        radius 0.003
-      }
-      physics Physics {
-        density -1
-        mass 5
-      }
-    }
-    Solid {
-      translation 0.155 0.00427111 1.6565e-07
-      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
-      children [
-        Transform {
-          children [
-            Shape {
-              appearance Appearance {
-                material Material {
-                  diffuseColor 0 0 0
-                }
-              }
-              geometry Cylinder {
-                height 0.02
-                radius 0.006
-              }
-            }
-          ]
-        }
-        DEF SPEEDBUMP Shape {
-          appearance Appearance {
-            material Material {
-            }
-          }
-          geometry Cylinder {
-            height 0.3
-            radius 0.003
-          }
-        }
-      ]
-      name "speedbump(2)"
-      boundingObject Cylinder {
-        height 0.3
-        radius 0.003
-      }
-      physics Physics {
-        density -1
-        mass 5
-      }
-    }
-    Solid {
-      translation 0.445 0.00450199 1.19211e-08
+      translation 1.055 0.00498811 0.3
       rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
       children [
         Transform {
@@ -3420,10 +3340,158 @@ DEF Obstacles Group {
       physics Physics {
         density -1
         mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
       }
     }
     Solid {
-      translation 0.755 0.0047489 -1.52408e-07
+      translation 0.455 0.00451036 0.3
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(7)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0.745 0.00474125 0.3
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(8)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0.155 0.00427111 8.63372e-15
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(2)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0.445 0.00450202 -1.53728e-07
       rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
       children [
         Transform {
@@ -3460,6 +3528,154 @@ DEF Obstacles Group {
       physics Physics {
         density -1
         mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 1.045 0.0049798 -4.71788e-07
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(5)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 0.755 0.00474888 -3.18059e-07
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(6)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
+      }
+    }
+    Solid {
+      translation 1.345 0.00521903 0.3
+      rotation 0.5770438952777949 0.5775028951944954 -0.5775038951943139 -2.0948553071795866
+      children [
+        Transform {
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.006
+              }
+            }
+          ]
+        }
+        DEF SPEEDBUMP Shape {
+          appearance Appearance {
+            material Material {
+            }
+          }
+          geometry Cylinder {
+            height 0.3
+            radius 0.003
+          }
+        }
+      ]
+      name "speedbump(4)"
+      boundingObject Cylinder {
+        height 0.3
+        radius 0.003
+      }
+      physics Physics {
+        density -1
+        mass 5
+        centerOfMass [
+          0 0 0
+        ]
+        inertiaMatrix [
+          1000 1000 1000
+          0 0 0
+        ]
       }
     }
     Solid {
@@ -3718,6 +3934,303 @@ DEF Obstacles Group {
         }
         geometry Cylinder {
           height 0.125
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 1.26913 0.00197918 0.33177
+      rotation -0.44721292362185294 -0.44721392362168216 -0.774596867708936 -1.8234853071795865
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(9)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 0.58452 0.00197414 0.317557
+      rotation 0.6546520159231012 0.6546550159231742 0.37796500919324305 2.41887
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(13)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 0.63648 0.00197474 0.287557
+      rotation 0.6947450600336179 0.6947480600338772 0.18615701608601462 2.7735
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(18)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 0.532559 0.00197353 0.347557
+      rotation -0.5199881374825417 -0.5199881374825417 -0.6776611791705899 -1.9504553071795865
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(16)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 0.532559 0.0119735 0.347557
+      rotation 0.44720608437415627 0.4472150843758543 -0.774600146143436 -1.823475307179586
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(17)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 0.68844 0.00197534 0.257557
+      rotation 0.6546520159231012 0.6546550159231742 0.37796500919324305 2.41887
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(14)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 1.20851 0.0119788 0.29677
+      rotation -0.44721292362185294 -0.44721392362168216 -0.774596867708936 -1.8234853071795865
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(12)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 1.13923 0.00197843 0.25677
+      rotation 0.6785962482166418 0.6786002482181049 0.28108510281518717 2.59357
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(10)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 1.20286 0.00197894 0.235557
+      rotation -0.6215130372096759 -0.6215160372098555 -0.4769060285521263 -2.2515953071795867
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(11)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
           radius 0.002
         }
       }
