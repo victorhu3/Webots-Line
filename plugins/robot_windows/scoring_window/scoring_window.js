@@ -59,7 +59,7 @@ function clickScoringBox(event) {
         case "speed bump":
             scoreValue = Speedbump.scoreValue;
             break;
-        case "seesaw":
+        case "ramp":
             scoreValue = Seesaw.scoreValue;
             break;
         default:
@@ -73,7 +73,7 @@ function clickScoringBox(event) {
 }
 
 function addScoringElement(event) {
-
+    var suffix = "";
     var n = 0;
     var type = event.srcElement.parentElement.id;
     switch(type) {
@@ -88,21 +88,19 @@ function addScoringElement(event) {
             n = ++Gap.n;
             break;
         case "checkpoint":
+            suffix += " (0 Lack of Progress)";
             n = ++Checkpoint.n;
             break;
         case "speed bump":
             n = ++Speedbump.n;
             break;
-        case "seesaw":
+        case "ramp":
             n = ++Seesaw.n;
     }
 
     const div = document.createElement('div');
     div.id = type + n;
-    
-    var suffix = "";
-    if (type == "checkpoint")
-        suffix += " (0 Lack of Progress)";
+
     const upperCasedLabel = type.charAt(0).toUpperCase() + type.slice(1) + " " + n + suffix;
     div.innerHTML = `
             <label for="${div.id}">${upperCasedLabel}: </label>
@@ -147,7 +145,7 @@ function removeScoringElementConfirmed(event) {
         case "speed bump":
             elementType = Speedbump;
             break;
-        case "seesaw":
+        case "ramp":
             elementType = Seesaw;
             break;
     }

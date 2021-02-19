@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9999291088224652 -0.010097620582006637 -0.006309943588681261 5.166075259461101
-  position 1.1497351860633596 3.9301349651612707 2.8281663587943573
+  orientation 0.5116737341870449 -0.8256248483529843 -0.2377679531080614 5.25790469496588
+  position 3.6917594061677397 1.5761105950359908 2.860000094226436
 }
 TexturedBackground {
 }
@@ -1055,7 +1055,7 @@ DEF Tiles Group {
     }
     Solid {
       translation 2.4 0 1.5
-      rotation 0 1 0 4.71
+      rotation 0 0.9999999999999999 0 4.71
       children [
         Shape {
           appearance Appearance {
@@ -1251,11 +1251,12 @@ DEF Objects Group {
     }
     speedbump {
       translation 2.4 0.00191119 1.49
+      rotation 5.902539999897179e-06 2.3974499999582367e-09 -0.9999999999825802 1.57
     }
     speedbump {
       translation 1.21 0.00096229 2.08167e-17
       rotation 0.577656895078166 -0.5771968951617173 0.5771968951617173 -2.093935307179586
-      name "speedbump(1)"
+      name "speedbump1"
     }
     Wall {
       translation 0.45 0 -0.16
@@ -1316,8 +1317,8 @@ DEF Objects Group {
     DEF Victims Group {
       children [
         Solid {
-          translation 0.220506 0.01998430399999608 0.240012
-          rotation 0 0 -1 9.968966771568225e-16
+          translation 0.220506 0.019984304002405927 0.240012
+          rotation 0 0 -1 3.0100233953199156e-15
           children [
             Shape {
               appearance BrushedAluminium {
@@ -1341,8 +1342,8 @@ DEF Objects Group {
           }
         }
         Solid {
-          translation 0.352042 0.019984304000000005 0.2444550000000001
-          rotation 0.9284763194323377 5.183219053883722e-15 -0.37139160498506113 5.368426867164749e-15
+          translation 0.352042 0.019984304002405927 0.2444550000000001
+          rotation 0.639299102395356 2.2897813580167994e-15 -0.7689581638011864 7.796753037961107e-15
           children [
             Shape {
               appearance BrushedAluminium {
@@ -1366,7 +1367,7 @@ DEF Objects Group {
           }
         }
         Solid {
-          translation 0.520666 0.019984304000000005 0.040763900000000075
+          translation 0.520666 0.019984304002405927 0.040763900000000075
           rotation 1 0 0 3.6137325123018575e-15
           children [
             Shape {
@@ -1391,8 +1392,8 @@ DEF Objects Group {
           }
         }
         Solid {
-          translation 0.45056 0.019984304000000005 0.597966
-          rotation 0 0 1 1.993788670441238e-15
+          translation 0.45056 0.019984304002405927 0.597966
+          rotation 0 0 1 5.995376899681895e-15
           children [
             Shape {
               appearance RoughPolymer {
@@ -1417,8 +1418,8 @@ DEF Objects Group {
           }
         }
         Solid {
-          translation 0.03236279999999732 0.019984304000000005 0.0915155
-          rotation -1.663481308654326e-08 1.1332281301098018e-15 0.9999999999999999 1.3370814187881421e-13
+          translation 0.032362799999995986 0.019984304002405927 0.0915155
+          rotation 9.645351287824165e-05 1.0428916207136868e-15 0.9999999953483599 1.9872884156499347e-13
           children [
             Shape {
               appearance RoughPolymer {
@@ -1443,8 +1444,8 @@ DEF Objects Group {
           }
         }
         Solid {
-          translation 0.12322899999999991 0.019984304000000005 0.479263
-          rotation 0 0 1 3.98757289247655e-15
+          translation 0.12322899999999913 0.019984304002405927 0.479263
+          rotation 0 0 1 4.1114293100560017e-14
           children [
             Shape {
               appearance RoughPolymer {
@@ -1477,8 +1478,8 @@ seesaw {
   rotation 0 1 0 1.5708
 }
 DEF player0 Robot {
-  translation 2.3958288824386953 0.029243782636665827 1.8125538108921657
-  rotation 0.9999992107709509 0.00019458462696793303 0.0012412067910410399 0.03257135961730111
+  translation 2.395828882359912 0.029243783004159366 1.8125537888255232
+  rotation 0.999999210627618 0.00019459621795211532 0.0012413204474524234 0.0325706055698651
   scale 0.3 0.3 0.3
   children [
     DEF default Group {
@@ -2007,23 +2008,23 @@ DEF player0 Robot {
         }
         DEF CASTER_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position -0.05167521236093586
+            position -0.051675212110267855
             axis 0 1 0
             anchor 0 -0.0011939 0.191844
             staticFriction 0.05
           }
           endPoint Solid {
-            translation 3.1159745208490372e-06 -0.0012443623505272975 0.1918932335347624
-            rotation 5.0413668046511845e-06 -0.9999999999833061 -2.8235260403334055e-06 0.060358804452087016
+            translation 3.1159745331923037e-06 -0.0012443623505272975 0.1918932335347616
+            rotation 5.041366825225832e-06 -0.9999999999833061 -2.8235260526867364e-06 0.06035880420141612
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
-                  position -64.50608104106644
+                  position -64.50608106655562
                   anchor 0 -0.0521014 0.012843
                 }
                 endPoint Solid {
                   translation 0 -0.0521014 0.012843
-                  rotation -1 0 0 1.6742279692705726
+                  rotation -1 0 0 1.6742279947597585
                   children [
                     DEF CASTER_WHEEL_RIM_SHAPE Shape {
                       appearance PBRAppearance {
@@ -2184,7 +2185,7 @@ DEF player0 Robot {
         }
         DEF LEFT_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position 19.586156939422146
+            position 19.586156939421883
             axis -1 0 0
             anchor -0.165 -0.0001156 0
           }
@@ -2198,8 +2199,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation -0.16500220360576365 -7.565405206773666e-05 -9.272977959854845e-06
-            rotation 0.999999998059653 -1.5383862184407712e-05 6.0365806034107544e-05 5.6105079851085105
+            translation -0.16500220360576365 -7.565405206773422e-05 -9.27297795984434e-06
+            rotation 0.9999999980596531 -1.53838621844199e-05 6.036580603412221e-05 5.610507985108768
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -2462,7 +2463,7 @@ DEF player0 Robot {
         }
         DEF RIGHT_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position 24.555835377689743
+            position 24.555835377689036
             axis -1 0 0
             anchor 0.165032 -0.0001156 0
           }
@@ -2476,8 +2477,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation 0.16503110517477204 -8.842624337372835e-05 -2.3562670922098012e-05
-            rotation -0.9999999978702185 3.6840279493407076e-05 5.3873525160156516e-05 5.642367495683562
+            translation 0.16503110517477204 -8.842624337371174e-05 -2.356267092207876e-05
+            rotation -0.9999999978702184 3.684027949334946e-05 5.387352516011311e-05 5.642367495682855
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -4382,6 +4383,11 @@ DEF player0 Robot {
     }
     DEF extensionSlot Group {
       children [
+        DistSensor {
+          translation 0.210007 0.06 -0.00983298
+          rotation -0.0023300889996729517 0.9999945706938158 -0.002330078999677245 0.000807337
+          name "rightDist"
+        }
         DistSensor {
           translation -0.210007 0.06 -0.00983298
           rotation 9.40586e-07 1 -9.4059e-07 -3.1407853071795864

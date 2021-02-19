@@ -39,7 +39,7 @@ def placeBlank(event, widget):
     widget['image'] = tilePhotos[ind]
 
 def showInstructions():
-    global instructionWindows, instructionText
+    global instructionWindow, instructionText
     instructionWindow = tk.Toplevel(root)
     instruction = """
     Link to YouTube tutorial (written tutorial below):
@@ -71,6 +71,15 @@ def showInstructions():
     robot has traveled since it arrived at the previous checkpoint (or since the 
     beginning if first checkpoint). This is only for scoring purposes and can be
     omitted.
+
+    6. To specify tiles with speed bumps, enter the following information in the
+    specified form: "tile number,direction of speed bump". Use the letters 'H' and
+    'V' to specify horizontal or vertical for the speed bump direction. E.g. "4,H 12,V".
+
+    7. To specify tiles with ramps, enter the following information in the specified form:
+    "tile number,direction of entry". The direction of entry is what direction the robot
+    will enter the tile from. Use 'N', 'E', 'S', or 'W' to denote north, east, south, west.
+    E.g. "16,N 23,W".
                 """
                     
     instructionText = tk.Text(instructionWindow, height=300, width=300)
@@ -102,6 +111,7 @@ def makeWorld():
     file.write('  ]\n}')
 
     i = 0
+    ind = 0
     obstacleList = str(obstacleEntry.get())
     file.write('DEF Obstacles Group {\n  children [')
     while i < len(obstacleList):
@@ -113,11 +123,13 @@ def makeWorld():
         file.write('    Solid {\n')
         file.write('      translation ' + str(int(obsTileNum % numCol) * 0.3) + ' 0.06 ' + str(int(obsTileNum / numCol) * 0.3) + '\n')
         file.write('      scale 1.3 1.3 1.3\n      children [\n        Shape {\n          appearance Appearance {\n            material Material {\n              diffuseColor 0.2 0.2 0.8\n            }\n          }\n          geometry Cylinder {\n            height 0.1\n            radius 0.05\n          }\n        }\n      ]\n')
-        file.write('      name \"obstacle' + str(x + 1) + '\"\n')
+        file.write('      name \"obstacle' + str(ind + 1) + '\"\n')
         file.write('      boundingObject Shape {\n        appearance Appearance {\n          material Material {\n            diffuseColor 0.2 0.2 0.8\n          }\n        }\n        geometry Cylinder {\n          height 0.1\n          radius 0.05\n        }\n      }\n      physics Physics {\n        mass 7\n      }\n    }\n')
+        ind = ind + 1
     file.write(' ]\n}\n')
 
     i = 0
+    ind = 0
     checkpointList = str(checkpointEntry.get())
     file.write('DEF Checkpoints Group {\n  children [\n')
     while i < len(checkpointList):
@@ -137,13 +149,60 @@ def makeWorld():
         file.write('    Solid {\n')
         file.write('      translation ' + str(int(checkpointNum % numCol) * 0.3 - 0.12) + ' 0 ' + str(int(checkpointNum / numCol) * 0.3 - 0.12) + '\n')
         file.write('      children [\n        Shape {\n          appearance Appearance {\n            material Material {\n              diffuseColor 1 0.666667 0\n            }\n          }\n          geometry Cylinder {\n            height 0.02\n            radius 0.03\n          }\n        }\n      ]\n')
-        file.write('      name \"checkpoint' + str(x) + '\"\n')
+        file.write('      name \"checkpoint' + str(ind) + '\"\n')
         file.write('      description \"' + checkpointDir.upper() + checkpointDist + '\"\n    }\n')
+        ind = ind + 1
+    file.write('  ]\n}\n')
+
+    i = 0
+    ind = 0
+    speedbumpList = str(speedbumpEntry.get())
+    speedbumpRot = {
+        'H': ['0.707', '-0.707', '0', '-3.14'],
+        'V': ['-0.577', '0.577', '-0.577', '2.09']
+    }
+    file.write('DEF Speedbumps Group {\n  children [\n')
+    while i < len(speedbumpList):
+        j = i + 1
+        while j != len(speedbumpList) and speedbumpList[j] != ',':
+            j = j + 1
+        sbNum = int(speedbumpList[i:j])
+        sbDir = speedbumpList[j + 1].upper()
+        i = j + 3
+        file.write('    speedbump {\n')
+        file.write('      translation ' + str(int(sbNum % numCol) * 0.3) + ' 0 ' + str(int(sbNum / numCol) * 0.3) + '\n')
+        file.write('      rotation ' + speedbumpRot[sbDir][0] + ' ' + speedbumpRot[sbDir][1] + ' ' + speedbumpRot[sbDir][2] + ' ' + speedbumpRot[sbDir][3] + '\n')
+        file.write('      name \"speedbump' + str(ind) + '\"\n    }\n')
+        ind = ind + 1
+    file.write('  ]\n}\n')
+
+    i = 0
+    ind = 0
+    seesawList = str(seesawEntry.get())
+    seesawRot = {
+        'N': '-3.14',
+        'E': '1.57',
+        'S': '0',
+        'W': '-1.57'
+    }
+    file.write('DEF Seesaw Group {\n  children [\n')
+    while i < len(seesawList):
+        j = i + 1
+        while j != len(seesawList) and seesawList[j] != ',':
+            j = j + 1
+        ssNum = int(seesawList[i:j])
+        ssDir = seesawList[j + 1].upper()
+        i = j + 3
+        file.write('    seesaw {\n')
+        file.write('      translation ' + str(int(ssNum % numCol) * 0.3) + ' 0 ' + str(int(ssNum / numCol) * 0.3) + '\n')
+        file.write('      rotation 0 1 0 ' + seesawRot[ssDir] + '\n')
+        file.write('      name \"seesaw' + str(ind) + '\"\n    }\n')
+        ind = ind + 1
     file.write('  ]\n}\n')
     print('World ' + worldName + '.wbt Generated')
 
 def enterTiles():
-    global worldName, numRow, numCol, mapWindow, mapCanvas, rotationVar, rotationLabel, placeButton, rotateButton, map, obstacleLabel, checkpointLabel, obstacleEntry, checkpointEntry
+    global worldName, numRow, numCol, mapWindow, mapCanvas, rotationVar, rotationLabel, placeButton, rotateButton, map, obstacleLabel, checkpointLabel, obstacleEntry, checkpointEntry, speedbumpLabel, seesawLabel, speedbumpEntry, seesawEntry
     offset = 33
     worldName = str(worldNameEntry.get())
     numRow = int(numRowEntry.get())
@@ -158,12 +217,21 @@ def enterTiles():
     y = numRow * (tileImgSize + 1) + tileImgSize / 2 + 10
     obstacleLabel = tk.Label(mapWindow, text='Obstacle tiles')
     checkpointLabel = tk.Label(mapWindow, text='Checkpoint tiles')
-    mapCanvas.create_window(x - 55, y, window=obstacleLabel)
-    mapCanvas.create_window(x - 55, y + 30, window=checkpointLabel)
+    speedbumpLabel = tk.Label(mapWindow, text='Speed bump tiles')
+    seesawLabel = tk.Label(mapWindow, text='Ramp tiles')
+    mapCanvas.create_window(x - 180, y, window=obstacleLabel)
+    mapCanvas.create_window(x - 180, y + 30, window=checkpointLabel)
+    mapCanvas.create_window(x + 80, y, window=speedbumpLabel)
+    mapCanvas.create_window(x + 80, y + 30, window=seesawLabel)
+
     obstacleEntry = tk.Entry(mapWindow, justify='center')
     checkpointEntry = tk.Entry(mapWindow, justify='center')
-    mapCanvas.create_window(x + 55, y, window=obstacleEntry)
-    mapCanvas.create_window(x + 55, y + 30, window=checkpointEntry)
+    speedbumpEntry = tk.Entry(mapWindow, justify='center')
+    seesawEntry = tk.Entry(mapWindow, justify='center')
+    mapCanvas.create_window(x - 60, y, window=obstacleEntry)
+    mapCanvas.create_window(x - 60, y + 30, window=checkpointEntry)
+    mapCanvas.create_window(x + 200, y, window=speedbumpEntry)
+    mapCanvas.create_window(x + 200, y + 30, window=seesawEntry)
 
     makeWorldButton = tk.Button(mapWindow, text='Generate World', command=makeWorld)
     mapCanvas.create_window(x, y + 63, window=makeWorldButton)
@@ -194,8 +262,12 @@ placeButton = None
 rotateButton = None
 obstacleLabel = None
 checkpointLabel = None
+speedbumpLabel = None
+seesawLabel = None
 obstacleEntry = None
 checkpointEntry = None
+speedbumpEntry = None
+seesawEntry = None
 instructionWindow = None
 instructionButton = None
 instructionText = None
@@ -218,9 +290,11 @@ rootCanvas.create_window(80, 40, window=numRowLabel)
 rootCanvas.create_window(80, 60, window=numColLabel)
 rootCanvas.create_window(240, 87, window=enterButton)
 
-worldNameEntry = tk.Entry(root, justify='center')
-numRowEntry = tk.Entry(root, justify='center')
-numColEntry = tk.Entry(root, justify='center')
+v = tk.StringVar()
+v.set('5')
+worldNameEntry = tk.Entry(root, textvariable = v, justify='center')
+numRowEntry = tk.Entry(root, textvariable = v, justify='center')
+numColEntry = tk.Entry(root, textvariable = v, justify='center')
 rootCanvas.create_window(240, 20, window=worldNameEntry)
 rootCanvas.create_window(240, 40, window=numRowEntry)
 rootCanvas.create_window(240, 60, window=numColEntry)

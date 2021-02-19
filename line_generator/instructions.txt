@@ -1,0 +1,11 @@
+In this folder there are 3 different python scripts that will allow you to generate fields. For those of you who are familiar with running Python scripts, you can use this YouTube tutorial to learn how to use the 3 line generators provided: 
+
+For those of you who are familiar with running Python scripts, you can just run the programs normally. Note the following:
+
+1. GraphicalLineGenerator.py provides a graphical interface where you can pick out your map.
+a. GraphicalLineGenerator.py requires installing the PIL library using “pip install image”
+2. Instructions on using GraphicalLineGenerator.py are provided when you click on the “Click Here for Instructions” button after inputting the proper information into the first window.
+3. Instructions on using LineGeneratorFromMap.py appear when you the program. Instructions on how to set up the map file is in the folder \Webots-Line\line_generator\maps\sample.txt
+4. Instructions on using LineGenerator.py appear when you run the program.
+
+If you do not understand any of the instructions, remember you can always refer to the YouTube tutorial listed above.
