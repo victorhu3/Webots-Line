@@ -1,0 +1,151 @@
+#VRML_SIM R2021a utf8
+
+PROTO scoop [
+	field SFVec3f    translation   0.05000000000000064 -0.22621600000000258 -0.3190900000000037
+  	field SFRotation rotation      3.2929596322439094e-08 0.9996875172493005 -0.024997356978866375 3.141590000817359
+	field SFString   name          "scoop"
+]
+{
+       DEF SCOOP HingeJoint {
+      jointParameters HingeJointParameters {
+        position -0.05
+        minStop -0.5
+        maxStop 1.5
+      }
+      device [
+        RotationalMotor {
+          name IS name
+          minPosition -0.05
+          maxPosition 1
+          maxVelocity 1
+        }
+      ]
+      endPoint Solid {
+        translation IS translation
+        rotation IS rotation
+        children [
+          DEF SCOOP Group {
+            children [
+              Transform {
+                translation 0.06 0.18 -0.05
+                children [
+                  DEF BACK Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor .9 .9 .9
+                      }
+                    }
+                    geometry Box {
+                      size 0.2 0.12 0.01
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation 0.16 0.18 0.03
+                children [
+                  DEF SIDE Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor .9 .9 .9
+                      }
+                    }
+                    geometry Box {
+                      size 0.01 0.12 0.16
+                    }
+                  }
+                ]
+              }
+              Transform {
+                translation -0.04 0.18 0.03
+                children [
+                  DEF SIDE Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor .9 .9 .9
+                      }
+                    }
+                    geometry Box {
+                      size 0.01 0.12 0.16
+                    }
+                  }
+                ]
+              }
+              Solid {
+                translation 0.06 0.12 0.03
+                children [
+                  DEF BOTTOM Shape {
+                    appearance Appearance {
+                      material Material {
+                        diffuseColor 0.4 0.4 0.4
+                        emissiveColor 0.4 0.4 0.4
+                      }
+                    }
+                    geometry Box {
+                      size 0.2 0.01 0.16
+                    }
+                  }
+                ]
+                boundingObject USE BOTTOM
+              }
+            ]
+          }
+        ]
+    
+        boundingObject DEF SCOOP Group {
+          children [
+            Transform {
+              translation -0.04 0.18 0.03
+              children [
+                DEF SIDE Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0.8 0.5 0.8
+                    }
+                  }
+                  geometry Box {
+                    size 0.01 0.12 0.16
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.16 0.18 0.03
+              children [
+                DEF SIDE Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0.8 0.5 0.8
+                    }
+                  }
+                  geometry Box {
+                    size 0.01 0.12 0.16
+                  }
+                }
+              ]
+            }
+            Transform {
+              translation 0.06 0.18 -0.05
+              children [
+                DEF BACK Shape {
+                  appearance Appearance {
+                    material Material {
+                      diffuseColor 0.2 0.8 0.8
+                      emissiveColor 0.2 0.4 0.4
+                    }
+                  }
+                  geometry Box {
+                    size 0.2 0.12 0.016
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        physics Physics {
+          density -1
+          mass 0.1
+        }
+      }
+    }
+}

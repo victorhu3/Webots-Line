@@ -1,10 +1,11 @@
 #VRML_SIM R2021a utf8
 WorldInfo {
+  basicTimeStep 16
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.27543076863007065 -0.9252586571085438 -0.26083387268056835 4.68916171989936
-  position 1.5435058985139296 0.45274292878272865 0.9134282964152518
+  orientation 0.22983974844207056 -0.9453862405167184 -0.23112452547869378 4.650692127901079
+  position 1.6915922922936195 0.5349186088911805 0.8595706450206171
 }
 TexturedBackground {
 }
@@ -508,147 +509,6 @@ DEF player0 Robot {
   rotation 0.9999992107709509 0.00019458462696793303 0.0012412067910410399 0.03257135961730111
   scale 0.3 0.3 0.3
   children [
-    DEF SCOOP HingeJoint {
-      jointParameters HingeJointParameters {
-        position -0.05
-        minStop -0.06
-        maxStop 1.1
-      }
-      device [
-        RotationalMotor {
-          name "scoop"
-          minPosition -0.05
-          maxPosition 1
-        }
-      ]
-      endPoint Solid {
-        translation 0.05000000000000064 -0.22621600000000258 -0.3190900000000037
-        rotation 3.2929596322439094e-08 0.9996875172493005 -0.024997356978866375 3.141590000817359
-        children [
-          DEF SCOOP Group {
-            children [
-              Transform {
-                translation 0.06 0.18 -0.05
-                children [
-                  DEF BOTTOM Shape {
-                    appearance Appearance {
-                      material Material {
-                        diffuseColor 0.2 0.8 0.8
-                        emissiveColor 0.2 0.4 0.4
-                      }
-                    }
-                    geometry Box {
-                      size 0.2 0.12 0.01
-                    }
-                  }
-                ]
-              }
-              Transform {
-                translation 0.16 0.16 0
-                children [
-                  DEF SIDE Shape {
-                    appearance Appearance {
-                      material Material {
-                        diffuseColor 0.8 0.5 0.8
-                      }
-                    }
-                    geometry Box {
-                      size 0.01 0.06 0.1
-                    }
-                  }
-                ]
-              }
-              Transform {
-                translation -0.04 0.16 0
-                children [
-                  DEF SIDE Shape {
-                    appearance Appearance {
-                      material Material {
-                        diffuseColor 0.8 0.5 0.8
-                      }
-                    }
-                    geometry Box {
-                      size 0.01 0.06 0.1
-                    }
-                  }
-                ]
-              }
-              Solid {
-                translation 0.06 0.12 0
-                children [
-                  DEF BOTTOM Shape {
-                    appearance Appearance {
-                      material Material {
-                        diffuseColor 0.8 0.8 0.5
-                      }
-                    }
-                    geometry Box {
-                      size 0.2 0.01 0.1
-                    }
-                  }
-                ]
-                boundingObject USE BOTTOM
-              }
-            ]
-          }
-        ]
-        name "solid(6)"
-        boundingObject DEF SCOOP Group {
-          children [
-            Transform {
-              translation -0.04 0.16 0
-              children [
-                DEF SIDE Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 0.8 0.5 0.8
-                    }
-                  }
-                  geometry Box {
-                    size 0.01 0.06 0.1
-                  }
-                }
-              ]
-            }
-            Transform {
-              translation 0.16 0.16 0
-              children [
-                DEF SIDE Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 0.8 0.5 0.8
-                    }
-                  }
-                  geometry Box {
-                    size 0.01 0.06 0.1
-                  }
-                }
-              ]
-            }
-            Transform {
-              translation 0.06 0.18 -0.05
-              children [
-                DEF BOTTOM Shape {
-                  appearance Appearance {
-                    material Material {
-                      diffuseColor 0.2 0.8 0.8
-                      emissiveColor 0.2 0.4 0.4
-                    }
-                  }
-                  geometry Box {
-                    size 0.2 0.12 0.01
-                  }
-                }
-              ]
-            }
-          ]
-        }
-        physics Physics {
-          density -1
-          mass 0.1
-        }
-      }
-    }
     DEF default Group {
       children [
         DEF BODY Transform {
@@ -1181,8 +1041,8 @@ DEF player0 Robot {
             staticFriction 0.05
           }
           endPoint Solid {
-            translation 3.1159745208817615e-06 -0.0012443623505272975 0.1918932335347624
-            rotation 5.041366804546171e-06 -0.9999999999833062 -2.823526040274581e-06 0.06035880445188097
+            translation 3.115974520889283e-06 -0.0012443623505272975 0.1918932335347624
+            rotation 5.041366804240569e-06 -0.9999999999833061 -2.8235260401034305e-06 0.06035880445116719
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
@@ -1366,8 +1226,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation -0.16500220360576365 -7.565405206773671e-05 -9.272977959854827e-06
-            rotation 0.9999999980596531 -1.538386218440194e-05 6.036580603408488e-05 5.610507985108483
+            translation -0.16500220360576365 -7.565405206773671e-05 -9.272977959854828e-06
+            rotation 0.9999999980596531 -1.5383862184362965e-05 6.03658060339319e-05 5.61050798510833
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -1644,8 +1504,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation 0.16503110517477204 -8.842624337372917e-05 -2.3562670922097314e-05
-            rotation -0.9999999978702185 3.6840279493384253e-05 5.387352516012305e-05 5.642367495683582
+            translation 0.16503110517477204 -8.842624337372933e-05 -2.3562670922097144e-05
+            rotation -0.9999999978702185 3.6840279493290524e-05 5.387352515998607e-05 5.642367495683756
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -3550,6 +3410,10 @@ DEF player0 Robot {
     }
     DEF extensionSlot Group {
       children [
+        DEF SCOOP scoop {
+          translation 0.05000000000000074 -0.22621600000000375 -0.319090000000005
+          rotation 3.292959615556306e-08 0.9996875172493004 -0.024997356978864328 3.141590000817359
+        }
         DistSensor {
           translation -0.210007 0.06 -0.00983298
           rotation 9.40586e-07 1 -9.4059e-07 -3.1407853071795864
@@ -3561,17 +3425,17 @@ DEF player0 Robot {
           name "frontDist"
         }
         ColorSensor {
-          translation 0.06 -0.015 -0.18
+          translation 0.06 -0.015 -0.16
           rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
           name "rightColor"
         }
         ColorSensor {
-          translation 8.20114e-08 -0.015 -0.24
+          translation -4.10057e-08 -0.015 -0.21
           rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
           name "frontColor"
         }
         ColorSensor {
-          translation -0.0599998 -0.015 -0.18
+          translation -0.0599998 -0.015 -0.16
           rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
           name "leftColor"
         }
