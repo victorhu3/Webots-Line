@@ -5,6 +5,7 @@ PROTO rescueZone [
   	field SFRotation rotation      0 0 0 0
   	field SFString   name          "rescueZone"
 	field SFFloat    seed	        1.1
+  field SFBool    advancedZone  FALSE
 ]
 {
 	%{
@@ -12,6 +13,11 @@ PROTO rescueZone [
 		local wbrandom = require('wbrandom')
 		wbrandom.seed(fields.seed.value)
 		local x = 0
+    local level = "deliveryLevel1"
+
+    if fields.advancedZone.value then
+      level = "deliveryLevel2"
+    end
 	}%
 	Transform {
 	
@@ -42,44 +48,11 @@ PROTO rescueZone [
       %{x = x + 1}%
       size 0.6 0.4 0.02
     }
-    Wall {
-      translation -0.0399361 0 0.74433
-      size 0.21 0.06 0.01
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      appearance Roughcast {
-        colorOverride 0 0 0
-        textureTransform TextureTransform {
-          scale 1 2.4
-        }
-      }
+    
+    %{= level}% {
+      translation 0 0 .6
     }
-    Wall {
-      translation -0.14 0 0.64
-      rotation 0 1 0 -1.5707953071795862
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      size 0.2 0.06 0.01
-      appearance Roughcast {
-        colorOverride 0 0 0
-        textureTransform TextureTransform {
-          scale 1 2.4
-        }
-      }
-    }
-    Wall {
-      translation -0.03233 0 0.637693
-      rotation 0 1 0 -0.785795307179586
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      size 0.3 0.06 0.01
-      appearance Roughcast {
-        colorOverride 0 0 0
-        textureTransform TextureTransform {
-          scale 1 2.4
-        }
-      }
-    }
+    
     DEF Victims Group {
       children [
         
