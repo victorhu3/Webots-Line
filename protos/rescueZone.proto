@@ -1,0 +1,459 @@
+#VRML_SIM R2021a utf8
+
+PROTO rescueZone [
+	field SFVec3f    translation   0.05000000000000064 0 2.3190900000000037
+  	field SFRotation rotation      0 0 0 0
+  	field SFString   name          "rescueZone"
+	field SFFloat    seed	        1.1
+]
+{
+	%{
+		local os = require('os')
+		local wbrandom = require('wbrandom')
+		wbrandom.seed(fields.seed.value)
+		local x = 0
+	}%
+	Transform {
+	
+		children[
+      Wall {
+      translation 0.45 0 -0.16
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 1.2 0.4 0.02
+    }
+    Wall {
+      translation 0.3 0 0.76
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.9 0.4 0.02
+    }
+    Wall {
+      translation -0.16 0 0.3
+      rotation 0 1 0 -1.5707953071795862
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.9 0.4 0.02
+    }
+    Wall {
+      translation 1.06 0 0.45
+      rotation 0 1 0 -1.5707953071795862
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.6 0.4 0.02
+    }
+    Wall {
+      translation -0.0399361 0 0.74433
+      size 0.21 0.06 0.01
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      appearance Roughcast {
+        colorOverride 0 0 0
+        textureTransform TextureTransform {
+          scale 1 2.4
+        }
+      }
+    }
+    Wall {
+      translation -0.14 0 0.64
+      rotation 0 1 0 -1.5707953071795862
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.2 0.06 0.01
+      appearance Roughcast {
+        colorOverride 0 0 0
+        textureTransform TextureTransform {
+          scale 1 2.4
+        }
+      }
+    }
+    Wall {
+      translation -0.03233 0 0.637693
+      rotation 0 1 0 -0.785795307179586
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.3 0.06 0.01
+      appearance Roughcast {
+        colorOverride 0 0 0
+        textureTransform TextureTransform {
+          scale 1 2.4
+        }
+      }
+    }
+    DEF Victims Group {
+      children [
+        
+        Solid {
+          %{ 
+            local randX = wbrandom.integer(0, 9100) / 10000
+            local randZ = wbrandom.integer(0, 6100) / 10000
+          }%
+          translation %{= randX}% 0.019984303999999987 %{= randZ}%
+          rotation 0.7071059134765989 2.890054729534989e-15 -0.7071076488954313 7.049095649985336e-15
+          children [
+            Shape {
+              appearance BrushedAluminium {
+              }
+              geometry Sphere {
+                radius 0.02
+              }
+            }
+          ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+          boundingObject Shape {
+            appearance BrushedAluminium {
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+        }
+        Solid {
+          %{ 
+            local randX = wbrandom.integer(0, 9100) / 10000
+            local randZ = wbrandom.integer(0, 6100) / 10000
+          }%
+          translation %{= randX}% 0.019984303999999987 %{= randZ}%
+          rotation 0.20152121529379147 0.6997934952063164 -0.6853307696677864 2.5988955872372386
+          children [
+            Shape {
+              appearance BrushedAluminium {
+              }
+              geometry Sphere {
+                radius 0.02
+              }
+            }
+          ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+          boundingObject Shape {
+            appearance BrushedAluminium {
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+        }
+
+        Solid {
+          %{ 
+            local randX = wbrandom.integer(0, 9100) / 10000
+            local randZ = wbrandom.integer(0, 6100) / 10000
+          }%
+          translation %{= randX}% 0.019984303999999987 %{= randZ}%
+          rotation 0.2788646362908996 0.22641443100414613 0.9332582815380814 -1.6426645028270594
+          children [
+            Shape {
+              appearance RoughPolymer {
+                baseColor 0 0 0
+              }
+              geometry Sphere {
+                radius 0.02
+              }
+            }
+          ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+          boundingObject Shape {
+            appearance BrushedAluminium {
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+        }
+      ]
+    }
+		Solid {
+      translation 1.2 -0.05 0.9
+      boundingObject Box {
+        size 2.7 0.1 2.1
+      }
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.3 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.6 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.8999999999999999 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 1.2 0 0
+      rotation 0 1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/27.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.3 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.6 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.3 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.6 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/26.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+    }
+		]
+		translation IS translation
+		rotation IS rotation
+	}
+}
