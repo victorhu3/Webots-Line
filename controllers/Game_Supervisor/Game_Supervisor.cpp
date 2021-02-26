@@ -50,9 +50,17 @@ int main() {
     sort(checkpoints.begin(), checkpoints.end(), checkpointCmp);
 
     //send distances between checkpoints
-    string checkpointVal = "D";
-    for (int i = 0; i < checkpoints.size(); i++)
-        checkpointVal += (checkpoints[i]->getField("description")->getSFString()).substr(1) + ",";
+    string checkpointVal = "D", tmp;
+    int finalInd, preEvac = checkpoints.size();
+    for (int i = 0; i < (int)checkpoints.size(); i++) {
+        tmp = (checkpoints[i]->getField("description")->getSFString());
+        finalInd = tmp.length();
+        if (tmp.substr(tmp.length() - 1).compare("*") == 0) {
+            finalInd--;
+            preEvac = i;
+        }
+        checkpointVal += tmp.substr(1, finalInd) + ",";
+    }
     supervisor->wwiSendText(checkpointVal);
 
     vector<Node*>::iterator nextCheckpoint = checkpoints.begin();
@@ -111,6 +119,10 @@ int main() {
                     robot->getField("translation")->setSFVec3f(checkpointTilePos);
                 }
             }
+            else if (msg == "1")
+                cout << "Level 1!" << endl;
+            else if (msg == "2")
+                cout << "Level 2!" << endl;
         }
 
         if(nextCheckpoint != checkpoints.end()) {
@@ -123,7 +135,12 @@ int main() {
                 
                 cout << "Reached checkpoint" << endl;
                 nextCheckpoint++;
-                supervisor->wwiSendText("C");
+                if (nextCheckpoint - checkpoints.begin() - 1 == preEvac)
+                    supervisor->wwiSendText("C*");
+                else if (nextCheckpoint - checkpoints.begin() - 2 == preEvac)
+                    supervisor->wwiSendText("C-");
+                else
+                    supervisor->wwiSendText("C");
             }
         }
 

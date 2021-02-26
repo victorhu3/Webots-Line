@@ -1,0 +1,76 @@
+#VRML_SIM R2021a utf8
+
+PROTO deliveryLevel2 [
+	field SFVec3f    translation   0.01 0 0
+  field SFRotation rotation     0 1 0 0
+	field SFString   name          "deliveryzone"
+]
+{
+	Solid {
+		translation IS translation
+		rotation IS rotation
+		children [
+			Wall {
+				translation 0 0 0.145
+				size 0.29 0.06 0.01
+				appearance Roughcast {
+					colorOverride 0 0 0
+					textureTransform TextureTransform {
+						scale 1 2.4
+					}
+				}
+			}
+			Wall {
+				translation -0.15 0 0
+				rotation 0 -0.9999999999999999 0 1.5707953071795862
+				name "wall(1)"
+				size 0.3 0.06 0.01
+				appearance Roughcast {
+					colorOverride 0 0 0
+					textureTransform TextureTransform {
+						scale 1 2.4
+					}
+				}
+			}
+			Wall {
+				translation 0 0 0
+				rotation 0 1 0 -0.785795307179586
+				name "wall(2)"
+				size 0.41 0.06 0.01
+				appearance Roughcast {
+					colorOverride 0 0 0
+					textureTransform TextureTransform {
+						scale 1 2.4
+					}
+				}
+			}
+			Solid {
+				translation 0 0.001 0
+				rotation 0 1 0 3.14159
+				children [
+					Shape {
+						appearance Appearance {
+							material Material {
+								diffuseColor 0 0 0
+							}
+						}
+						geometry IndexedFaceSet {
+							coord Coordinate {
+								point [
+									0.15 0 0.15
+									0.15 0 -0.15
+									-0.15 0 -0.15
+								]
+							}
+							coordIndex [
+								0, 1, 2
+							]
+						}
+					}
+				]
+				name "solid(1)"
+			}
+		]
+		name IS name
+	}
+}

@@ -3844,7 +3844,7 @@ DEF Tiles Group {
           appearance Appearance{
             texture ImageTexture{
               url[
-                "../tiles/8.png"
+                "../tiles/6.png"
               ]
             }
           }

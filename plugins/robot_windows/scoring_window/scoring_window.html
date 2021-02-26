@@ -5,6 +5,7 @@
         <div>
             <h1 id="score"> Total Score: 0</h1>
             <button id = "LOPButton"> Lack Of Progress </button>
+            <label id = "LOPCount">Total Count: 0</label>
         </div>
 
         <div id="myModal" class="modal">
@@ -108,7 +109,6 @@
             </div>
         </div>
         <div id="checkpoint">
-            <!--***** Add note at bottom of window saying LOP is Lack of Progress*****-->
             <h3 style ="display: inline-block">Checkpoint</h3>
             <button class="add">Add</button>
             <button class="remove">Remove</button>
@@ -126,6 +126,50 @@
             <div id="checkpoint3">
                 <label for="checkpoint3">Checkpoint 3 (0 Lack of Progress): </label>
                 <input type="checkbox" name="checkpoint3" >
+                <br>
+            </div>
+        </div>
+        <div id="rescuekit">
+            <h3 style ="display: inline-block">Rescue Kit</h3>
+            <br>
+            <div id="kitLevel">
+                <label for="livevictim">Rescue kit level: </label>
+                <input type="number" name="kitLevel" min="1" max="2">
+                <!--button class="submitLevel">Submit</button!-->
+            </div>
+            <div id="kit">
+                <label for="kit">Rescue kit: </label>
+                <input type="checkbox" name="kit" >
+                <br>
+            </div>
+        </div>
+        <div id="victim">
+            <h3 style ="display: inline-block">Victims</h3>
+            <button class="submitVic">Submit Victims</button>
+            <br>
+            <div id="level">
+                <label id="evacLevel">Evacuation Level: </label>
+                <input type="number" name="level" min="1" max="2">
+                <button class="submitLevel">Submit</button>
+            </div>
+            <div id="livevictim">
+                <label for="livevictim">Live victims: </label>
+                <input type="number" name="livevictim" min="0" max="2">
+                <br>
+            </div>
+            <div id="deadvictim">
+                <label for="deadvictim">Dead victims: </label>
+                <input type="number" name="deadvictim" min="0" max="1">
+                <br>
+            </div>
+        </div>
+        <div id="finish">
+            <h3 style ="display: inline-block">Finish Run</h3>
+            <button class="submitFinal">Submit</button>
+            <br>
+            <div id="exitBonus">
+                <label for="exitBonus">Exit bonus: </label>
+                <input type="checkbox" name="exitBonus">
                 <br>
             </div>
         </div>

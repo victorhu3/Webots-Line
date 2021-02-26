@@ -3,7 +3,14 @@ var modal = document.getElementById("myModal");
 var modalMessage = document.getElementById("modalMessage");
 
 var score = 0;
+var numLOP = 0;
 var LOPind = 0;
+var level = 0;
+var kitLevel = 0;
+var kitMultiply = 1;
+var evacMultiply = 1;
+var evacLack = 0;
+var evacCheck = false;
 
 var Obstacle = {scoreValue: 15, n: 2};
 var Intersection = {scoreValue: 15, n: 3};
@@ -11,6 +18,8 @@ var Gap = {scoreValue: 10, n: 2};
 var Speedbump = {scoreValue: 5, n: 2};
 var Seesaw = {scoreValue: 10, n: 2};
 var Checkpoint = {scoreValue: 1, n: 3};
+var Victim = {scoreValue: [1.2, 1.4]};
+var RescueKit = {scoreValue: [1.1, 1.3, 1.2, 1.6]}
 
 var LOP = [];
 var checkpointDist = [];
@@ -61,6 +70,20 @@ function clickScoringBox(event) {
             break;
         case "ramp":
             scoreValue = Seesaw.scoreValue;
+            break;
+        case "kitLevel":
+            kitLevel = document.getElementsByName('kitLevel')[0].value - 1;
+            break;
+        case "kit":
+            kitMultiply = RescueKit.scoreValue[level * 2 + kitLevel];
+            break;
+        case "submitFinal":
+            console.log('Final submit');
+            break;
+        case "level":
+        case "livevictim":
+        case "deadvictim":
+        case "exitBonus":
             break;
         default:
             console.log("Error: unrecognized scoring element" + scoringElement);
@@ -163,6 +186,36 @@ function removeScoringElementConfirmed(event) {
     elementType.n--;
 }
 
+function addVictimScore() {
+    //var finishLive = document.getElementsByName('finishlive')[0].value;
+    var numLive = document.getElementsByName('livevictim')[0].value;
+    var numDead = document.getElementsByName('deadvictim')[0].value;
+    if (evacMultiply == 1)
+        evacMultiply = 0;
+    evacMultiply += Victim.scoreValue[level] * numLive;
+    if (numLive == 2) {
+        evacMultiply += Victim.scoreValue[level] * numDead;
+    }
+    evacMultiply *= kitMultiply;
+}
+
+function markLevel(event) {
+    level = document.getElementsByName('level')[0].value - 1;
+    messageSupervisor(level);
+}
+
+function finalScore(event) {
+    if (document.getElementsByName('exitBonus')[0].value)
+        score += 60 - (5 * numLOP);
+    score *= evacMultiply;
+    var cpElem = document.getElementById("score");
+    var newLabel = "Total Score: " + score;
+    cpElem.innerHTML = `
+        <label id = "${cpElem.id}">${newLabel}</label>
+        <br>
+        `;
+}
+
 function messageSupervisor(msg) {
     window.robotWindow.send(msg);
 }
@@ -172,16 +225,27 @@ window.onload = function() {
     //window.robotWindow.receive = null;
 
     document.getElementById("LOPButton").addEventListener('click', function() {
+        if (evacCheck)
+            evacLack++;
+        numLOP++;
         messageSupervisor("L");
-        LOP[LOPind]++;
-        var cpElem = document.getElementById("checkpoint" + (LOPind + 1).toString());
-        const newLabel = "Checkpoint " + (LOPind + 1).toString() + " (" + (LOP[LOPind]).toString() + " Lack of Progress)";
+        var cpElem = document.getElementById("LOPCount");
+        var newLabel = "Total Count: " + numLOP;
         cpElem.innerHTML = `
-            <label for="${cpElem.id}">${newLabel}: </label>
-            <input type="checkbox" name="${cpElem.id}">
+            <label id = "${cpElem.id}">${newLabel}</label>
             <br>
             `;
-        cpElem.getElementsByTagName("input")[0].addEventListener('click', clickScoringBox);
+        if (LOPind < LOP.length) {
+            LOP[LOPind]++;
+            cpElem = document.getElementById("checkpoint" + (LOPind + 1).toString());
+            newLabel = "Checkpoint " + (LOPind + 1).toString() + " (" + (LOP[LOPind]).toString() + " Lack of Progress)";
+            cpElem.innerHTML = `
+                <label for="${cpElem.id}">${newLabel}: </label>
+                <input type="checkbox" name="${cpElem.id}">
+                <br>
+                `;
+            cpElem.getElementsByTagName("input")[0].addEventListener('click', clickScoringBox);
+        }
     });
     var inputs = document.getElementsByTagName("input");
     for(i = 0; i < inputs.length; i++) {
@@ -202,6 +266,22 @@ window.onload = function() {
     for(i = 0; i < closeModalButtons.length; i++) {
         closeModalButtons[i].addEventListener('click', hideModal);
     }
+
+    var submitVic = document.getElementsByClassName("submitVic");
+    for(i = 0; i < submitVic.length; i++) {
+        submitVic[i].addEventListener('click', addVictimScore);
+    }
+
+    var submitLevel = document.getElementsByClassName("submitLevel");
+    for(i = 0; i < submitLevel.length; i++) {
+        submitLevel[i].addEventListener('click', markLevel);
+    }
+
+    var submitFinal = document.getElementsByClassName("submitFinal");
+    for(i = 0; i < submitLevel.length; i++) {
+        submitFinal[i].addEventListener('click', finalScore);
+    }
+
     window.addEventListener('click', function(event) {
 
         if(event.target == modal) {
@@ -222,8 +302,15 @@ window.onload = function() {
                 LOP.push(0);
             }
         }
-        if (msg == "C")
+        if (msg.charAt(0) == 'C') {
             LOPind++;
+            if (msg.length == 2) {
+                if (msg.charAt(1) == '*')
+                    evacCheck = true;
+                else if (msg.charAt(1) == '-')
+                    evacCheck = false;
+            }
+        }
     }
 }
 

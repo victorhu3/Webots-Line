@@ -19,6 +19,8 @@ PROTO scoop [
           maxPosition 1
           maxVelocity 1
         }
+				PositionSensor {
+				}
       ]
       endPoint Solid {
         translation IS translation

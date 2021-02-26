@@ -61,8 +61,9 @@ def showInstructions():
 
     5. To specify tiles with checkpoints, enter the following information in the
     specified form: "tile number,direction of entry,number of tiles since last 
-    checkpoint". Note that there are no spaces in one checkpoint entry. Only 
-    separate different entries with a space. E.g. "2,E,3 5,N,12".
+    checkpoint". Add an asterisk to the end of the checkpoint entry for the last
+    checkpoint before the evacuation room. Note that there are no spaces in one 
+    checkpoint entry. Only separate different entries with a space. E.g. "2,E,3 5,N,12*".
 
         a. The "tile number" is the number of the tile the checkpoint is on.
         b. The "direction of entry" is the direction the robot enters the checkpoint 
@@ -70,7 +71,7 @@ def showInstructions():
         c. The "number of tiles since last checkpoint" is the number of tiles the
     robot has traveled since it arrived at the previous checkpoint (or since the 
     beginning if first checkpoint). This is only for scoring purposes and can be
-    omitted.
+    omitted (e.g. "2,E* 5,N").
 
     6. To specify tiles with speed bumps, enter the following information in the
     specified form: "tile number,direction of speed bump". Use the letters 'H' and
@@ -130,6 +131,7 @@ def makeWorld():
 
     i = 0
     ind = 0
+    preEvac = False
     checkpointList = str(checkpointEntry.get())
     file.write('DEF Checkpoints Group {\n  children [\n')
     while i < len(checkpointList):
@@ -140,18 +142,29 @@ def makeWorld():
         checkpointDir = checkpointList[j + 1]
         checkpointDist = '1'
         k = j + 2
+        if k != len(checkpointList) and checkpointList[k] == '*':
+            k = k + 1
+            preEvac = True
         if k != len(checkpointList) and checkpointList[k] != ' ':
             k = k + 1
             while k != len(checkpointList) and checkpointList[k] != ' ':
+                if checkpointList[k] == '*':
+                    preEvac = True
                 k = k + 1
             checkpointDist = checkpointList[j + 3:k]
+            if preEvac:
+                checkpointDist = checkpointList[j + 3:k - 1]
         i = k + 1
         file.write('    Solid {\n')
         file.write('      translation ' + str(int(checkpointNum % numCol) * 0.3 - 0.12) + ' 0 ' + str(int(checkpointNum / numCol) * 0.3 - 0.12) + '\n')
         file.write('      children [\n        Shape {\n          appearance Appearance {\n            material Material {\n              diffuseColor 1 0.666667 0\n            }\n          }\n          geometry Cylinder {\n            height 0.02\n            radius 0.03\n          }\n        }\n      ]\n')
         file.write('      name \"checkpoint' + str(ind) + '\"\n')
-        file.write('      description \"' + checkpointDir.upper() + checkpointDist + '\"\n    }\n')
+        file.write('      description \"' + checkpointDir.upper() + checkpointDist)
+        if preEvac:
+            file.write('*')
+        file.write('\"\n    }\n')
         ind = ind + 1
+        preEvac = False
     file.write('  ]\n}\n')
 
     i = 0
