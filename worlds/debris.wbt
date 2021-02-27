@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.32471022253004295 -0.8846335506737442 -0.3346442176504088 1.7229227023365155
-  position -0.9006126938861576 1.6153177903185811 0.38126702944136776
+  orientation -0.32242540145809145 -0.9066213849706705 -0.2721755404301636 1.499462684452138
+  position -1.6055285832605477 1.8281225981186544 0.9473411759718584
 }
 TexturedBackground {
 }
@@ -3226,12 +3226,13 @@ DEF Tiles Group {
     }
     Solid {
       translation 0 0 0.3
+      rotation 0 1 0 1.5708
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/1.png"
+                "../tiles/26.png"
               ]
             }
           }
@@ -3992,6 +3993,39 @@ DEF Obstacles Group {
         }
       ]
       name "obstacle2(13)"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.666667 0.666667 0.498039
+          }
+        }
+        geometry Cylinder {
+          height 0.17
+          radius 0.002
+        }
+      }
+      physics Physics {
+        density -1
+        mass 1.2
+      }
+    }
+    Solid {
+      translation 0.61916 0.0119745 0.297557
+      rotation -0.44721487003110416 -0.44721387003139484 -0.7745957748881706 -1.8234853071795865
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.666667 0.666667 0.498039
+            }
+          }
+          geometry Cylinder {
+            height 0.17
+            radius 0.002
+          }
+        }
+      ]
+      name "obstacle2(15)"
       boundingObject Shape {
         appearance Appearance {
           material Material {

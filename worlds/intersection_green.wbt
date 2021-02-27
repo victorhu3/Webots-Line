@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.8326700081259284 0.4743244810305308 0.2857917848061483 5.0303995080399435
-  position -0.1691314187215755 1.4767145502299717 1.3894095044007893
+  orientation 0.38627341968074735 0.8688806483824904 0.30957917261108525 4.79308334844337
+  position -1.7222672973951187 1.365802465674702 1.254439445183114
 }
 TexturedBackground {
 }
@@ -647,8 +647,6 @@ DEF player0 Robot {
                   }
                   physics Physics {
                   }
-                  linearVelocity -2.6325613652885846e-11 -5.731218178011325e-11 4.868427160081289e-10
-                  angularVelocity 3.678491639241489e-11 -1.8118300764695566e-09 1.522105705858767e-10
                 }
               }
               DEF FORK_SHAPE Shape {
@@ -706,8 +704,6 @@ DEF player0 Robot {
             }
             physics Physics {
             }
-            linearVelocity -6.332721589328719e-12 -5.861491852926426e-11 1.5537260221231412e-10
-            angularVelocity 7.327067351129579e-11 -1.8107000066591157e-09 -4.764420284900602e-10
           }
         }
         DEF GREEN_LED LED {
@@ -913,8 +909,6 @@ DEF player0 Robot {
             }
             physics Physics {
             }
-            linearVelocity 3.244308990519123e-10 -8.21681162809316e-11 -2.4085013610757213e-10
-            angularVelocity 8.892976739787431e-11 -1.865287566882598e-09 -4.629580363211254e-10
           }
         }
         DEF LOWER_YELLOW_LED LED {
@@ -1109,8 +1103,6 @@ DEF player0 Robot {
             boundingObject USE BOUNDING_WHEEL
             physics Physics {
             }
-            linearVelocity -2.737875277425394e-10 -9.03358866648812e-11 -2.40377224042183e-10
-            angularVelocity 8.895705263487645e-11 -1.865288918434222e-09 -4.2812658433074423e-10
           }
         }
         DEF SO_0 DistanceSensor {
@@ -3053,7 +3045,7 @@ DEF player0 Robot {
                         name "arm2"
                         maxVelocity 1.5708
                         minPosition -1.13446
-                        maxPosition 1.9000399480745822
+                        maxPosition 1.9000399481561618
                         maxTorque 9.5
                       }
                       PositionSensor {
@@ -3062,7 +3054,7 @@ DEF player0 Robot {
                     ]
                     endPoint Solid {
                       translation 0.033 0 0.07
-                      rotation 0 -1 0 0.06744420008157005
+                      rotation 0 -1 0 0.06744420008156346
                       children [
                         Group {
                           children [
@@ -3392,8 +3384,6 @@ DEF player0 Robot {
                                                   0 0 8.29319e-07
                                                 ]
                                               }
-                                              linearVelocity 1.2521590985989322e-10 -8.68945519105644e-11 -5.081548156747488e-11
-                                              angularVelocity 1.4719043394765223e-10 -3.1792705546105444e-09 -4.753177305025363e-10
                                             }
                                           }
                                           SliderJoint {
@@ -3437,8 +3427,6 @@ DEF player0 Robot {
                                               name "finger2"
                                               boundingObject USE FINGER_BO
                                               physics USE FINGER_PH
-                                              linearVelocity 1.4566259849816022e-10 -8.594908050021376e-11 -5.083104663216886e-11
-                                              angularVelocity 1.4738142901992963e-10 -3.1792508023797072e-09 -4.75295227671398e-10
                                             }
                                           }
                                         ]
@@ -3461,8 +3449,6 @@ DEF player0 Robot {
                                             0 0 0
                                           ]
                                         }
-                                        linearVelocity 1.2610021558204723e-10 -8.611058111417971e-11 -5.5820944788845874e-11
-                                        angularVelocity 1.4732959983126218e-10 -3.1792615185412254e-09 -4.753619569968712e-10
                                       }
                                     }
                                   ]
@@ -3498,8 +3484,6 @@ DEF player0 Robot {
                                       0 0 -0.00015098
                                     ]
                                   }
-                                  linearVelocity 1.1184514728387656e-10 -8.562948447017692e-11 -6.351848452644759e-11
-                                  angularVelocity 1.372210248473029e-10 -3.4731285501611273e-09 -4.753327964363244e-10
                                 }
                               }
                             ]
@@ -3522,8 +3506,6 @@ DEF player0 Robot {
                                 0 0 -5.99276e-20
                               ]
                             }
-                            linearVelocity 7.471591334122692e-11 -8.609002142855417e-11 -7.088770555082334e-11
-                            angularVelocity 1.3722412498740487e-10 -3.4731282207617026e-09 -4.753502080784558e-10
                           }
                         }
                       ]
@@ -3546,8 +3528,6 @@ DEF player0 Robot {
                           0 0 1.56701e-20
                         ]
                       }
-                      linearVelocity 1.0917567947429443e-10 -8.321577737589745e-11 -8.184748581156935e-11
-                      angularVelocity 1.3721713686950503e-10 -3.4731322417285234e-09 -4.753415737155341e-10
                     }
                   }
                 ]
@@ -3571,8 +3551,6 @@ DEF player0 Robot {
                     -0.000533052 -0.00082008 -0.00062712
                   ]
                 }
-                linearVelocity 5.36268144452956e-11 -8.713445345912375e-11 -6.918461398694469e-11
-                angularVelocity 1.372201955231153e-10 -3.4731297370693426e-09 -4.753446029247006e-10
               }
             }
           ]
@@ -3716,8 +3694,6 @@ DEF player0 Robot {
     ]
   }
   controller "my_controller"
-  linearVelocity 2.4915452188348956e-11 -7.741317694584279e-11 -1.0539235167335754e-10
-  angularVelocity 8.399359242034467e-11 -1.865287410740092e-09 -4.753104192584871e-10
 }
 DEF Tiles Group {
   children [
@@ -3728,13 +3704,13 @@ DEF Tiles Group {
       }
     }
     Solid {
-      rotation 0 1 0 1.57
+      rotation 0 -1 0 -1.5700053071795859
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/11.png"
+                "../tiles/26.png"
               ]
             }
           }
