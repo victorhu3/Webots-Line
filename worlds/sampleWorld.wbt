@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.5791975160608268 0.7595344715597776 0.2960365246069776 1.1846550810687433
-  position 3.0433130459925586 0.8976185414042807 2.274318144222875
+  orientation -0.9953248643881696 0.09100153948833438 0.032359452118738516 0.6862602857411501
+  position 1.5005797888287842 3.084791835027812 4.158449225345503
 }
 TexturedBackground {
 }
@@ -1985,8 +1985,8 @@ DEF player0 Robot {
             staticFriction 0.05
           }
           endPoint Solid {
-            translation 3.1159745374730215e-06 -0.0012443623505272975 0.19189323353476134
-            rotation 5.041366832332161e-06 -0.9999999999833062 -2.823526056954966e-06 0.06035880411429023
+            translation 3.1159745374659462e-06 -0.0012443623505272975 0.19189323353476134
+            rotation 5.0413680457973855e-06 -0.9999999999833062 -2.8235267365822963e-06 0.060358804104827066
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
@@ -2170,8 +2170,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation -0.16500220360576365 -7.565405206774624e-05 -9.272977959895843e-06
-            rotation 0.999999998059653 -1.538386218434766e-05 6.036580603400129e-05 5.61050798510747
+            translation -0.16500220360576365 -7.565405206774639e-05 -9.272977959895715e-06
+            rotation 0.999999998059653 -1.5383862184266545e-05 6.0365806033682726e-05 5.610507985107178
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -2448,8 +2448,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation 0.16503110517477204 -8.842624337373459e-05 -2.3562670922105137e-05
-            rotation -0.9999999978702185 3.684027949342024e-05 5.3873525160160534e-05 5.642367495683854
+            translation 0.16503110517477204 -8.842624337373467e-05 -2.356267092210514e-05
+            rotation -0.9999999978702185 3.684027949317669e-05 5.387352515980466e-05 5.642367495684138
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -4355,8 +4355,8 @@ DEF player0 Robot {
     DEF extensionSlot Group {
       children [
         DEF SCOOP scoop {
-          translation 0.05000000000000092 -0.22621599788328317 -0.3190900015006357
-          rotation 3.292960073433801e-08 0.9996875173322117 -0.024997353663094805 3.141590000817359
+          translation 0.050000000000000905 -0.22621599788328411 -0.31909000150063743
+          rotation 3.2929600538365786e-08 0.9996875173322117 -0.024997353663096668 3.141590000817359
         }
         DistSensor {
           translation 0.210007 0.06 -0.00983298
@@ -4501,7 +4501,7 @@ DEF player0 Robot {
     density -1
     mass 0.8
     centerOfMass [
-      0 0.02 0
+      0 0 0.03
     ]
   }
   controller "my_controller"
