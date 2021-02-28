@@ -4501,7 +4501,7 @@ DEF player0 Robot {
     density -1
     mass 0.8
     centerOfMass [
-      0 0 0.03
+      0 -0.1 0.05
     ]
   }
   controller "my_controller"
