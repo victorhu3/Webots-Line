@@ -2928,6 +2928,36 @@ DEF player0 Robot {
     }
     DEF extensionSlot Group {
       children [
+        DistSensor {
+          translation 0.210007 0.06 -0.00983298
+          rotation -0.0023300889996729517 0.9999945706938158 -0.002330078999677245 0.000807337
+          name "rightDist"
+        }
+        DistSensor {
+          translation -0.210007 0.06 -0.00983298
+          rotation 9.40586e-07 1 -9.4059e-07 -3.1407853071795864
+          name "leftDist"
+        }
+        DistSensor {
+          translation 0.000143812 0.0600002 -0.180001
+          rotation 5.8671e-07 1 5.86708e-07 1.57
+          name "frontDist"
+        }
+        ColorSensor {
+          translation 0.06 -0.015 -0.18
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "rightColor"
+        }
+        ColorSensor {
+          translation 8.20114e-08 -0.015 -0.24
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "frontColor"
+        }
+        ColorSensor {
+          translation -0.0599998 -0.015 -0.18
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "leftColor"
+        }
       ]
     }
   ]
