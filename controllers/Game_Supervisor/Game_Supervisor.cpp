@@ -77,7 +77,7 @@ int main() {
            
             if(msg == "L") {
                 //Lack of progress button has been pushed
-                cout << "Lack of Progress: ";
+                cout << "Lack of Progress: " << endl;
 
                 if(nextCheckpoint == checkpoints.begin()) {
                     //robot hasn't reached the first checkpoint, reset back to pose at start of game
@@ -98,6 +98,7 @@ int main() {
                     checkpointTilePos[1] = robot->getField("translation")->getSFVec3f()[1];
 
                     string dir = (*(nextCheckpoint-1))->getField("description")->getSFString();
+                    dir = dir[0];
 
                     if(dir == "N") {
                         robot->getField("rotation")->setSFRotation(NORTH);
