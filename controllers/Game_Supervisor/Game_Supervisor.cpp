@@ -116,7 +116,6 @@ int main() {
             if (tileNum == path[ind + 1].num) {
                 string tmp = "S";
                 supervisor->wwiSendText(tmp + path[ind].points);
-                cout << tmp + path[ind].points << endl;
                 ind++;
             }
             else {
