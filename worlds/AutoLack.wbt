@@ -3044,11 +3044,45 @@ DEF player0 Robot {
   controller "my_controller"
 }
 DEF Obstacles Group {
+  children [
+    Solid {
+      translation 0.3 0.06 0.6
+      scale 1.3 1.3 1.3
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.8
+            }
+          }
+          geometry Cylinder {
+            height 0.1
+            radius 0.05
+          }
+        }
+      ]
+      name "obstacle1"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.2 0.2 0.8
+          }
+        }
+        geometry Cylinder {
+          height 0.1
+          radius 0.05
+        }
+      }
+      physics Physics {
+        mass 7
+      }
+    }
+  ]
 }
 DEF Checkpoints Group {
   children [
     Solid {
-      translation 0.18 0 0.18
+      translation 0.48 0 -0.12
       children [
         Shape {
           appearance Appearance {
@@ -3063,10 +3097,10 @@ DEF Checkpoints Group {
         }
       ]
       name "checkpoint0"
-      description "N1"
+      description "W1"
     }
     Solid {
-      translation 0.48 0 0.48
+      translation -0.12 0 0.48
       children [
         Shape {
           appearance Appearance {
@@ -3081,19 +3115,26 @@ DEF Checkpoints Group {
         }
       ]
       name "checkpoint1"
-      description "W1"
+      description "E1"
     }
   ]
 }
 DEF Speedbumps Group {
 }
 DEF Seesaw Group {
+  children [
+    seesaw {
+      translation 0.6 0 0.3
+      rotation 0 1 0 -3.14
+      name "seesaw0"
+    }
+  ]
 }
 DEF Tiles Group {
   children [
     Solid {
       translation 0.29999999999999993 0 0.29999999999999993
-      description "0,1,4,3,6,7,8,5,2,;3,3,"
+      description "0,1#,2@,5!,8#,7!,6@,3,4,;3,3,"
       boundingObject Plane {
         size 0.8999999999999999 0.8999999999999999
       }
@@ -3118,13 +3159,12 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.3 0 0
-      rotation 0 1 0 4.71
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/4.png"
+                "../tiles/3.png"
               ]
             }
           }
@@ -3137,12 +3177,13 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.6 0 0
+      rotation 0 1 0 4.71
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/25.png"
+                "../tiles/23.png"
               ]
             }
           }
@@ -3155,13 +3196,12 @@ DEF Tiles Group {
     }
     Solid {
       translation 0 0 0.3
-      rotation 0 1 0 1.57
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/9.png"
+                "../tiles/4.png"
               ]
             }
           }
@@ -3174,13 +3214,13 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.3 0 0.3
-      rotation 0 1 0 3.14
+      rotation 0 1 0 4.71
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/4.png"
+                "../tiles/25.png"
               ]
             }
           }
@@ -3199,7 +3239,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/5.png"
+                "../tiles/1.png"
               ]
             }
           }
@@ -3218,7 +3258,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/4.png"
+                "../tiles/12.png"
               ]
             }
           }
@@ -3236,7 +3276,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/6.png"
+                "../tiles/1.png"
               ]
             }
           }
@@ -3255,7 +3295,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/9.png"
+                "../tiles/30.png"
               ]
             }
           }

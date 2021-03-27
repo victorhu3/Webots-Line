@@ -311,6 +311,20 @@ window.onload = function() {
                     evacCheck = false;
             }
         }
+        if (msg.charAt(0) == 'S') {
+            //console.log(msg.charAt(1));
+            switch (msg.charAt(1)) {
+                case '!':
+                    incrementScore(15);
+                    break;
+                case '@':
+                    incrementScore(10);
+                    break;
+                case '#':
+                    incrementScore(5);
+                    break;
+            }
+        }
     }
 }
 

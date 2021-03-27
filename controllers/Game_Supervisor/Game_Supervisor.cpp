@@ -17,6 +17,11 @@ const double NORTH[] {0, 1, 0, 3.15};
 const double WEST[] = {0, 1, 0, 4.72};
 int width = 0, height = 0;
 
+typedef struct {
+    int num;
+    char points;
+} tile;
+
 int checkpointCmp(Node* a, Node* b) {
 
    return a->getField("name")->getSFString() < b->getField("name")->getSFString(); 
@@ -37,17 +42,26 @@ int main() {
 
     Node *robot = supervisor->getFromDef("player0");
     Node *checkpointGroup = supervisor->getFromDef("Checkpoints");
-    vector<int> path;
+    vector<tile> path;
 
     string pathStr = supervisor->getFromDef("Tiles")->getField("children")->getMFNode(0)->getField("description")->getSFString();
     int tileNum = 0, ind;
+    char tilePoints = '\0';
     for (ind = 0; pathStr[ind] != ';'; ind++) {
-        if (pathStr[ind] == ',') {
-            path.push_back(tileNum);
-            tileNum = 0;
+        switch (pathStr[ind]) {
+            case ',':
+                path.push_back(tile{ tileNum, tilePoints });
+                tileNum = 0;
+                tilePoints = '\0';
+                break;
+            case '!':
+            case '@':
+            case '#':
+                tilePoints = pathStr[ind];
+                break;
+            default:
+                tileNum = tileNum * 10 + pathStr[ind] - '0';
         }
-        else
-            tileNum = tileNum * 10 + pathStr[ind] - '0';
     }
     while (pathStr[++ind] != ',')
         height = height * 10 + pathStr[ind] - '0';
@@ -98,9 +112,13 @@ int main() {
         string msg = "";
 
         tileNum = toGridNum(robot->getField("translation")->getSFVec3f());
-        if (tileNum != path[ind]) {
-            if (tileNum == path[ind + 1])
+        if (tileNum != path[ind].num) {
+            if (tileNum == path[ind + 1].num) {
+                string tmp = "S";
+                supervisor->wwiSendText(tmp + path[ind].points);
+                cout << tmp + path[ind].points << endl;
                 ind++;
+            }
             else {
                 ind = max(lastInd - 1, 0);
                 msg = "L";

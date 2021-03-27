@@ -34,13 +34,14 @@ def rotateTile(event, widget):
 
 def placeBlank(event, widget):
     ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol)
-    print(widget.winfo_x(), widget.winfo_y())
-    print(widget.winfo_x() / tileImgSize, widget.winfo_y() / tileImgSize)
-    print()
-    '''tiles[ind] = getImg('../tiles/0.png').resize((100, 100))
+    #print(widget.winfo_x(), widget.winfo_y())
+    #print(widget.winfo_x() / tileImgSize, widget.winfo_y() / tileImgSize)
+    #print()
+    print(ind)
+    tiles[ind] = getImg('../tiles/0.png').resize((100, 100))
     tilePhotos[ind] = getPhoto(tiles[ind])
     map[ind].tileNum = 0
-    widget['image'] = tilePhotos[ind]'''
+    widget['image'] = tilePhotos[ind]
 
 def showInstructions():
     global instructionWindow, instructionText
@@ -92,9 +93,10 @@ def showInstructions():
     instructionText.insert(tk.END, instruction)
 
 def makeWorld():
-    path = "0,1,"
+    path = "0,"
     tileChange = [-numCol, 1, numCol, -1]
-    intersections = [3, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 28, 29, 30]
+    intersections = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+    gaps = [3, 10, 28, 29, 30]
     scoringElem = [[], []] #first list is for 15 point elements, second is for 5 point
     #index 0 refers to 0.png, index 1 refers to 1.png, etc.
     #the exit direction when entering N, E, S, W, respectively
@@ -243,21 +245,23 @@ def makeWorld():
     file.write('  ]\n}\n')
     print('World ' + worldName + '.wbt Generated')
 
-    ind = 1
+    ind = 0
     while curDir != -1:
-        curDir = tilePath[map[ind].tileNum][(curDir - map[ind].dir + 6) % 4]
-        print(map[ind].tileNum, curDir, (curDir + map[ind].dir) % 4)
+        if ind != 0:
+            curDir = tilePath[map[ind].tileNum][(curDir - map[ind].dir + 6) % 4]
         if curDir != -1:
-            curDir = (curDir + map[ind].dir) % 4
+            if ind != 0:
+                curDir = (curDir + map[ind].dir) % 4
             ind += tileChange[curDir]
             path += str(ind)
             if intersections.count(map[ind].tileNum) > 0:
                 path += '@'
             if scoringElem[0].count(ind) > 0:
                 path += '!'
-            elif scoringElem[1].count(ind) > 0:
+            elif scoringElem[1].count(ind) > 0 or gaps.count(map[ind].tileNum) > 0:
                 path += '#'
             path += ','
+            print(map[ind].tileNum, intersections.count(map[ind].tileNum))
     path += ';' + str(numRow) + ',' + str(numCol) + ','
     print(path)
 
@@ -326,7 +330,7 @@ def enterTiles():
                 topLeftTile = mapCanvas.create_window(y * tileImgSize, offset + x * tileImgSize, anchor=tk.NW, window=selectTileButton)
             else:
                 mapCanvas.create_window(y * tileImgSize, offset + x * tileImgSize, anchor=tk.NW, window=selectTileButton)
-            print('tlt', selectTileButton.winfo_y())
+            #print('tlt', selectTileButton.winfo_y())
 
 N = 0
 E = 1
