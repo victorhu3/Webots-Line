@@ -11,6 +11,12 @@ using namespace std;
 
 #define TIME_STEP 32
 
+const double SOUTH[] = {0, 1, 0, 0};
+const double EAST[] = {0, 1, 0, 1.57};
+const double NORTH[] {0, 1, 0, 3.15};
+const double WEST[] = {0, 1, 0, 4.72};
+int width = 0, height = 0;
+
 int checkpointCmp(Node* a, Node* b) {
 
    return a->getField("name")->getSFString() < b->getField("name")->getSFString(); 
@@ -21,10 +27,9 @@ double findDistance(const double a[], const double b[]) {
     return sqrt(pow(a[0]-b[0],2) + pow(a[2]-b[2], 2));
 }
 
-const double SOUTH[] = {0, 1, 0, 0};
-const double EAST[] = {0, 1, 0, 1.57};
-const double NORTH[] {0, 1, 0, 3.15};
-const double WEST[] = {0, 1, 0, 4.72};
+int toGridNum(const double *coord) {
+    return int((coord[2] + 0.15) / 0.3) * width + int((coord[0] + 0.15) / 0.3);
+}
 
 int main() {
 
@@ -32,6 +37,22 @@ int main() {
 
     Node *robot = supervisor->getFromDef("player0");
     Node *checkpointGroup = supervisor->getFromDef("Checkpoints");
+    vector<int> path;
+
+    string pathStr = supervisor->getFromDef("Tiles")->getField("children")->getMFNode(0)->getField("description")->getSFString();
+    int tileNum = 0, ind;
+    for (ind = 0; pathStr[ind] != ';'; ind++) {
+        if (pathStr[ind] == ',') {
+            path.push_back(tileNum);
+            tileNum = 0;
+        }
+        else
+            tileNum = tileNum * 10 + pathStr[ind] - '0';
+    }
+    while (pathStr[++ind] != ',')
+        height = height * 10 + pathStr[ind] - '0';
+    while (pathStr[++ind] != ',')
+        width = width * 10 + pathStr[ind] - '0';
 
     if(robot == NULL) {
         cout << "No player0 robot found" << endl;
@@ -70,10 +91,23 @@ int main() {
     memcpy(initialPos, robot->getField("translation")->getSFVec3f(), sizeof(initialPos));
     memcpy(initialRot, robot->getField("rotation")->getSFRotation(), sizeof(initialRot)); 
 
+    int lastInd = 0;
+    tileNum = 0, ind = 0;
+
     while(supervisor->step(TIME_STEP) != -1) {
-         
-        string msg;
-        if((msg = supervisor->wwiReceiveText()).length() > 0) {
+        string msg = "";
+
+        tileNum = toGridNum(robot->getField("translation")->getSFVec3f());
+        if (tileNum != path[ind]) {
+            if (tileNum == path[ind + 1])
+                ind++;
+            else {
+                ind = max(lastInd - 1, 0);
+                msg = "L";
+            }
+        }
+
+        if(msg.length() > 0 || (msg = supervisor->wwiReceiveText()).length() > 0) {
            
             if(msg == "L") {
                 //Lack of progress button has been pushed
@@ -142,6 +176,7 @@ int main() {
                     supervisor->wwiSendText("C-");
                 else
                     supervisor->wwiSendText("C");
+                lastInd = ind;
             }
         }
 

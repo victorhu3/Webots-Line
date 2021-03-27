@@ -17,14 +17,15 @@ def placeTile(widget):
     global tiles
     filename = filedialog.askopenfilename()
     if filename != '':
-        ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol) - 1
+        ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol)
         tiles[ind] = getImg(filename).resize((100, 100))
         tilePhotos[ind] = getPhoto(tiles[ind])
         map[ind].tileNum = int(filename[filename.rfind('/') + 1 : -4])
+        map[ind].dir = 0
         widget['image'] = tilePhotos[ind]
 
 def rotateTile(event, widget):
-    ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol) - 1
+    ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol)
     if tiles[ind] != 0:
         tiles[ind] = tiles[ind].rotate(-90)
         tilePhotos[ind] = getPhoto(tiles[ind])
@@ -32,11 +33,14 @@ def rotateTile(event, widget):
         widget['image'] = tilePhotos[ind]
 
 def placeBlank(event, widget):
-    ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol) - 1
-    tiles[ind] = getImg('../tiles/0.png').resize((100, 100))
+    ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol)
+    print(widget.winfo_x(), widget.winfo_y())
+    print(widget.winfo_x() / tileImgSize, widget.winfo_y() / tileImgSize)
+    print()
+    '''tiles[ind] = getImg('../tiles/0.png').resize((100, 100))
     tilePhotos[ind] = getPhoto(tiles[ind])
     map[ind].tileNum = 0
-    widget['image'] = tilePhotos[ind]
+    widget['image'] = tilePhotos[ind]'''
 
 def showInstructions():
     global instructionWindow, instructionText
@@ -88,28 +92,50 @@ def showInstructions():
     instructionText.insert(tk.END, instruction)
 
 def makeWorld():
+    path = "0,1,"
+    tileChange = [-numCol, 1, numCol, -1]
+    intersections = [3, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 28, 29, 30]
+    scoringElem = [[], []] #first list is for 15 point elements, second is for 5 point
+    #index 0 refers to 0.png, index 1 refers to 1.png, etc.
+    #the exit direction when entering N, E, S, W, respectively
+    tilePath = [[-1, -1, -1, -1], #0
+        [-1, W, -1, E],
+        [E, N, W, S],
+        [-1, W, -1, E],
+        [-1, S, E, -1],
+        [-1, W, -1, E],
+        [-1, W, -1, E],
+        [-1, S, E, -1],
+        [-1, W, -1, E],
+        [-1, -1, W, S],
+        [-1, W, -1, E], #10
+        [-1, W, -1, E],
+        [-1, S, E, E],
+        [-1, W, W, S],
+        [-1, S, S, S],
+        [S, W, N, E],
+        [S, S, E, E],
+        [W, S, E, N],
+        [S, S, S, S],
+        [E, E, S, S],
+        [-1, -1, -1, -1], #20
+        [-1, W, -1, E],
+        [-1, W, -1, E],
+        [-1, S, E, -1],
+        [-1, S, E, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, W, -1, E],
+        [-1, W, -1, E],
+        [-1, -1, W, S]] #30
+
     ind = 0
+    curDir = E
     dirAngle = [0, 4.71, 3.14, 1.57]
     header = open('worldHeader.txt', 'r')
     file = open('../worlds/' + worldName + '.wbt', 'w')
     file.write(header.read())
-
-    file.write('DEF Tiles Group {\n  children [\n    Solid {\n      translation')
-    file.write(' ' + str(numCol / 2 * 0.3 - 0.15) + ' 0 ' + str(numRow / 2 * 0.3 - 0.15) + '\n')
-    file.write('      boundingObject Plane {\n')
-    file.write('        size ' + str(numCol * 0.3) + ' ' + str(numRow * 0.3) + '\n      }\n    }\n')
-    for x in range(numRow):
-        for y in range(numCol):
-            ind = x * numCol + y
-            file.write('    Solid {\n      translation')
-            file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
-            file.write('      rotation 0 1 0 ' + str(dirAngle[map[ind].dir]) + '\n')		#rotation
-            file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
-            file.write(str(map[ind].tileNum) + '.png\"\n')		#imgNum
-            file.write('              ]\n            }\n          }\n          geometry Plane {\n')
-            file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
-            file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
-    file.write('  ]\n}')
 
     i = 0
     ind = 0
@@ -120,6 +146,7 @@ def makeWorld():
         while j != len(obstacleList) and obstacleList[j] != ' ':
             j = j + 1
         obsTileNum = int(obstacleList[i:j])
+        scoringElem[0].append(obsTileNum)
         i = j + 1
         file.write('    Solid {\n')
         file.write('      translation ' + str(int(obsTileNum % numCol) * 0.3) + ' 0.06 ' + str(int(obsTileNum / numCol) * 0.3) + '\n')
@@ -181,6 +208,7 @@ def makeWorld():
             j = j + 1
         sbNum = int(speedbumpList[i:j])
         sbDir = speedbumpList[j + 1].upper()
+        scoringElem[1].append(sbNum)
         i = j + 3
         file.write('    speedbump {\n')
         file.write('      translation ' + str(int(sbNum % numCol) * 0.3) + ' 0 ' + str(int(sbNum / numCol) * 0.3) + '\n')
@@ -205,6 +233,7 @@ def makeWorld():
             j = j + 1
         ssNum = int(seesawList[i:j])
         ssDir = seesawList[j + 1].upper()
+        scoringElem[0].append(ssNum)
         i = j + 3
         file.write('    seesaw {\n')
         file.write('      translation ' + str(int(ssNum % numCol) * 0.3) + ' 0 ' + str(int(ssNum / numCol) * 0.3) + '\n')
@@ -214,8 +243,44 @@ def makeWorld():
     file.write('  ]\n}\n')
     print('World ' + worldName + '.wbt Generated')
 
+    ind = 1
+    while curDir != -1:
+        curDir = tilePath[map[ind].tileNum][(curDir - map[ind].dir + 6) % 4]
+        print(map[ind].tileNum, curDir, (curDir + map[ind].dir) % 4)
+        if curDir != -1:
+            curDir = (curDir + map[ind].dir) % 4
+            ind += tileChange[curDir]
+            path += str(ind)
+            if intersections.count(map[ind].tileNum) > 0:
+                path += '@'
+            if scoringElem[0].count(ind) > 0:
+                path += '!'
+            elif scoringElem[1].count(ind) > 0:
+                path += '#'
+            path += ','
+    path += ';' + str(numRow) + ',' + str(numCol) + ','
+    print(path)
+
+    file.write('DEF Tiles Group {\n  children [\n    Solid {\n')
+    file.write('      description \"' + path + '\"      translation')
+    file.write(' ' + str(numCol / 2 * 0.3 - 0.15) + ' 0 ' + str(numRow / 2 * 0.3 - 0.15) + '\n')
+    file.write('      boundingObject Plane {\n')
+    file.write('        size ' + str(numCol * 0.3) + ' ' + str(numRow * 0.3) + '\n      }\n    }\n')
+    for x in range(numRow):
+        for y in range(numCol):
+            ind = x * numCol + y
+            file.write('    Solid {\n      translation')
+            file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
+            file.write('      rotation 0 1 0 ' + str(dirAngle[map[ind].dir]) + '\n')		#rotation
+            file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
+            file.write(str(map[ind].tileNum) + '.png\"\n')		#imgNum
+            file.write('              ]\n            }\n          }\n          geometry Plane {\n')
+            file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
+            file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
+    file.write('  ]\n}')
+
 def enterTiles():
-    global worldName, numRow, numCol, mapWindow, mapCanvas, rotationVar, rotationLabel, placeButton, rotateButton, map, obstacleLabel, checkpointLabel, obstacleEntry, checkpointEntry, speedbumpLabel, seesawLabel, speedbumpEntry, seesawEntry
+    global worldName, numRow, numCol, mapWindow, mapCanvas, rotationVar, rotationLabel, placeButton, rotateButton, map, obstacleLabel, checkpointLabel, obstacleEntry, checkpointEntry, speedbumpLabel, seesawLabel, speedbumpEntry, seesawEntry, topLeftTile
     offset = 33
     worldName = str(worldNameEntry.get())
     numRow = int(numRowEntry.get())
@@ -257,7 +322,16 @@ def enterTiles():
             selectTileButton['command'] = lambda w=selectTileButton: placeTile(w)
             selectTileButton.bind('<Button-2>', (lambda event=None, widget=selectTileButton: placeBlank(event, widget)))
             selectTileButton.bind('<Button-3>', (lambda event=None, widget=selectTileButton: rotateTile(event, widget)))
-            mapCanvas.create_window(y * tileImgSize, offset + x * tileImgSize, anchor=tk.NW, window=selectTileButton)
+            if x == 0 and y == 0:
+                topLeftTile = mapCanvas.create_window(y * tileImgSize, offset + x * tileImgSize, anchor=tk.NW, window=selectTileButton)
+            else:
+                mapCanvas.create_window(y * tileImgSize, offset + x * tileImgSize, anchor=tk.NW, window=selectTileButton)
+            print('tlt', selectTileButton.winfo_y())
+
+N = 0
+E = 1
+S = 2
+W = 3
 
 tileOptions = 26
 tileImgSize = 100
@@ -284,6 +358,7 @@ seesawEntry = None
 instructionWindow = None
 instructionButton = None
 instructionText = None
+topLeftTile = None
 
 root = tk.Tk()
 rootCanvas = tk.Canvas(root, width = 330, height = 100)
