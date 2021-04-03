@@ -3084,7 +3084,634 @@ DEF player0 Robot {
   }
   controller "scoopTest"
 }
-rescueZone {
-  translation 0 0 0
-  seed 11.1
+DEF RescueZone Group {
+  children [
+    Solid {
+      translation 0.45 0 -0.16
+      children [
+        Solid {
+          translation 0 0.2 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                roughness 1
+                metalness 0
+                normalMap ImageTexture {
+                  url [
+                    "textures/roughcast/roughcast_normal.png"
+                  ]
+                }
+                textureTransform TextureTransform {
+                  scale 1 2.4
+                }
+              }
+              geometry Box {
+                size 1.2 0.4 0.02
+              }
+            }
+          ]
+          boundingObject Box {
+            size 1.2 0.4 0.02
+          }
+        }
+      ]
+      name "rescueZone0"
+      model "wall"
+    }
+    Solid {
+      translation 0.3 0 0.76
+      children [
+        Solid {
+          translation 0 0.2 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                roughness 1
+                metalness 0
+                normalMap ImageTexture {
+                  url [
+                    "textures/roughcast/roughcast_normal.png"
+                  ]
+                }
+                textureTransform TextureTransform {
+                  scale 1 2.4
+                }
+              }
+              geometry Box {
+                size 0.9 0.4 0.02
+              }
+            }
+          ]
+          boundingObject Box {
+            size 0.9 0.4 0.02
+          }
+        }
+      ]
+      name "rescueZone1"
+      model "wall"
+    }
+    Solid {
+      translation -0.16 0 0.3
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Solid {
+          translation 0 0.2 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                roughness 1
+                metalness 0
+                normalMap ImageTexture {
+                  url [
+                    "textures/roughcast/roughcast_normal.png"
+                  ]
+                }
+                textureTransform TextureTransform {
+                  scale 1 2.4
+                }
+              }
+              geometry Box {
+                size 0.9 0.4 0.02
+              }
+            }
+          ]
+          boundingObject Box {
+            size 0.9 0.4 0.02
+          }
+        }
+      ]
+      name "rescueZone2"
+      model "wall"
+    }
+    Solid {
+      translation 1.06 0 0.45
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Solid {
+          translation 0 0.2 0
+          children [
+            Shape {
+              appearance PBRAppearance {
+                roughness 1
+                metalness 0
+                normalMap ImageTexture {
+                  url [
+                    "textures/roughcast/roughcast_normal.png"
+                  ]
+                }
+                textureTransform TextureTransform {
+                  scale 1 2.4
+                }
+              }
+              geometry Box {
+                size 0.6 0.4 0.02
+              }
+            }
+          ]
+          boundingObject Box {
+            size 0.6 0.4 0.02
+          }
+        }
+      ]
+      name "rescueZone3"
+      model "wall"
+    }
+    Solid {
+      translation 0 0 0.6
+      children [
+        Solid {
+          rotation 0 1 0 -0.785795307179586
+          children [
+            Solid {
+              translation 0 0.0025 0
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0 0 0
+                    roughness 1
+                    metalness 0
+                    normalMap ImageTexture {
+                      url [
+                        "textures/roughcast/roughcast_normal.png"
+                      ]
+                    }
+                    textureTransform TextureTransform {
+                      scale 1 2.4
+                    }
+                  }
+                  geometry Box {
+                    size 0.41 0.005 0.01
+                  }
+                }
+              ]
+              boundingObject Box {
+                size 0.41 0.005 0.01
+              }
+            }
+          ]
+          name "wall(2)"
+          model "wall"
+        }
+        Solid {
+          translation 0 0.001 0
+          rotation 0 1 0 3.14159
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 0 0 0
+                }
+              }
+              geometry IndexedFaceSet {
+                coord Coordinate {
+                  point [
+                    0.15 0 0.15
+                    0.15 0 -0.15
+                    -0.15 0 -0.15
+                  ]
+                }
+                coordIndex [
+                  0, 1, 2
+                ]
+              }
+            }
+          ]
+          name "solid(1)"
+        }
+      ]
+      name "deliveryzone"
+    }
+    DEF Victims Group {
+      children [
+        Solid {
+          translation 0.36455 0.019984303999999987 0.325
+          rotation 0.7071059134765989 2.890054729534989e-15 -0.7071076488954313 7.049095649985336e-15
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColorMap ImageTexture {
+                  url [
+                    "textures/brushed_aluminium/brushed_aluminium_base_color.jpg"
+                  ]
+                }
+                roughnessMap ImageTexture {
+                  url [
+                    "textures/brushed_aluminium/brushed_aluminium_roughness.jpg"
+                  ]
+                }
+                normalMap ImageTexture {
+                  url [
+                    "textures/brushed_aluminium/brushed_aluminium_normal.jpg"
+                  ]
+                }
+              }
+              geometry Sphere {
+                radius 0.02
+              }
+            }
+          ]
+          name "rescueZone4"
+          boundingObject Shape {
+            appearance PBRAppearance {
+              baseColorMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_base_color.jpg"
+                ]
+              }
+              roughnessMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_roughness.jpg"
+                ]
+              }
+              normalMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_normal.jpg"
+                ]
+              }
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+        }
+        Solid {
+          translation 0.6756 0.019984303999999987 0.2472
+          rotation 0.20152121529379147 0.6997934952063164 -0.6853307696677864 2.5988955872372386
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColorMap ImageTexture {
+                  url [
+                    "textures/brushed_aluminium/brushed_aluminium_base_color.jpg"
+                  ]
+                }
+                roughnessMap ImageTexture {
+                  url [
+                    "textures/brushed_aluminium/brushed_aluminium_roughness.jpg"
+                  ]
+                }
+                normalMap ImageTexture {
+                  url [
+                    "textures/brushed_aluminium/brushed_aluminium_normal.jpg"
+                  ]
+                }
+              }
+              geometry Sphere {
+                radius 0.02
+              }
+            }
+          ]
+          name "rescueZone5"
+          boundingObject Shape {
+            appearance PBRAppearance {
+              baseColorMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_base_color.jpg"
+                ]
+              }
+              roughnessMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_roughness.jpg"
+                ]
+              }
+              normalMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_normal.jpg"
+                ]
+              }
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+        }
+        Solid {
+          translation 0.857 0.019984303999999987 0.4557
+          rotation 0.2788646362908996 0.22641443100414613 0.9332582815380814 -1.6426645028270594
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0 0 0
+                roughnessMap ImageTexture {
+                  url [
+                    "textures/rough_polymer/rough_polymer_roughness.jpg"
+                  ]
+                }
+                metalness 0
+                normalMap ImageTexture {
+                  url [
+                    "textures/rough_polymer/rough_polymer_normal.jpg"
+                  ]
+                }
+                normalMapFactor 2
+                occlusionMap ImageTexture {
+                  url [
+                    "textures/rough_polymer/rough_polymer_occlusion.jpg"
+                  ]
+                }
+                occlusionMapStrength 2
+              }
+              geometry Sphere {
+                radius 0.02
+              }
+            }
+          ]
+          name "rescueZone6"
+          boundingObject Shape {
+            appearance PBRAppearance {
+              baseColorMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_base_color.jpg"
+                ]
+              }
+              roughnessMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_roughness.jpg"
+                ]
+              }
+              normalMap ImageTexture {
+                url [
+                  "textures/brushed_aluminium/brushed_aluminium_normal.jpg"
+                ]
+              }
+            }
+            geometry Sphere {
+              radius 0.02
+            }
+          }
+          physics Physics {
+            density -1
+            mass 0.01
+          }
+        }
+      ]
+    }
+    Solid {
+      translation 1.2 -0.05 0.9
+      name "rescueZone7"
+      boundingObject Box {
+        size 2.7 0.1 2.1
+      }
+    }
+    Solid {
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone8"
+    }
+    Solid {
+      translation 0.3 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone9"
+    }
+    Solid {
+      translation 0.6 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone10"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone11"
+    }
+    Solid {
+      translation 1.2 0 0
+      rotation 0 1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/27.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone12"
+    }
+    Solid {
+      translation 0 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone13"
+    }
+    Solid {
+      translation 0.3 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone14"
+    }
+    Solid {
+      translation 0.6 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone15"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone16"
+    }
+    Solid {
+      translation 0 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone17"
+    }
+    Solid {
+      translation 0.3 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone18"
+    }
+    Solid {
+      translation 0.6 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone19"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone20"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/26.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "rescueZone21"
+    }
+  ]
 }
