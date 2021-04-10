@@ -259,6 +259,7 @@ def makeWorld():
         for j in range(len(scoringElem[i])):
             path += str(scoringElem[i][j]) + ','
         path += ';'
+    path += ',,;,;,;,;'
     print(path)
 
     file.write('DEF Tiles Group {\n  children [\n    Solid {\n')

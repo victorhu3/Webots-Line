@@ -354,6 +354,17 @@ window.onload = function() {
                 cpElem.getElementsByTagName("input")[0].addEventListener('click', clickScoringBox);
             }
         }
+        if (msg.charAt(0) == 'V') {
+            var numVic = Number(msg.charAt(1));
+            if(numVic >= 1)
+              numVic += Number(msg.charAt(3));
+            evacMultiply = Math.pow(Victim[level],numVic);
+            console.log(msg);
+            console.log("Victims: " + numVic + "   Multiplier: " + evacMultiply);
+        }
+        if (msg.charAt(0) == 'P') {
+            console.log(msg);
+        }
     }
 }
 
