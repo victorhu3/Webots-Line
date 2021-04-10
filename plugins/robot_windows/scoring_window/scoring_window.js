@@ -205,11 +205,14 @@ function markLevel(event) {
 }
 
 function finalScore(event) {
+    var finalMsg = score.toString() + ',' + (60 - (5 * numLOP)).toString() + ',' + evacMultiply.toString() + ',';
     if (document.getElementsByName('exitBonus')[0].value)
         score += 60 - (5 * numLOP);
     score *= evacMultiply;
+    finalMsg += score + ',';
+    messageSupervisor(finalMsg);
     var cpElem = document.getElementById("score");
-    var newLabel = "Total Score: " + score;
+    var newLabel = "Total Score: " + score.toFixed(2);
     cpElem.innerHTML = `
         <label id = "${cpElem.id}">${newLabel}</label>
         <br>
@@ -304,12 +307,15 @@ window.onload = function() {
         }
         if (msg.charAt(0) == 'C') {
             LOPind++;
-            if (msg.length == 2) {
-                if (msg.charAt(1) == '*')
-                    evacCheck = true;
-                else if (msg.charAt(1) == '-')
-                    evacCheck = false;
-            }
+            var cpNum = parseInt(msg.substring(2));
+            if (msg.charAt(1) == '*')
+                evacCheck = true;
+            else if (msg.charAt(1) == '-')
+                evacCheck = false;
+            else
+                cpNum = parseInt(msg.substring(1));
+            if (LOP[cpNum] < 3)
+                incrementScore(checkpointDist[cpNum] * ((2 - LOP[cpNum]) * 2 + 1));
         }
         if (msg.charAt(0) == 'S') {
             switch (msg.charAt(1)) {
@@ -322,6 +328,30 @@ window.onload = function() {
                 case '#':
                     incrementScore(5);
                     break;
+            }
+        }
+        if (msg.charAt(0) == 'F')
+            finalScore();
+        if (msg.charAt(0) == 'L') {
+            if (evacCheck)
+                evacLack++;
+            numLOP++;
+            var cpElem = document.getElementById("LOPCount");
+            var newLabel = "Total Count: " + numLOP;
+            cpElem.innerHTML = `
+                <label id = "${cpElem.id}">${newLabel}</label>
+                <br>
+                `;
+            if (LOPind < LOP.length) {
+                LOP[LOPind]++;
+                cpElem = document.getElementById("checkpoint" + (LOPind + 1).toString());
+                newLabel = "Checkpoint " + (LOPind + 1).toString() + " (" + (LOP[LOPind]).toString() + " Lack of Progress)";
+                cpElem.innerHTML = `
+                    <label for="${cpElem.id}">${newLabel}: </label>
+                    <input type="checkbox" name="${cpElem.id}">
+                    <br>
+                    `;
+                cpElem.getElementsByTagName("input")[0].addEventListener('click', clickScoringBox);
             }
         }
     }
