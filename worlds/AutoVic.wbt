@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.16645239324225497 0.7080511389401548 0.6862632041931691 2.8014368255141875
-  position 0.5139450953866878 4.193309437818876 1.1145895565690798
+  orientation 0.07355701020972408 -0.8274262588804769 -0.5567361604602885 3.3593700139725775
+  position 0.7952514258473462 2.6792015048390434 1.0723116764132312
 }
 TexturedBackground {
 }
@@ -23,7 +23,8 @@ DEF GameSupervisor Robot {
   window "scoring_window"
 }
 DEF player0 Robot {
-  rotation 0 1 0 -1.57
+  translation 0.381661 0.04 2.09967
+  rotation 0 1 0 0.000786322
   scale 0.3 0.3 0.3
   children [
     DEF default Group {
@@ -2927,6 +2928,10 @@ DEF player0 Robot {
     }
     DEF extensionSlot Group {
     }
+    DEF SCOOP scoop {
+      translation 0.050000000000000475 -0.22621600000000222 -0.3190900000000029
+      rotation 3.292959628704641e-08 0.9996875172493005 -0.024997356978866344 3.14159
+    }
   ]
   name "Pioneer 3-DX"
   model "Adept Pioneer 3-DX"
@@ -3310,7 +3315,7 @@ DEF Tiles Group {
 }
 DEF RescueZone Transform {
   translation 7.71371e-06 0 2.1
-  rotation 0 1 0 1.5708
+  rotation 0 1 0 1.57
   children [
     DEF Victims Group {
       children [
@@ -3427,8 +3432,8 @@ DEF RescueZone Transform {
           }
         }
         Solid {
-          translation 0.857 0.01999214422969061 0.4557
-          rotation 0.2788646362908996 0.22641443100414615 0.9332582815380814 -1.6426645028270594
+          translation 0.112907 0.0269349 0.395444
+          rotation 0.7128468928850534 0.7010238946616197 -0.020366796939611596 -3.109155307179586
           children [
             Shape {
               appearance PBRAppearance {

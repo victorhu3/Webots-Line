@@ -123,70 +123,103 @@ int main() {
     int lastInd = 0;
     tileNum = 0, ind = 0;
 
-      //victims
-      //IMPORTANT: victims group currently needs to be first in children table; only supports up to 9 silver and 9 black victism currently (easy fix if need be)
-      int numSVic = 0, numBVic = 0;//victim color counts
-      Node *rescueZone = supervisor->getFromDef("RescueZone");
-      Node *victims = rescueZone->getField("children")->getMFNode(0);
-      //find delivery zone rotation        
-      Node *deliveryLoc = NULL;
-      for(int i = 1; i < rescueZone->getField("children")->getCount(); i++) {
-          string s1 = "delivery";
-          if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("description")->getSFString()))//delivery zone node found
-            deliveryLoc = rescueZone->getField("children")->getMFNode(i);
-      }
-      const double *deliveryRot = deliveryLoc->getField("rotation")->getSFRotation();
-      const double *deliveryT = deliveryLoc->getField("translation")->getSFVec3f();
-      //find delivery zone triangle (4 possible rotations)
-      float deliveryPts[6] = {0};
-      //supervisor->wwiSendText("V" + to_string(deliveryRot[3]));
-      if(fabs(deliveryRot[3] - 0) < 0.1){
-         float pts[6] = {0.15,0.15,0.15,-0.15,-0.15,-0.15};
-         for(int i = 0; i < 6; i++)
-           deliveryPts[i] = pts[i];
-      }
-      else if(fabs(fabs(deliveryRot[3]) - 3.14) < 0.1){
-         float pts[6] = {0.15,0.15,-0.15,0.15,-0.15,-0.15};
-         for(int i = 0; i < 6; i++)
-           deliveryPts[i] = pts[i];
-      }
-      else if((fabs(deliveryRot[3] - 1.57) < 0.1 && deliveryRot[1] == 1) || (fabs(deliveryRot[3] + 1.57) < 0.1 && deliveryRot[1] == -1)){
-         float pts[6] = {-0.15,0.15,-0.15,-0.15,0.15,-0.15};
-         for(int i = 0; i < 6; i++)
-           deliveryPts[i] = pts[i];
-      }
-      else{
-         float pts[6] = {-0.15,0.15,0.15,0.15,0.15,-0.15};
-         for(int i = 0; i < 6; i++)
-           deliveryPts[i] = pts[i];
-      }
-        //add translation
-      for(int i = 0; i < 6; i+=2){
-        deliveryPts[i] += deliveryT[0];//x translation
-        deliveryPts[i+1] += deliveryT[2];//z translation
-      }  
+    //victims
+    //IMPORTANT: victims group currently needs to be first in children table; only supports up to 9 silver and 9 black victism currently (easy fix if need be)
+    int numSVic = 0, numBVic = 0;//victim color counts
+    Node *rescueZone = supervisor->getFromDef("RescueZone");
+    Node *victims = rescueZone->getField("children")->getMFNode(0);
+    //find delivery zone rotation        
+    Node *deliveryLoc = NULL;
+    for(int i = 1; i < rescueZone->getField("children")->getCount(); i++) {
+        string s1 = "delivery";
+        if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("description")->getSFString()))//delivery zone node found
+          deliveryLoc = rescueZone->getField("children")->getMFNode(i);
+    }
+    const double *deliveryRot = deliveryLoc->getField("rotation")->getSFRotation();
+    const double *deliveryT = deliveryLoc->getField("translation")->getSFVec3f();
+    //find delivery zone triangle (4 possible rotations)
+    float deliveryPts[6] = {0};
+    //supervisor->wwiSendText("V" + to_string(deliveryRot[3]));
+    if(fabs(deliveryRot[3] - 0) < 0.1){
+       float pts[6] = {0.15,0.15,0.15,-0.15,-0.15,-0.15};
+       for(int i = 0; i < 6; i++)
+         deliveryPts[i] = pts[i];
+    }
+    else if(fabs(fabs(deliveryRot[3]) - 3.14) < 0.1){
+       float pts[6] = {0.15,0.15,-0.15,0.15,-0.15,-0.15};
+       for(int i = 0; i < 6; i++)
+         deliveryPts[i] = pts[i];
+    }
+    else if((fabs(deliveryRot[3] - 1.57) < 0.1 && deliveryRot[1] == 1) || (fabs(deliveryRot[3] + 1.57) < 0.1 && deliveryRot[1] == -1)){
+       float pts[6] = {-0.15,0.15,-0.15,-0.15,0.15,-0.15};
+       for(int i = 0; i < 6; i++)
+         deliveryPts[i] = pts[i];
+    }
+    else{
+       float pts[6] = {-0.15,0.15,0.15,0.15,0.15,-0.15};
+       for(int i = 0; i < 6; i++)
+         deliveryPts[i] = pts[i];
+    }
+      //add translation
+    for(int i = 0; i < 6; i+=2){
+      deliveryPts[i] += deliveryT[0];//x translation
+      deliveryPts[i+1] += deliveryT[2];//z translation
+    }  
+
+    bool vicCounted[20] = {0};
 
     while(supervisor->step(TIME_STEP) != -1) {
-        string msg = "";
+        
+        //VICTIM
         numSVic = 0;
         numBVic = 0;
-        //see if victim in evac
+        //get scoop info
+        double currPos[3], currRot[4], relScoopPos[3], scoopPos[3];
+        memcpy(currPos, robot->getField("translation")->getSFVec3f(), sizeof(currPos));
+        memcpy(currRot, robot->getField("rotation")->getSFRotation(), sizeof(currRot)); 
+        memcpy(relScoopPos, robot->getField("children")->getMFNode(2)->getField("translation")->getSFVec3f(), sizeof(relScoopPos));
+        scoopPos[0] = currPos[0] - sin(currRot[3])*(0.12)*currRot[1];//actual rel location at 0.12; ***not correctly compensating for robot rotation when factoring in scoop relative position
+        scoopPos[2] = currPos[2] - cos(currRot[3])*(0.12)*currRot[1];
+       //supervisor->wwiSendText("P" + to_string(scoopPos[0]) + "," + to_string(scoopPos[2]));
+       //supervisor->wwiSendText("P" + to_string(cos(currRot[3])*(-1*relScoopPos[2])) + "," + to_string(sin(currRot[3])*relScoopPos[2]));
+       //supervisor->wwiSendText("P Robot:" + to_string(currPos[0]) + "," + to_string(currPos[2]));
+        //***see if victim in evac + robot at least 30 cm away (once robot was 30cm away for an instant and victim in evac zone, then that victim will always count even when the robot re-enters 30 cm range)
+     
+          //vicT and deliveryPts relative to rescue zone
         for(int i = 0; i < victims->getField("children")->getCount(); i++) {
+          //victim already scored
+          if(vicCounted[i]){
+            if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("silver") == 0)
+                  numSVic += 1;
+                else 
+                  numBVic += 1; 
+            continue;  
+          }       
           const double *vicT = victims->getField("children")->getMFNode(i)->getField("translation")->getSFVec3f();
+          const double *rescueZoneT = rescueZone->getField("translation")->getSFVec3f();
+          const double *rescueZoneR = rescueZone->getField("rotation")->getSFRotation();
           /*if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("black") == 0){
             supervisor->wwiSendText("P" + to_string(vicT[0]) + "," + to_string(vicT[2]) + "," + to_string(deliveryPts[0]) + "," + to_string(deliveryPts[1]) + "," + to_string(deliveryPts[2]) + "," + to_string(deliveryPts[3]) + "," + to_string(deliveryPts[4]) + "," + to_string(deliveryPts[5]));
             supervisor->wwiSendText("P" + to_string(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])));
           }*/
+          double absVicT[3];
+          absVicT[0] = rescueZoneT[0] + cos(rescueZoneR[3])*vicT[0] + sin(rescueZoneR[3])*vicT[2];
+          absVicT[2] = rescueZoneT[2] + cos(rescueZoneR[3])*vicT[2] - sin(rescueZoneR[3])*vicT[0];
+          //if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("black") == 0)
+          //  supervisor->wwiSendText("P Black Vic:" + to_string(absVicT[0]) + "," + to_string(absVicT[2]));
           if(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])){
-            if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("silver") == 0)
-              numSVic += 1;
-            else 
-              numBVic += 1;
+            if(findDistance(currPos,absVicT) > 0.3){//robot center 30 cm away
+              if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("silver") == 0)
+                numSVic += 1;
+              else 
+                numBVic += 1;
+              vicCounted[i] = true;
+            }
           }
         }   
         supervisor->wwiSendText("V" + to_string(numSVic) + " " + to_string(numBVic));
 
-
+        string msg = "";
         tileNum = toGridNum(robot->getField("translation")->getSFVec3f());
         if (tileNum != path[ind].num) {
             if (tileNum == path[ind + 1].num) {

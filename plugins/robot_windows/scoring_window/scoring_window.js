@@ -224,7 +224,7 @@ window.onload = function() {
     window.robotWindow = webots.window("scoring_window");
     //window.robotWindow.receive = null;
 
-    document.getElementById("LOPButton").addEventListener('click', function() {
+    /*document.getElementById("LOPButton").addEventListener('click', function() {
         if (evacCheck)
             evacLack++;
         numLOP++;
@@ -246,7 +246,7 @@ window.onload = function() {
                 `;
             cpElem.getElementsByTagName("input")[0].addEventListener('click', clickScoringBox);
         }
-    });
+    });*/
     var inputs = document.getElementsByTagName("input");
     for(i = 0; i < inputs.length; i++) {
         inputs[i].addEventListener('click', clickScoringBox);
@@ -328,7 +328,7 @@ window.onload = function() {
             var numVic = Number(msg.charAt(1));
             if(numVic >= 1)
               numVic += Number(msg.charAt(3));
-            evacMultiply = Math.pow(Victim[level],numVic);
+            evacMultiply = Math.pow(Victim.scoreValue[level],numVic);
             console.log(msg);
             console.log("Victims: " + numVic + "   Multiplier: " + evacMultiply);
         }
