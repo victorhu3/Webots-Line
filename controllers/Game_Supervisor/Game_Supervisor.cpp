@@ -260,7 +260,7 @@ int main() {
             if (toGridNum(robot->getField("translation")->getSFVec3f()) == path[path.size() - 1])
                 finished = true;
         }
-        if (finished || supervisor->getTime() > 10) {
+        if (finished || supervisor->getTime() > 480) {
             cout << "Completed run!" << endl;
             fout << robot->getField("name")->getSFString() << header << endl;
             for (int i = 0; i < NUMSCOREITEMS; i++)
