@@ -150,68 +150,77 @@ int main() {
     //IMPORTANT: victims group currently needs to be first in children table; only supports up to 9 silver and 9 black victism currently (easy fix if need be)
     int numSVic = 0, numBVic = 0;//victim color counts
     Node *rescueZone = supervisor->getFromDef("RescueZone");
-    Node *victims = rescueZone->getField("children")->getMFNode(0);
+    Node *victims;
     //find delivery zone rotation        
     Node *deliveryLoc = NULL;
-    for(int i = 1; i < rescueZone->getField("children")->getCount(); i++) {
-        string s1 = "delivery";
-        if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("description")->getSFString()))//delivery zone node found
-        deliveryLoc = rescueZone->getField("children")->getMFNode(i);
+    if (rescueZone != 0) {
+        victims = rescueZone->getField("children")->getMFNode(0);
+        for(int i = 1; i < rescueZone->getField("children")->getCount(); i++) {
+            string s1 = "delivery";
+            if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("description")->getSFString()))//delivery zone node found
+            deliveryLoc = rescueZone->getField("children")->getMFNode(i);
+        }
     }
-    const double *deliveryRot = deliveryLoc->getField("rotation")->getSFRotation();
-    const double *deliveryT = deliveryLoc->getField("translation")->getSFVec3f();
+    const double *deliveryRot;
+    const double *deliveryT;
     //find delivery zone triangle (4 possible rotations)
     float deliveryPts[6] = {0};
-    //supervisor->wwiSendText("V" + to_string(deliveryRot[3]));
-    if(fabs(deliveryRot[3] - 0) < 0.1){
-        float pts[6] = {0.15,0.15,0.15,-0.15,-0.15,-0.15};
-        for(int i = 0; i < 6; i++)
-        deliveryPts[i] = pts[i];
+    //supervisor->wwiSendText("V" + to_string(deliveryRot[3]));)
+    if (rescueZone != 0) {
+        deliveryRot = deliveryLoc->getField("rotation")->getSFRotation();
+        deliveryT = deliveryLoc->getField("translation")->getSFVec3f();
+        if(fabs(deliveryRot[3] - 0) < 0.1){
+            float pts[6] = {0.15,0.15,0.15,-0.15,-0.15,-0.15};
+            for(int i = 0; i < 6; i++)
+            deliveryPts[i] = pts[i];
+        }
+        else if(fabs(fabs(deliveryRot[3]) - 3.14) < 0.1){
+            float pts[6] = {0.15,0.15,-0.15,0.15,-0.15,-0.15};
+            for(int i = 0; i < 6; i++)
+            deliveryPts[i] = pts[i];
+        }
+        else if((fabs(deliveryRot[3] - 1.57) < 0.1 && deliveryRot[1] == 1) || (fabs(deliveryRot[3] + 1.57) < 0.1 && deliveryRot[1] == -1)){
+            float pts[6] = {-0.15,0.15,-0.15,-0.15,0.15,-0.15};
+            for(int i = 0; i < 6; i++)
+            deliveryPts[i] = pts[i];
+        }
+        else{
+            float pts[6] = {-0.15,0.15,0.15,0.15,0.15,-0.15};
+            for(int i = 0; i < 6; i++)
+            deliveryPts[i] = pts[i];
+        }
+        //add translation
+        for(int i = 0; i < 6; i+=2){
+        deliveryPts[i] += deliveryT[0];//x translation
+        deliveryPts[i+1] += deliveryT[2];//z translation
+        }  
     }
-    else if(fabs(fabs(deliveryRot[3]) - 3.14) < 0.1){
-        float pts[6] = {0.15,0.15,-0.15,0.15,-0.15,-0.15};
-        for(int i = 0; i < 6; i++)
-        deliveryPts[i] = pts[i];
-    }
-    else if((fabs(deliveryRot[3] - 1.57) < 0.1 && deliveryRot[1] == 1) || (fabs(deliveryRot[3] + 1.57) < 0.1 && deliveryRot[1] == -1)){
-        float pts[6] = {-0.15,0.15,-0.15,-0.15,0.15,-0.15};
-        for(int i = 0; i < 6; i++)
-        deliveryPts[i] = pts[i];
-    }
-    else{
-        float pts[6] = {-0.15,0.15,0.15,0.15,0.15,-0.15};
-        for(int i = 0; i < 6; i++)
-        deliveryPts[i] = pts[i];
-    }
-    //add translation
-    for(int i = 0; i < 6; i+=2){
-    deliveryPts[i] += deliveryT[0];//x translation
-    deliveryPts[i+1] += deliveryT[2];//z translation
-    }  
 
     while(supervisor->step(TIME_STEP) != -1) {
         string msg = "";
         numSVic = 0;
         numBVic = 0;
         //see if victim in evac
-        for(int i = 0; i < victims->getField("children")->getCount(); i++) {
-          const double *vicT = victims->getField("children")->getMFNode(i)->getField("translation")->getSFVec3f();
-          /*if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("black") == 0){
-            supervisor->wwiSendText("P" + to_string(vicT[0]) + "," + to_string(vicT[2]) + "," + to_string(deliveryPts[0]) + "," + to_string(deliveryPts[1]) + "," + to_string(deliveryPts[2]) + "," + to_string(deliveryPts[3]) + "," + to_string(deliveryPts[4]) + "," + to_string(deliveryPts[5]));
-            supervisor->wwiSendText("P" + to_string(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])));
-          }*/
-          if(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])){
-            if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("silver") == 0) {
-              numSVic += 1;
-              scoringElem[liveVic]++;
-            }
-            else {
-              numBVic += 1;
-              scoringElem[deadVic]++;
-            }
-          }
-        }   
-        supervisor->wwiSendText("V" + to_string(numSVic) + " " + to_string(numBVic));
+        if (rescueZone != 0) {
+            for(int i = 0; i < victims->getField("children")->getCount(); i++) {
+                const double *vicT = victims->getField("children")->getMFNode(i)->getField("translation")->getSFVec3f();
+                /*if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("black") == 0){
+                    supervisor->wwiSendText("P" + to_string(vicT[0]) + "," + to_string(vicT[2]) + "," + to_string(deliveryPts[0]) + "," + to_string(deliveryPts[1]) + "," + to_string(deliveryPts[2]) + "," + to_string(deliveryPts[3]) + "," + to_string(deliveryPts[4]) + "," + to_string(deliveryPts[5]));
+                    supervisor->wwiSendText("P" + to_string(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])));
+                }*/
+                if(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])){
+                    if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("silver") == 0) {
+                    scoringElem[liveVic][numSVic]++;
+                    numSVic += 1;
+                    }
+                    else {
+                    scoringElem[deadVic][0]++;
+                    numBVic += 1;
+                    }
+                }
+            }   
+            supervisor->wwiSendText("V" + to_string(numSVic) + " " + to_string(numBVic));
+        }
 
         tileNum = toGridNum(robot->getField("translation")->getSFVec3f());
         if (tileNum != path[ind]) {
