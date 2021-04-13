@@ -29,7 +29,7 @@ def placeTile(widget):
 
 def rotateTile(event, widget):
     ind = getGrid(widget.winfo_x(), widget.winfo_y())
-    if tiles[ind] != 0:
+    if tiles[ind] != 0 or tiles[ind] != -1:
         tiles[ind] = tiles[ind].rotate(-90)
         tilePhotos[ind] = getPhoto(tiles[ind])
         tileMap[ind].dir = (tileMap[ind].dir + 1) % 4
@@ -262,6 +262,8 @@ def makeWorld():
     path += ';,,;,;,;,;'
     print(path)
 
+    eEntrance = -1
+    eExit = -1
     file.write('DEF Tiles Group {\n  children [\n    Solid {\n')
     file.write('      description \"' + path + '\"      translation')
     file.write(' ' + str(numCol / 2 * 0.3 - 0.15) + ' 0 ' + str(numRow / 2 * 0.3 - 0.15) + '\n')
@@ -270,15 +272,37 @@ def makeWorld():
     for x in range(numRow):
         for y in range(numCol):
             ind = x * numCol + y
-            file.write('    Solid {\n      translation')
-            file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
-            file.write('      rotation 0 1 0 ' + str(dirAngle[tileMap[ind].dir]) + '\n')		#rotation
-            file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
-            file.write(str(tileMap[ind].tileNum) + '.png\"\n')		#imgNum
-            file.write('              ]\n            }\n          }\n          geometry Plane {\n')
-            file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
-            file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
-    file.write('  ]\n}')
+            if tileMap[ind].tileNum != -1:
+                file.write('    Solid {\n      translation')
+                file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
+                file.write('      rotation 0 1 0 ' + str(dirAngle[tileMap[ind].dir]) + '\n')		#rotation
+                file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
+                file.write(str(tileMap[ind].tileNum) + '.png\"\n')		#imgNum
+                file.write('              ]\n            }\n          }\n          geometry Plane {\n')
+                file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
+                file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
+            if tileMap[ind].tileNum == 26:
+                eEntrance = ind
+            elif tileMap[ind].tileNum == 27:
+                eExit = ind
+    file.write('  ]\n}\n')
+
+    print(eEntrance, eExit)
+    if eEntrance != -1:
+        file.write('rescueZone {\n')
+        if eExit - eEntrance == -3 * numCol + 1: #N
+            file.write('  translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
+            file.write('  rotation 0 1 0 ' + str(dirAngle[0]) + '\n')
+        elif eExit - eEntrance == numCol + 3: #E
+            file.write('  translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
+            file.write('  rotation 0 1 0 ' + str(dirAngle[1]) + '\n')
+        elif eExit - eEntrance == 3 * numCol - 1: #S
+            file.write('  translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
+            file.write('  rotation 0 1 0 ' + str(dirAngle[2]) + '\n')
+        elif eExit - eEntrance == -1 * numCol - 3: #W
+            file.write('  translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
+            file.write('  rotation 0 1 0 ' + str(dirAngle[3]) + '\n')
+        file.write('}\n')
 
     i = 0
     ind = 0
@@ -297,7 +321,7 @@ def makeWorld():
         checkInd = pathList.index(checkpointNum)
         checkpointDist = checkInd - prevCheck
         prevCheck = checkInd
-        if preEvac == 0 and i < len(checkpointList): #************************************ find evac exit
+        if preEvac == 0 and i < len(checkpointList):
             k = i
             while checkpointList[k] != ',':
                 k = k + 1
@@ -325,7 +349,7 @@ def enterTiles():
     worldName = str(worldNameEntry.get())
     numRow = int(numRowEntry.get())
     numCol = int(numColEntry.get())
-    tileMap = [Tile(0, 0) for i in range(numRow * numCol)]
+    tileMap = [Tile(-1, 0) for i in range(numRow * numCol)]
     tiles = [0] * (numRow * numCol)
     tilePhotos = [0] * (numRow * numCol)
 

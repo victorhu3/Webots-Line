@@ -235,26 +235,6 @@ PROTO rescueZone [
       %{x = x + 1}%
     }
     Solid {
-      translation 1.2 0 0
-      rotation 0 1 0 1.57
-      children [
-        Shape {
-          appearance Appearance {
-            texture ImageTexture {
-              url [
-                "../tiles/27.png"
-              ]
-            }
-          }
-          geometry Plane {
-            size 0.3 0.3
-          }
-        }
-      ]
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-    }
-    Solid {
       translation 0 0 0.3
       children [
         Shape {
@@ -395,25 +375,6 @@ PROTO rescueZone [
             texture ImageTexture {
               url [
                 "../tiles/0.png"
-              ]
-            }
-          }
-          geometry Plane {
-            size 0.3 0.3
-          }
-        }
-      ]
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-    }
-    Solid {
-      translation 0.8999999999999999 0 0.8999999999999999
-      children [
-        Shape {
-          appearance Appearance {
-            texture ImageTexture {
-              url [
-                "../tiles/26.png"
               ]
             }
           }
