@@ -1,10 +1,10 @@
-#VRML_SIM R2020b utf8
+#VRML_SIM R2021a utf8
 WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9251203630072125 0.3508348502487668 0.1451455193946019 5.442137801127191
-  position -0.07262460522737657 1.054634150491071 1.3139438506349923
+  orientation 0.8300166934684589 0.5016613001450836 0.24373803252761117 5.22400914190664
+  position -0.29386929402606266 1.690729955206584 1.454583798285503
 }
 TexturedBackground {
 }
@@ -23,7 +23,6 @@ DEF GameSupervisor Robot {
   window "scoring_window"
 }
 DEF player0 Robot {
-  translation 0 0 0
   rotation 0 1 0 -1.57
   scale 0.3 0.3 0.3
   children [
@@ -2927,8 +2926,6 @@ DEF player0 Robot {
       ]
     }
     DEF extensionSlot Group {
-      children [
-       ]
     }
   ]
   name "Pioneer 3-DX"
@@ -3047,7 +3044,8 @@ DEF player0 Robot {
   controller "my_controller"
 }
 DEF Obstacles Group {
-  children [    Solid {
+  children [
+    Solid {
       translation 0.3 0.06 1.2
       scale 1.3 1.3 1.3
       children [
@@ -3079,18 +3077,18 @@ DEF Obstacles Group {
         mass 7
       }
     }
- ]
+  ]
 }
 DEF Speedbumps Group {
   children [
     speedbump {
-      translation 0.3 0 0.0
-      rotation -0.577 0.577 -0.577 2.09
+      translation 0.3 0 0
+      rotation -0.5773502691896258 0.5773502691896258 -0.5773502691896258 2.09
       name "speedbump0"
     }
     speedbump {
       translation 2.4 0 0.3
-      rotation 0.707 -0.707 0 -3.14
+      rotation 0.7071067811865475 -0.7071067811865475 0 -3.14
       name "speedbump1"
     }
   ]
@@ -3112,19 +3110,19 @@ DEF Seesaw Group {
 DEF Tiles Group {
   children [
     Solid {
-      description "7,9,;0,1,2,3,4,13,12,13,4,3,2,11,20,19,18,27,28,37,46,55,56,47,48,39,40,52,61,62,53,44,35,26,17,8,7,6,5,;2,12,2,18,46,62,26,6,;19,35,;37,;11,20,56,47,44,;;1,17,;;;,,;,;,;,;"      translation 1.2 0 0.9
+      translation 1.2 0 0.9
+      description "7,9,;0,1,2,3,4,13,12,13,4,3,2,11,20,19,18,27,28,37,46,55,56,47,48,39,40*,52,61,62,53,44,35,26,17,8,7,6,5,;2,12,2,18,46,62,26,6,;19,35,;37,;11,20,56,47,44,;;1,17,;;;,,;,;,;,;"
       boundingObject Plane {
         size 2.6999999999999997 2.1
       }
     }
     Solid {
-      translation 0.0 0 0.0
       rotation 0 1 0 1.57
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/11.png"
               ]
             }
@@ -3137,13 +3135,12 @@ DEF Tiles Group {
       name "solid0"
     }
     Solid {
-      translation 0.3 0 0.0
-      rotation 0 1 0 0
+      translation 0.3 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/1.png"
               ]
             }
@@ -3156,13 +3153,12 @@ DEF Tiles Group {
       name "solid1"
     }
     Solid {
-      translation 0.6 0 0.0
-      rotation 0 1 0 0
+      translation 0.6 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/12.png"
               ]
             }
@@ -3175,13 +3171,12 @@ DEF Tiles Group {
       name "solid2"
     }
     Solid {
-      translation 0.8999999999999999 0 0.0
-      rotation 0 1 0 0
+      translation 0.8999999999999999 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/6.png"
               ]
             }
@@ -3194,13 +3189,13 @@ DEF Tiles Group {
       name "solid3"
     }
     Solid {
-      translation 1.2 0 0.0
+      translation 1.2 0 0
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/4.png"
               ]
             }
@@ -3213,13 +3208,13 @@ DEF Tiles Group {
       name "solid4"
     }
     Solid {
-      translation 1.5 0 0.0
+      translation 1.5 0 0
       rotation 0 1 0 1.57
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/25.png"
               ]
             }
@@ -3232,13 +3227,13 @@ DEF Tiles Group {
       name "solid5"
     }
     Solid {
-      translation 1.7999999999999998 0 0.0
+      translation 1.7999999999999998 0 0
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/18.png"
               ]
             }
@@ -3251,13 +3246,12 @@ DEF Tiles Group {
       name "solid6"
     }
     Solid {
-      translation 2.1 0 0.0
-      rotation 0 1 0 0
+      translation 2.1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/6.png"
               ]
             }
@@ -3270,13 +3264,12 @@ DEF Tiles Group {
       name "solid7"
     }
     Solid {
-      translation 2.4 0 0.0
-      rotation 0 1 0 0
+      translation 2.4 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/9.png"
               ]
             }
@@ -3289,13 +3282,12 @@ DEF Tiles Group {
       name "solid8"
     }
     Solid {
-      translation 0.0 0 0.3
-      rotation 0 1 0 0
+      translation 0 0 0.3
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3309,12 +3301,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.3 0 0.3
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3330,10 +3321,10 @@ DEF Tiles Group {
       translation 0.6 0 0.3
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/3.png"
               ]
             }
@@ -3349,10 +3340,10 @@ DEF Tiles Group {
       translation 0.8999999999999999 0 0.3
       rotation 0 1 0 1.57
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/14.png"
               ]
             }
@@ -3368,10 +3359,10 @@ DEF Tiles Group {
       translation 1.2 0 0.3
       rotation 0 1 0 3.14
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/4.png"
               ]
             }
@@ -3387,10 +3378,10 @@ DEF Tiles Group {
       translation 2.4 0 0.3
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/1.png"
               ]
             }
@@ -3403,13 +3394,13 @@ DEF Tiles Group {
       name "solid17"
     }
     Solid {
-      translation 0.0 0 0.6
+      translation 0 0 0.6
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/19.png"
               ]
             }
@@ -3423,12 +3414,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.3 0 0.6
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/1.png"
               ]
             }
@@ -3444,10 +3434,10 @@ DEF Tiles Group {
       translation 0.6 0 0.6
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/30.png"
               ]
             }
@@ -3461,12 +3451,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.8999999999999999 0 0.6
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3480,12 +3469,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.2 0 0.6
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3501,10 +3489,10 @@ DEF Tiles Group {
       translation 2.4 0 0.6
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/11.png"
               ]
             }
@@ -3517,13 +3505,12 @@ DEF Tiles Group {
       name "solid26"
     }
     Solid {
-      translation 0.0 0 0.8999999999999999
-      rotation 0 1 0 0
+      translation 0 0 0.8999999999999999
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/2.png"
               ]
             }
@@ -3539,10 +3526,10 @@ DEF Tiles Group {
       translation 0.3 0 0.8999999999999999
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/4.png"
               ]
             }
@@ -3556,12 +3543,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.6 0 0.8999999999999999
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3575,12 +3561,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.8999999999999999 0 0.8999999999999999
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3594,12 +3579,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.2 0 0.8999999999999999
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3615,10 +3599,10 @@ DEF Tiles Group {
       translation 2.4 0 0.8999999999999999
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/1.png"
               ]
             }
@@ -3631,13 +3615,13 @@ DEF Tiles Group {
       name "solid35"
     }
     Solid {
-      translation 0.0 0 1.2
+      translation 0 0 1.2
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3653,10 +3637,10 @@ DEF Tiles Group {
       translation 0.3 0 1.2
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/1.png"
               ]
             }
@@ -3670,12 +3654,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 0.6 0 1.2
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3691,10 +3674,10 @@ DEF Tiles Group {
       translation 0.8999999999999999 0 1.2
       rotation 0 1 0 1.57
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/9.png"
               ]
             }
@@ -3710,10 +3693,10 @@ DEF Tiles Group {
       translation 1.2 0 1.2
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/26.png"
               ]
             }
@@ -3729,10 +3712,10 @@ DEF Tiles Group {
       translation 2.4 0 1.2
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/3.png"
               ]
             }
@@ -3745,13 +3728,12 @@ DEF Tiles Group {
       name "solid44"
     }
     Solid {
-      translation 0.0 0 1.5
-      rotation 0 1 0 0
+      translation 0 0 1.5
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3767,10 +3749,10 @@ DEF Tiles Group {
       translation 0.3 0 1.5
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/22.png"
               ]
             }
@@ -3786,10 +3768,10 @@ DEF Tiles Group {
       translation 0.6 0 1.5
       rotation 0 1 0 1.57
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/30.png"
               ]
             }
@@ -3805,10 +3787,10 @@ DEF Tiles Group {
       translation 0.8999999999999999 0 1.5
       rotation 0 1 0 3.14
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/7.png"
               ]
             }
@@ -3822,12 +3804,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.2 0 1.5
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3841,12 +3822,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.5 0 1.5
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3860,12 +3840,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.7999999999999998 0 1.5
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3879,12 +3858,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 2.1 0 1.5
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/27.png"
               ]
             }
@@ -3900,10 +3878,10 @@ DEF Tiles Group {
       translation 2.4 0 1.5
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/5.png"
               ]
             }
@@ -3916,13 +3894,12 @@ DEF Tiles Group {
       name "solid53"
     }
     Solid {
-      translation 0.0 0 1.7999999999999998
-      rotation 0 1 0 0
+      translation 0 0 1.7999999999999998
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3938,10 +3915,10 @@ DEF Tiles Group {
       translation 0.3 0 1.7999999999999998
       rotation 0 1 0 1.57
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/4.png"
               ]
             }
@@ -3957,10 +3934,10 @@ DEF Tiles Group {
       translation 0.6 0 1.7999999999999998
       rotation 0 1 0 4.71
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/30.png"
               ]
             }
@@ -3976,10 +3953,10 @@ DEF Tiles Group {
       translation 0.8999999999999999 0 1.7999999999999998
       rotation 0 1 0 3.14
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -3993,12 +3970,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.2 0 1.7999999999999998
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -4012,12 +3988,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.5 0 1.7999999999999998
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -4031,12 +4006,11 @@ DEF Tiles Group {
     }
     Solid {
       translation 1.7999999999999998 0 1.7999999999999998
-      rotation 0 1 0 0
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/0.png"
               ]
             }
@@ -4052,10 +4026,10 @@ DEF Tiles Group {
       translation 2.1 0 1.7999999999999998
       rotation 0 1 0 3.14
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/9.png"
               ]
             }
@@ -4071,10 +4045,10 @@ DEF Tiles Group {
       translation 2.4 0 1.7999999999999998
       rotation 0 1 0 3.14
       children [
-        Shape{
-          appearance Appearance{
-            texture ImageTexture{
-              url[
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
                 "../tiles/23.png"
               ]
             }

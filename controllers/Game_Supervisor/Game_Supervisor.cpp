@@ -235,20 +235,22 @@ int main() {
                 ind = lastInd;
                 msg = "L";
                 supervisor->wwiSendText(msg);
-                scoringElem[checkpoint][checkpointInd]++;
-                if (scoringElem[checkpoint][checkpointInd] == 5) { //skip to next checkpoint after 5 LOP
-                    cout << "Skipped checkpoint" << endl;
-                    nextCheckpoint++;
-                    checkpointInd++;
-                    if (nextCheckpoint - checkpoints.begin() - 1 == preEvac)
-                        supervisor->wwiSendText("C*");
-                    else if (nextCheckpoint - checkpoints.begin() - 2 == preEvac)
-                        supervisor->wwiSendText("C-");
-                    else
-                        supervisor->wwiSendText("C");
-                    int tmp = toGridNum((*(nextCheckpoint- 1))->getField("translation")->getSFVec3f());
-                    for (; path[ind] != tmp; ind++);
-                    lastInd = ind;
+                if (checkpointInd < scoringElem[checkpoint].size()) {
+                    scoringElem[checkpoint][checkpointInd]++;
+                    if (scoringElem[checkpoint][checkpointInd] == 5) { //skip to next checkpoint after 5 LOP
+                        cout << "Skipped checkpoint" << endl;
+                        nextCheckpoint++;
+                        checkpointInd++;
+                        if (nextCheckpoint - checkpoints.begin() - 1 == preEvac)
+                            supervisor->wwiSendText("C*");
+                        else if (nextCheckpoint - checkpoints.begin() - 2 == preEvac)
+                            supervisor->wwiSendText("C-");
+                        else
+                            supervisor->wwiSendText("C");
+                        int tmp = toGridNum((*(nextCheckpoint- 1))->getField("translation")->getSFVec3f());
+                        for (; path[ind] != tmp; ind++);
+                        lastInd = ind;
+                    }
                 }
             }
         }
@@ -273,9 +275,10 @@ int main() {
                         fout << scoringMap[scoringElem[j][i]].scored << ',';
                     else if (j == checkpoint) {
                         if (i < checkpointInd)
-                            fout << checkpointDist[i] << " tiles - " << scoringElem[j][i] << " LOPs,";
-                        else
-                            fout << "Did not reach,";
+                            fout << checkpointDist[i] << " tiles - " << scoringElem[j][i] << " LOPs";
+                        else if (i < checkpoints.size())
+                            fout << "Did not reach";
+                        fout << ",";
                     }
                     else
                         fout << ',';

@@ -235,7 +235,10 @@ def makeWorld():
                 if ind != 0:
                     curDir = (curDir + tileMap[ind].dir) % 4
                 ind += tileChange[curDir]
-                path += str(ind) + ','
+                path += str(ind)
+                if tileMap[ind].tileNum == 26:
+                    path += '*'
+                path += ','
                 pathList.append(ind)
         if intersections.count(tileMap[ind].tileNum) > 0:
             scoringElem[intersection].append(ind)
