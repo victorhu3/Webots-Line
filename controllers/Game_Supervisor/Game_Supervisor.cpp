@@ -126,17 +126,25 @@ int main() {
     //victims
     //IMPORTANT: victims group currently needs to be first in children table; only supports up to 9 silver and 9 black victism currently (easy fix if need be)
     int numSVic = 0, numBVic = 0;//victim color counts
+    double rescuedColor[3] = {0,1,1};
     Node *rescueZone = supervisor->getFromDef("RescueZone");
     Node *victims = rescueZone->getField("children")->getMFNode(0);
-    //find delivery zone rotation        
-    Node *deliveryLoc = NULL;
+    //find delivery zone rotation/location and rescue kit location    
+    supervisor->wwiSendText("P1");    
+    Node *deliveryZone = NULL, *rescueKit = NULL;
     for(int i = 1; i < rescueZone->getField("children")->getCount(); i++) {
         string s1 = "delivery";
-        if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("description")->getSFString()))//delivery zone node found
-          deliveryLoc = rescueZone->getField("children")->getMFNode(i);
+        if(rescueZone->getField("children")->getMFNode(i)->getField("description") != NULL)
+          if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("description")->getSFString()))//delivery zone node found
+            deliveryZone = rescueZone->getField("children")->getMFNode(i);
+        s1 = "rescueKit";
+        if(rescueZone->getField("children")->getMFNode(i)->getField("name") != NULL)
+          if(0 == s1.compare(rescueZone->getField("children")->getMFNode(i)->getField("name")->getSFString()))//delivery zone node found
+            rescueKit = rescueZone->getField("children")->getMFNode(i);
     }
-    const double *deliveryRot = deliveryLoc->getField("rotation")->getSFRotation();
-    const double *deliveryT = deliveryLoc->getField("translation")->getSFVec3f();
+    const double *kitT = rescueKit->getField("translation")->getSFVec3f();//relative to rescue zone
+    const double *deliveryRot = deliveryZone->getField("rotation")->getSFRotation();
+    const double *deliveryT = deliveryZone->getField("translation")->getSFVec3f();
     //find delivery zone triangle (4 possible rotations)
     float deliveryPts[6] = {0};
     //supervisor->wwiSendText("V" + to_string(deliveryRot[3]));
@@ -167,6 +175,7 @@ int main() {
     }  
 
     bool vicCounted[20] = {0};
+    int rescueKitState = 0;//0: not rescued; 1: rescued, not recorded; 2: rescued, recorded
 
     while(supervisor->step(TIME_STEP) != -1) {
         
@@ -177,15 +186,21 @@ int main() {
         double currPos[3], currRot[4], relScoopPos[3], scoopPos[3];
         memcpy(currPos, robot->getField("translation")->getSFVec3f(), sizeof(currPos));
         memcpy(currRot, robot->getField("rotation")->getSFRotation(), sizeof(currRot)); 
-        memcpy(relScoopPos, robot->getField("children")->getMFNode(2)->getField("translation")->getSFVec3f(), sizeof(relScoopPos));
+        /*base off scoop location instead of center of robot: doesn't work
+        memcpy(relScoopPos, robot->getField("children")->getMFNode(0)->getField("translation")->getSFVec3f(), sizeof(relScoopPos));
         scoopPos[0] = currPos[0] - sin(currRot[3])*(0.12)*currRot[1];//actual rel location at 0.12; ***not correctly compensating for robot rotation when factoring in scoop relative position
         scoopPos[2] = currPos[2] - cos(currRot[3])*(0.12)*currRot[1];
-       //supervisor->wwiSendText("P" + to_string(scoopPos[0]) + "," + to_string(scoopPos[2]));
-       //supervisor->wwiSendText("P" + to_string(cos(currRot[3])*(-1*relScoopPos[2])) + "," + to_string(sin(currRot[3])*relScoopPos[2]));
-       //supervisor->wwiSendText("P Robot:" + to_string(currPos[0]) + "," + to_string(currPos[2]));
-        //***see if victim in evac + robot at least 30 cm away (once robot was 30cm away for an instant and victim in evac zone, then that victim will always count even when the robot re-enters 30 cm range)
+        supervisor->wwiSendText("P" + to_string(scoopPos[0]) + "," + to_string(scoopPos[2]));
+        supervisor->wwiSendText("P" + to_string(cos(currRot[3])*(-1*relScoopPos[2])) + "," + to_string(sin(currRot[3])*relScoopPos[2]));
+       supervisor->wwiSendText("P Robot:" + to_string(currPos[0]) + "," + to_string(currPos[2]));
+       */
+       
+        //***IMPORTNT NOTEs: see if victim in evac + robot at least 30 cm away (once robot was 30cm away for an instant and victim in evac zone, then that victim will always count even when the robot re-enters 30 cm range)
+        //  DON'T USE RESCUE KIT PROTO: CAN'T CHANGE COLOR AFTER RESCUED
      
-          //vicT and deliveryPts relative to rescue zone
+     
+        //Find evacuated victims: vicT and deliveryPts relative to rescue zone
+        bool newVic = false;
         for(int i = 0; i < victims->getField("children")->getCount(); i++) {
           //victim already scored
           if(vicCounted[i]){
@@ -207,17 +222,43 @@ int main() {
           absVicT[2] = rescueZoneT[2] + cos(rescueZoneR[3])*vicT[2] - sin(rescueZoneR[3])*vicT[0];
           //if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("black") == 0)
           //  supervisor->wwiSendText("P Black Vic:" + to_string(absVicT[0]) + "," + to_string(absVicT[2]));
+          //see if victim meets conditions for rescue
           if(inTriangle(vicT[0],vicT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])){
             if(findDistance(currPos,absVicT) > 0.3){//robot center 30 cm away
+              //rescue victim
               if(victims->getField("children")->getMFNode(i)->getField("description")->getSFString().compare("silver") == 0)
                 numSVic += 1;
               else 
                 numBVic += 1;
+              //not working: can't double stack nodes
+              //Field *vicColor = victims->getField("children")->getMFNode(i)->getField("children")->getMFNode(0)->getSFNode("appearance")->getField("baseColor")->setSFColor(rescuedColor);//change color of rescued victim
               vicCounted[i] = true;
+              newVic = true;
             }
           }
         }   
-        supervisor->wwiSendText("V" + to_string(numSVic) + " " + to_string(numBVic));
+        if(newVic)
+          supervisor->wwiSendText("V" + to_string(numSVic) + " " + to_string(numBVic));
+          
+       //Find rescue kit
+       if(rescueKitState != 2){
+          const double *rescueZoneT = rescueZone->getField("translation")->getSFVec3f();
+          const double *rescueZoneR = rescueZone->getField("rotation")->getSFRotation();
+          double absKitT[3];
+          absKitT[0] = rescueZoneT[0] + cos(rescueZoneR[3])*kitT[0] + sin(rescueZoneR[3])*kitT[2];
+          absKitT[2] = rescueZoneT[2] + cos(rescueZoneR[3])*kitT[2] - sin(rescueZoneR[3])*kitT[0];
+          //see if rescue kit meets conditions for rescue
+          if(inTriangle(kitT[0],kitT[2],deliveryPts[0],deliveryPts[1],deliveryPts[2],deliveryPts[3],deliveryPts[4],deliveryPts[5])){
+            if(findDistance(currPos,absKitT) > 0.3){//robot center 30 cm away
+              rescueKitState = 1;
+              //Set color like victim
+            }
+          }
+        }   
+        if(rescueKitState == 1){
+          rescueKitState = 2;
+          supervisor->wwiSendText("R");  
+        }
 
         string msg = "";
         tileNum = toGridNum(robot->getField("translation")->getSFVec3f());

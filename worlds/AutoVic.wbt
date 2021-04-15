@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.07355701020972408 -0.8274262588804769 -0.5567361604602885 3.3593700139725775
-  position 0.7952514258473462 2.6792015048390434 1.0723116764132312
+  orientation 0.0730851067983944 -0.9271864048634191 -0.3674016028826159 3.506372961054403
+  position 1.1012063858324581 1.6886039279955223 0.10956012989496977
 }
 TexturedBackground {
 }
@@ -23,7 +23,7 @@ DEF GameSupervisor Robot {
   window "scoring_window"
 }
 DEF player0 Robot {
-  translation 0.381661 0.04 2.09967
+  translation 0.381132 0.04 1.42967
   rotation 0 1 0 0.000786322
   scale 0.3 0.3 0.3
   children [
@@ -2929,8 +2929,8 @@ DEF player0 Robot {
     DEF extensionSlot Group {
     }
     DEF SCOOP scoop {
-      translation 0.050000000000000475 -0.22621600000000222 -0.3190900000000029
-      rotation 3.292959628704641e-08 0.9996875172493005 -0.024997356978866344 3.14159
+      translation 0.05000000000000053 -0.22621600000000244 -0.31909000000000326
+      rotation 3.2929596282931194e-08 0.9996875172493005 -0.02499735697886634 3.14159
     }
   ]
   name "Pioneer 3-DX"
@@ -3838,6 +3838,38 @@ DEF RescueZone Transform {
         }
       ]
       name "rescueZone15"
+    }
+    Solid {
+      translation 0 0.0619826 0.63
+      rotation 0 0 1 0
+      scale 1.3 1.3 1.3
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 0.2 0.2 0.8
+            }
+          }
+          geometry Box {
+            size 0.03 0.03 0.03
+          }
+        }
+      ]
+      name "rescueKit"
+      boundingObject Shape {
+        appearance Appearance {
+          material Material {
+            diffuseColor 0.2 0.2 0.8
+          }
+        }
+        geometry Box {
+          size 0.03 0.03 0.03
+        }
+      }
+      physics Physics {
+        density -1
+        mass 0.03
+      }
     }
     Solid {
       translation 0.8999999999999999 0 0.3
