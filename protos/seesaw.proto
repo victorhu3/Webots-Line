@@ -2,7 +2,8 @@
 
 PROTO seesaw [
 	field SFVec3f    translation   0 .025 0
-  	field SFRotation rotation      0 0 1 0
+	field SFRotation rotation      0 0 1 0
+	field SFFloat tilt 0.3489
 	field SFString   name          "seesaw"
 ]
 {
@@ -12,12 +13,12 @@ PROTO seesaw [
 	  children [
 	    HingeJoint {
 	      jointParameters HingeJointParameters {
-		position 0.3489
+		position IS tilt
 		minStop -0.3489
 		maxStop 0.3489
 	      }
 	      endPoint Solid {
-		translation 0 0.027156120938041727 0.010245890272805381
+		translation 0 0.025 0
 		rotation 0.17105702692029487 -0.9702984317988145 -0.17105685250802016 1.600942333273316
 		children [
 		  DEF SEESAW_TOP Shape {

@@ -235,6 +235,11 @@ int main() {
                 ind = lastInd;
                 msg = "L";
                 supervisor->wwiSendText(msg);
+                int numSeesaw = supervisor->getFromDef("Seesaw")->getField("children")->getCount();
+                Field *seesawGroup = supervisor->getFromDef("Seesaw")->getField("children");
+                float initTilt = 0.3489;
+                for (int i = 0; i < numSeesaw; i++)
+                    seesawGroup->getMFNode(i)->getField("tilt")->setSFFloat(initTilt);
                 if (checkpointInd < scoringElem[checkpoint].size()) {
                     scoringElem[checkpoint][checkpointInd]++;
                     if (scoringElem[checkpoint][checkpointInd] == 5) { //skip to next checkpoint after 5 LOP
@@ -287,9 +292,10 @@ int main() {
             }
             fout << endl;
             supervisor->wwiSendText("F");
+            supervisor->step(TIME_STEP);
             while (!((msg = supervisor->wwiReceiveText()).length() > 0));
             string tmp;
-            
+            supervisor->step(TIME_STEP);
             fout << "Line Tracing Score,";
             tmp = "";
             ind = 0;
