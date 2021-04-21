@@ -8,6 +8,7 @@ using namespace webots;
 #include <vector>
 #include <algorithm>
 #include <math.h>
+#include <cassert>
 using namespace std;
 
 #define TIME_STEP 32
@@ -55,6 +56,8 @@ int main() {
     Supervisor *supervisor = new Supervisor();
 
     Node *robot = supervisor->getFromDef("player0");
+
+    //supervisor->movieStartRecording("../worlds/results/movie.mp4", 480, 320, 0, 90, 1, true);
 	
 	
     //checkpoints
@@ -150,7 +153,7 @@ int main() {
     //IMPORTANT: victims group currently needs to be first in children table; only supports up to 9 silver and 9 black victism currently (easy fix if need be)
     int numSVic = 0, numBVic = 0;//victim color counts
     Node *rescueZone = supervisor->getFromDef("RescueZone");
-    Node *victims;
+    Node *victims = NULL;
     //find delivery zone rotation        
     Node *deliveryLoc = NULL;
     if (rescueZone != 0) {
@@ -287,7 +290,9 @@ int main() {
             }
             fout << endl;
             supervisor->wwiSendText("F");
+            supervisor->step(TIME_STEP);
             while (!((msg = supervisor->wwiReceiveText()).length() > 0));
+            supervisor->step(TIME_STEP);
             string tmp;
             
             fout << "Line Tracing Score,";
@@ -315,6 +320,20 @@ int main() {
                 tmp += msg[ind];
             fout << tmp << endl;
             fout << "end" << endl;
+
+            cout << "score: " << tmp << endl;
+            cout << "time: " << supervisor->getTime() << endl;
+
+            supervisor->step(TIME_STEP);
+
+             //supervisor->movieStopRecording();
+    
+            //while(!supervisor->movieIsReady()) 
+                //if(supervisor->movieFailed()) 
+                    //supervisor->simulationQuit(1);
+
+            supervisor->simulationQuit(0);
+
             break;
         }
 

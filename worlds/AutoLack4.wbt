@@ -23,7 +23,8 @@ DEF GameSupervisor Robot {
   window "scoring_window"
 }
 DEF player0 Robot {
-  rotation 0 1 0 -1.57
+  translation 0.016828719435949702 0.028791684303972182 -1.2373317879602101e-05
+  rotation -0.016320381516978 0.9997338561189286 -0.01630527757255156 -1.5702362493208135
   scale 0.3 0.3 0.3
   children [
     DEF default Group {
@@ -552,23 +553,23 @@ DEF player0 Robot {
         }
         DEF CASTER_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position -0.05216071598639618
+            position -0.0012286522112617674
             axis 0 1 0
             anchor 0 -0.0011939 0.191844
             staticFriction 0.05
           }
           endPoint Solid {
             translation 0 -0.0011939 0.191844
-            rotation 0 -0.9999999999999999 0 0.05216071598639966
+            rotation 0 -1 0 0.0012286522113281037
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
-                  position -64.42799975032122
+                  position -66.02168359221696
                   anchor 0 -0.0521014 0.012843
                 }
                 endPoint Solid {
                   translation 0 -0.0521014 0.012843
-                  rotation -1 0 0 1.596146678525355
+                  rotation -0.9999999999999999 0 0 3.1898305204210944
                   children [
                     DEF CASTER_WHEEL_RIM_SHAPE Shape {
                       appearance PBRAppearance {
@@ -729,7 +730,7 @@ DEF player0 Robot {
         }
         DEF LEFT_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position 19.586156939260647
+            position 20.194112384404963
             axis -1 0 0
             anchor -0.165 -0.0001156 0
           }
@@ -744,7 +745,7 @@ DEF player0 Robot {
           ]
           endPoint Solid {
             translation -0.165 -0.0001156 0
-            rotation 1 0 0 5.546584289457699
+            rotation 1 0 0 4.938628844313382
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -1007,7 +1008,7 @@ DEF player0 Robot {
         }
         DEF RIGHT_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position 24.55583537751417
+            position 25.163790937043764
             axis -1 0 0
             anchor 0.165032 -0.0001156 0
           }
@@ -1022,7 +1023,7 @@ DEF player0 Robot {
           ]
           endPoint Solid {
             translation 0.165032 -0.0001156 0
-            rotation 1 0 0 0.576905851204175
+            rotation -1 0 0 0.031049708325414645
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -2926,6 +2927,23 @@ DEF player0 Robot {
       ]
     }
     DEF extensionSlot Group {
+      children[
+              ColorSensor {
+          translation 0.06 -0.015 -0.18
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "rightColor"
+        }
+        ColorSensor {
+          translation 8.20114e-08 -0.015 -0.24
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "frontColor"
+        }
+        ColorSensor {
+          translation -0.0599998 -0.015 -0.18
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "leftColor"
+        }
+      ]
     }
   ]
   name "Pioneer 3-DX"
@@ -3041,12 +3059,15 @@ DEF player0 Robot {
       0 0.06 0.06
     ]
   }
-  controller "my_controller"
+  controller "competitionController"
+  linearVelocity 0.029075994890754454 0.0032167390270936114 -2.2297071796481507e-05
+  angularVelocity -4.8923753765757634e-06 3.3780627952455664e-05 0.0037328102836414025
 }
 DEF Obstacles Group {
   children [
     Solid {
-      translation 0.3 0.06 1.2
+      translation 0.3 0.06294687371958499 1.2
+      rotation -0.5195828873371011 0.1097501028486049 0.8473420431627133 -7.079617959351658e-17
       scale 1.3 1.3 1.3
       children [
         Shape {
@@ -3076,6 +3097,8 @@ DEF Obstacles Group {
       physics Physics {
         mass 7
       }
+      linearVelocity 4.573815859681459e-17 0.0003288013752898288 5.1634665342366654e-17
+      angularVelocity 1.5582649734809624e-15 1.4999785401200799e-16 -1.0310537095527038e-15
     }
   ]
 }
@@ -3096,11 +3119,17 @@ DEF Speedbumps Group {
 DEF Seesaw Group {
   children [
     seesaw {
+      hidden position_0_0 0.3489000047550558
+      hidden translation_1 0 0.02715612088932196 0.010245890401934252
+      hidden rotation_1 0.1710570291597074 -0.970298431009229 -0.17105685474743035 1.6009423340867008
       translation 0.3 0 0.6
       rotation 0 1 0 1.57
       name "seesaw0"
     }
     seesaw {
+      hidden position_0_0 0.34890000475505584
+      hidden translation_1 0 0.02715612088932196 0.010245890401934256
+      hidden rotation_1 0.17105702915970747 -0.970298431009229 -0.17105685474743035 1.6009423340867008
       translation 2.4 0 0.8999999999999999
       rotation 0 1 0 0
       name "seesaw1"
