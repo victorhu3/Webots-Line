@@ -24,15 +24,15 @@ For those using C++/Python (Java not explicitly covered, but still applicable):
 Important Features:
 - Custom color and distance sensor
   - Add object, use Custom PROTO Node
+- All Robocup Junior Rescue Line scoring features are implemented
+  - E.g. speed bumps, debris, see-saw, intersections, obstacles, etc.
+- Evacuation room and robot scoop
+  - Add on a robot scoop using robot's extensionSlot group (just like a sensor)
 - Blockly drag-and-drop programming
   - Open Scene Tree, right click on BlocklySupervisor Robot, click Show Robot Window
 - Scoring window to track points
   - Open Scene Tree, right click on GameSupervisor Robot, click Show Robot Window
+- Automatic Scoring
+  - Only worlds named "AutoScoring" support automatic scoring
 - Map generator
   - Navigate to the line_generator folder, run LineGenerator.py
-
-Features to be Added/Updated:
-- Evacuation room and robot will be updated to allow for easier delivery
-- Scoring window will be expanded to encompass all scoring elements
-- Speed bumps, debris, and see-saw will be added
-- Complete Rescue Line Simualtion documentation will be uploaded
