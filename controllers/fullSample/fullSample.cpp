@@ -77,7 +77,7 @@ int main(int argc, char **argv) {
   scoop->setPosition(INFINITY);
 
   // Keep motors still - use setVelocity to control motors (max speed = 12.2)
-  setSpeed(0.0, 0.0)
+  setSpeed(0.0, 0.0);
   scoop->setVelocity(0.0);
 
   // Line-tracing + obstacle variables
@@ -150,7 +150,7 @@ int main(int argc, char **argv) {
       delay(1000);
     }
 
-    cout << "L: " << leftGray << " F: " << frontLight << " R: " << rightGray << "   O: " << obstacle << endl;
+    cout << "L: " << leftLight << " F: " << frontLight << " R: " << rightLight << "   O: " << obstacle << endl;
   };
 
   // Cleanup code

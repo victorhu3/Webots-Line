@@ -13,29 +13,33 @@ def getImg(filePath):
 def getPhoto(img):
     return ImageTk.PhotoImage(img)
 
+def getGrid(x, y):
+    return int((x - topLeftTile.winfo_x()) / tileImgSize + (y - topLeftTile.winfo_y()) / tileImgSize * numCol)
+
 def placeTile(widget):
     global tiles
     filename = filedialog.askopenfilename()
     if filename != '':
-        ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol) - 1
+        ind = getGrid(widget.winfo_x(), widget.winfo_y())
         tiles[ind] = getImg(filename).resize((100, 100))
         tilePhotos[ind] = getPhoto(tiles[ind])
-        map[ind].tileNum = int(filename[filename.rfind('/') + 1 : -4])
+        tileMap[ind].tileNum = int(filename[filename.rfind('/') + 1 : -4])
+        tileMap[ind].dir = 0
         widget['image'] = tilePhotos[ind]
 
 def rotateTile(event, widget):
-    ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol) - 1
-    if tiles[ind] != 0:
+    ind = getGrid(widget.winfo_x(), widget.winfo_y())
+    if tiles[ind] != 0 or tiles[ind] != -1:
         tiles[ind] = tiles[ind].rotate(-90)
         tilePhotos[ind] = getPhoto(tiles[ind])
-        map[ind].dir = (map[ind].dir + 1) % 4
+        tileMap[ind].dir = (tileMap[ind].dir + 1) % 4
         widget['image'] = tilePhotos[ind]
 
 def placeBlank(event, widget):
-    ind = int(widget.winfo_x() / tileImgSize + widget.winfo_y() / tileImgSize * numCol) - 1
+    ind = getGrid(widget.winfo_x(), widget.winfo_y())
     tiles[ind] = getImg('../tiles/0.png').resize((100, 100))
     tilePhotos[ind] = getPhoto(tiles[ind])
-    map[ind].tileNum = 0
+    tileMap[ind].tileNum = 0
     widget['image'] = tilePhotos[ind]
 
 def showInstructions():
@@ -88,28 +92,58 @@ def showInstructions():
     instructionText.insert(tk.END, instruction)
 
 def makeWorld():
+    path = ''
+    tileChange = [-numCol, 1, numCol, -1]
+    intersections = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
+    gaps = [3, 10, 28, 29, 30]
+    scoringInd = [0, 0, 0, 0, 0, 0]
+    scoringElem = [[], [], [], [], [], [], []] #intersections, seesaws, obstacles, gaps, ramp, speed bump, checkpoints (checkpoint not indcluded in output string)
+    intersection = 0
+    seesaw = 1
+    obstacle = 2
+    gap = 3
+    ramp = 4
+    speedbump = 5
+    #index 0 refers to 0.png, index 1 refers to 1.png, etc.
+    #the exit direction when entering N, E, S, W, respectively
+    tilePath = [[-1, -1, -1, -1], #0
+        [-1, W, -1, E],
+        [E, N, W, S],
+        [-1, W, -1, E],
+        [-1, S, E, -1],
+        [-1, W, -1, E],
+        [-1, W, -1, E],
+        [-1, S, E, -1],
+        [-1, W, -1, E],
+        [-1, -1, W, S],
+        [-1, W, -1, E], #10
+        [-1, W, -1, E],
+        [-1, S, E, E],
+        [-1, W, W, S],
+        [-1, S, S, S],
+        [S, W, N, E],
+        [S, S, E, E],
+        [W, S, E, N],
+        [S, S, S, S],
+        [E, E, S, S],
+        [-1, -1, -1, -1], #20
+        [-1, W, -1, E],
+        [-1, W, -1, E],
+        [-1, S, E, -1],
+        [-1, S, E, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [S, S, S, S],
+        [-1, W, -1, E],
+        [-1, W, -1, E],
+        [-1, -1, W, S]] #30
+
     ind = 0
+    curDir = E
     dirAngle = [0, 4.71, 3.14, 1.57]
     header = open('worldHeader.txt', 'r')
     file = open('../worlds/' + worldName + '.wbt', 'w')
     file.write(header.read())
-
-    file.write('DEF Tiles Group {\n  children [\n    Solid {\n      translation')
-    file.write(' ' + str(numCol / 2 * 0.3 - 0.15) + ' 0 ' + str(numRow / 2 * 0.3 - 0.15) + '\n')
-    file.write('      boundingObject Plane {\n')
-    file.write('        size ' + str(numCol * 0.3) + ' ' + str(numRow * 0.3) + '\n      }\n    }\n')
-    for x in range(numRow):
-        for y in range(numCol):
-            ind = x * numCol + y
-            file.write('    Solid {\n      translation')
-            file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
-            file.write('      rotation 0 1 0 ' + str(dirAngle[map[ind].dir]) + '\n')		#rotation
-            file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
-            file.write(str(map[ind].tileNum) + '.png\"\n')		#imgNum
-            file.write('              ]\n            }\n          }\n          geometry Plane {\n')
-            file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
-            file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
-    file.write('  ]\n}')
 
     i = 0
     ind = 0
@@ -120,6 +154,7 @@ def makeWorld():
         while j != len(obstacleList) and obstacleList[j] != ' ':
             j = j + 1
         obsTileNum = int(obstacleList[i:j])
+        scoringElem[obstacle].append(obsTileNum)
         i = j + 1
         file.write('    Solid {\n')
         file.write('      translation ' + str(int(obsTileNum % numCol) * 0.3) + ' 0.06 ' + str(int(obsTileNum / numCol) * 0.3) + '\n')
@@ -128,44 +163,6 @@ def makeWorld():
         file.write('      boundingObject Shape {\n        appearance Appearance {\n          material Material {\n            diffuseColor 0.2 0.2 0.8\n          }\n        }\n        geometry Cylinder {\n          height 0.1\n          radius 0.05\n        }\n      }\n      physics Physics {\n        mass 7\n      }\n    }\n')
         ind = ind + 1
     file.write(' ]\n}\n')
-
-    i = 0
-    ind = 0
-    preEvac = False
-    checkpointList = str(checkpointEntry.get())
-    file.write('DEF Checkpoints Group {\n  children [\n')
-    while i < len(checkpointList):
-        j = i + 1
-        while checkpointList[j] != ',':
-            j = j + 1
-        checkpointNum = int(checkpointList[i:j])
-        checkpointDir = checkpointList[j + 1]
-        checkpointDist = '1'
-        k = j + 2
-        if k != len(checkpointList) and checkpointList[k] == '*':
-            k = k + 1
-            preEvac = True
-        if k != len(checkpointList) and checkpointList[k] != ' ':
-            k = k + 1
-            while k != len(checkpointList) and checkpointList[k] != ' ':
-                if checkpointList[k] == '*':
-                    preEvac = True
-                k = k + 1
-            checkpointDist = checkpointList[j + 3:k]
-            if preEvac:
-                checkpointDist = checkpointList[j + 3:k - 1]
-        i = k + 1
-        file.write('    Solid {\n')
-        file.write('      translation ' + str(int(checkpointNum % numCol) * 0.3 - 0.12) + ' 0 ' + str(int(checkpointNum / numCol) * 0.3 - 0.12) + '\n')
-        file.write('      children [\n        Shape {\n          appearance Appearance {\n            material Material {\n              diffuseColor 1 0.666667 0\n            }\n          }\n          geometry Cylinder {\n            height 0.02\n            radius 0.03\n          }\n        }\n      ]\n')
-        file.write('      name \"checkpoint' + str(ind) + '\"\n')
-        file.write('      description \"' + checkpointDir.upper() + checkpointDist)
-        if preEvac:
-            file.write('*')
-        file.write('\"\n    }\n')
-        ind = ind + 1
-        preEvac = False
-    file.write('  ]\n}\n')
 
     i = 0
     ind = 0
@@ -181,6 +178,7 @@ def makeWorld():
             j = j + 1
         sbNum = int(speedbumpList[i:j])
         sbDir = speedbumpList[j + 1].upper()
+        scoringElem[speedbump].append(sbNum)
         i = j + 3
         file.write('    speedbump {\n')
         file.write('      translation ' + str(int(sbNum % numCol) * 0.3) + ' 0 ' + str(int(sbNum / numCol) * 0.3) + '\n')
@@ -205,6 +203,7 @@ def makeWorld():
             j = j + 1
         ssNum = int(seesawList[i:j])
         ssDir = seesawList[j + 1].upper()
+        scoringElem[seesaw].append(ssNum)
         i = j + 3
         file.write('    seesaw {\n')
         file.write('      translation ' + str(int(ssNum % numCol) * 0.3) + ' 0 ' + str(int(ssNum / numCol) * 0.3) + '\n')
@@ -214,13 +213,149 @@ def makeWorld():
     file.write('  ]\n}\n')
     print('World ' + worldName + '.wbt Generated')
 
+    evacEntrance = -1
+    ind = 0
+    path += str(numRow) + ',' + str(numCol) + ',' + ';'
+    path += '0,'
+    pathList = [0]
+    while curDir != -1:
+        if tileMap[ind].tileNum == 26:
+            evacEntrance = len(pathList) - 1
+            for i in range(len(tileMap)):
+                if tileMap[i].tileNum == 27:
+                    ind = i
+                    path += str(ind) + ','
+                    pathList.append(ind)
+                    curDir = tileMap[ind].dir
+                    break
+        else:
+            if ind != 0:
+                curDir = tilePath[tileMap[ind].tileNum][(curDir - tileMap[ind].dir + 6) % 4]
+            if curDir != -1:
+                if ind != 0:
+                    curDir = (curDir + tileMap[ind].dir) % 4
+                ind += tileChange[curDir]
+                path += str(ind)
+                if tileMap[ind].tileNum == 26:
+                    path += '*'
+                path += ','
+                pathList.append(ind)
+        if intersections.count(tileMap[ind].tileNum) > 0:
+            scoringElem[intersection].append(ind)
+        if gaps.count(tileMap[ind].tileNum) > 0:
+            scoringElem[gap].append(ind)
+        breakVar = False
+        for i in range(len(scoringElem)):
+            if i != intersection and i != gap:
+                for j in range(len(scoringElem[i])):
+                    if ind == scoringElem[i][j]:
+                        tmp = scoringElem[i][j]
+                        scoringElem[i][j] = scoringElem[i][scoringInd[i]]
+                        scoringElem[i][scoringInd[i]] = tmp
+                        scoringInd[i] = scoringInd[i] + 1
+                        breakVar = True
+                        break
+            if breakVar:
+                break
+    path += ';'
+    for i in range(len(scoringElem)):
+        for j in range(len(scoringElem[i])):
+            path += str(scoringElem[i][j]) + ','
+        path += ';'
+    path += ',,;,;,;'
+    print(path)
+
+    eEntrance = -1
+    eExit = -1
+    file.write('DEF Tiles Group {\n  children [\n    Solid {\n')
+    file.write('      description \"' + path + '\"      translation')
+    file.write(' ' + str(numCol / 2 * 0.3 - 0.15) + ' 0 ' + str(numRow / 2 * 0.3 - 0.15) + '\n')
+    file.write('      boundingObject Plane {\n')
+    file.write('        size ' + str(numCol * 0.3) + ' ' + str(numRow * 0.3) + '\n      }\n    }\n')
+    for x in range(numRow):
+        for y in range(numCol):
+            ind = x * numCol + y
+            if tileMap[ind].tileNum != -1:
+                file.write('    Solid {\n      translation')
+                file.write(' ' + str(y * tileSize) + ' 0 ' + str(x * tileSize) + '\n')	#translation
+                file.write('      rotation 0 1 0 ' + str(dirAngle[tileMap[ind].dir]) + '\n')		#rotation
+                file.write('      children [\n        Shape{\n          appearance Appearance{\n            texture ImageTexture{\n              url[\n                \"../tiles/')
+                file.write(str(tileMap[ind].tileNum) + '.png\"\n')		#imgNum
+                file.write('              ]\n            }\n          }\n          geometry Plane {\n')
+                file.write('            size ' + str(tileSize) + ' ' + str(tileSize) + '\n') #tile size
+                file.write('          }\n        }\n      ]\n      name \"solid' + str(x * numCol + y) + '\"\n    }\n')
+            if tileMap[ind].tileNum == 26:
+                eEntrance = ind
+            elif tileMap[ind].tileNum == 27:
+                eExit = ind
+    file.write('  ]\n}\n')
+
+    print(eEntrance, eExit)
+    if eEntrance != -1:
+        file.write('DEF RescueZone Group{\n  children [\n')
+        file.write('    rescueZone {\n')
+        if eExit - eEntrance == -3 * numCol + 1: #N
+            file.write('      translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[0]) + '\n')
+        elif eExit - eEntrance == numCol + 3: #E
+            file.write('      translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[1]) + '\n')
+        elif eExit - eEntrance == 3 * numCol - 1: #S
+            file.write('      translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[2]) + '\n')
+        elif eExit - eEntrance == -1 * numCol - 3: #W
+            file.write('      translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[3]) + '\n')
+        file.write('    }\n    rescueKit {\n    }\n  ]\n}\n')
+
+    i = 0
+    ind = 0
+    preEvac = 0
+    checkpointList = str(checkpointEntry.get())
+    prevCheck = -1
+    file.write('DEF Checkpoints Group {\n  children [\n')
+    print(pathList)
+    while i < len(checkpointList):
+        j = i + 1
+        while checkpointList[j] != ',':
+            j = j + 1
+        checkpointNum = int(checkpointList[i:j])
+        checkpointDir = checkpointList[j + 1]
+        i = j + 3
+        checkInd = pathList.index(checkpointNum)
+        checkpointDist = checkInd - prevCheck
+        prevCheck = checkInd
+        if preEvac == 0 and i < len(checkpointList):
+            k = i
+            while checkpointList[k] != ',':
+                k = k + 1
+            print(int(checkpointList[i:k]), pathList.index(int(checkpointList[i:k])), evacEntrance)
+            if checkInd <= evacEntrance and pathList.index(int(checkpointList[i:k])) > evacEntrance:
+                preEvac = preEvac + 1
+        file.write('    Solid {\n')
+        file.write('      translation ' + str(int(checkpointNum % numCol) * 0.3 - 0.12) + ' 0 ' + str(int(checkpointNum / numCol) * 0.3 - 0.12) + '\n')
+        file.write('      children [\n        Shape {\n          appearance Appearance {\n            material Material {\n              diffuseColor 1 0.666667 0\n            }\n          }\n          geometry Cylinder {\n            height 0.02\n            radius 0.03\n          }\n        }\n      ]\n')
+        file.write('      name \"checkpoint' + str(ind) + '\"\n')
+        file.write('      description \"' + checkpointDir.upper() + str(checkpointDist))
+        if preEvac == 2:
+            file.write('-')
+            preEvac = preEvac + 1
+        if preEvac == 1:
+            file.write('*')
+            preEvac = preEvac + 1
+        file.write('\"\n    }\n')
+        ind = ind + 1
+    file.write('  ]\n}\n')
+
 def enterTiles():
-    global worldName, numRow, numCol, mapWindow, mapCanvas, rotationVar, rotationLabel, placeButton, rotateButton, map, obstacleLabel, checkpointLabel, obstacleEntry, checkpointEntry, speedbumpLabel, seesawLabel, speedbumpEntry, seesawEntry
+    global worldName, numRow, numCol, mapWindow, mapCanvas, rotationVar, rotationLabel, placeButton, rotateButton, tileMap, tiles, tilePhotos, obstacleLabel, checkpointLabel, obstacleEntry, checkpointEntry, speedbumpLabel, seesawLabel, speedbumpEntry, seesawEntry, topLeftTile
     offset = 33
     worldName = str(worldNameEntry.get())
     numRow = int(numRowEntry.get())
     numCol = int(numColEntry.get())
-    map = [Tile(0, 0) for i in range(numRow * numCol)]
+    tileMap = [Tile(-1, 0) for i in range(numRow * numCol)]
+    tiles = [0] * (numRow * numCol)
+    tilePhotos = [0] * (numRow * numCol)
 
     mapWindow = tk.Toplevel(root)
     mapCanvas = tk.Canvas(mapWindow, width=numCol * tileImgSize, height=(numRow) * tileImgSize + offset + 120)
@@ -258,17 +393,24 @@ def enterTiles():
             selectTileButton.bind('<Button-2>', (lambda event=None, widget=selectTileButton: placeBlank(event, widget)))
             selectTileButton.bind('<Button-3>', (lambda event=None, widget=selectTileButton: rotateTile(event, widget)))
             mapCanvas.create_window(y * tileImgSize, offset + x * tileImgSize, anchor=tk.NW, window=selectTileButton)
+            if x == 0 and y == 0:
+                topLeftTile = selectTileButton
 
-tileOptions = 26
+N = 0
+E = 1
+S = 2
+W = 3
+
+tileOptions = 30
 tileImgSize = 100
 tileSize = 0.3
 numRow = 0
 numCol = 0
 rotation = False
 
-tiles = [0] * tileOptions
-tilePhotos = [0] * tileOptions
-map = None
+tiles = None
+tilePhotos = None
+tileMap = None
 rotationVar = None
 rotationLabel = None
 placeButton = None
@@ -284,6 +426,7 @@ seesawEntry = None
 instructionWindow = None
 instructionButton = None
 instructionText = None
+topLeftTile = None
 
 root = tk.Tk()
 rootCanvas = tk.Canvas(root, width = 330, height = 100)

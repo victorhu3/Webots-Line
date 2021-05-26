@@ -15,7 +15,7 @@ PROTO scoop [
       device [
         RotationalMotor {
           name IS name
-          minPosition -0.05
+          minPosition -0.06
           maxPosition 1
           maxVelocity 1
         }
