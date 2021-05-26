@@ -22,38 +22,7 @@ PROTO rescueZone [
 	Transform {
 	
 		children[
-      Wall {
-      translation 0.45 0 -0.16
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      size 1.2 0.4 0.02
-    }
-    Wall {
-      translation 0.3 0 0.76
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      size 0.9 0.4 0.02
-    }
-    Wall {
-      translation -0.16 0 0.3
-      rotation 0 1 0 -1.5707953071795862
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      size 0.9 0.4 0.02
-    }
-    Wall {
-      translation 1.06 0 0.45
-      rotation 0 1 0 -1.5707953071795862
-      name "%{= fields.name.value .. x}%"
-      %{x = x + 1}%
-      size 0.6 0.4 0.02
-    }
-    
-    %{= level}% {
-      translation 0 0 .6
-    }
-    
-    DEF Victims Group {
+		DEF Victims Group {
       children [
         
         Solid {
@@ -73,6 +42,7 @@ PROTO rescueZone [
             }
           ]
       name "%{= fields.name.value .. x}%"
+			description "silver"
       %{x = x + 1}%
           boundingObject Shape {
             appearance BrushedAluminium {
@@ -103,6 +73,7 @@ PROTO rescueZone [
             }
           ]
       name "%{= fields.name.value .. x}%"
+			description "silver"
       %{x = x + 1}%
           boundingObject Shape {
             appearance BrushedAluminium {
@@ -135,6 +106,7 @@ PROTO rescueZone [
             }
           ]
       name "%{= fields.name.value .. x}%"
+			description "black"
       %{x = x + 1}%
           boundingObject Shape {
             appearance BrushedAluminium {
@@ -150,6 +122,37 @@ PROTO rescueZone [
         }
       ]
     }
+      Wall {
+      translation 0.45 0 -0.16
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 1.2 0.4 0.02
+    }
+    Wall {
+      translation 0.3 0 0.76
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.9 0.4 0.02
+    }
+    Wall {
+      translation -0.16 0 0.3
+      rotation 0 1 0 -1.5707953071795862
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.9 0.4 0.02
+    }
+    Wall {
+      translation 1.06 0 0.45
+      rotation 0 1 0 -1.5707953071795862
+      name "%{= fields.name.value .. x}%"
+      %{x = x + 1}%
+      size 0.6 0.4 0.02
+    }
+    
+    %{= level}% {
+      translation 0 -0.01 .6
+    }
+    
 		Solid {
       translation 1.2 -0.05 0.9
       boundingObject Box {

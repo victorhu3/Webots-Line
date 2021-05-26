@@ -205,7 +205,7 @@ function markLevel(event) {
 }
 
 function finalScore(event) {
-    var finalMsg = score.toString() + ',' + (60 - (5 * numLOP)).toString() + ',' + evacMultiply.toString() + ',';
+    var finalMsg = numLOP.toString() + ',' + evacLack.toString() + ',' + score.toString() + ',' + (60 - (5 * numLOP)).toString() + ',' + evacMultiply.toString() + ',';
     if (document.getElementsByName('exitBonus')[0].value)
         score += 60 - (5 * numLOP);
     score *= evacMultiply;
@@ -314,7 +314,7 @@ window.onload = function() {
                 evacCheck = false;
             else
                 cpNum = parseInt(msg.substring(1));
-            if (LOP[cpNum] < 3)
+            if (LOP[cpNum] < 3 && msg.charAt(msg.length - 1) != '0')
                 incrementScore(checkpointDist[cpNum] * ((2 - LOP[cpNum]) * 2 + 1));
         }
         if (msg.charAt(0) == 'S') {
@@ -330,6 +330,8 @@ window.onload = function() {
                     break;
             }
         }
+        if (msg.charAt(0) == 'I')
+            level = Number(msg.charAt(1));
         if (msg.charAt(0) == 'F')
             finalScore();
         if (msg.charAt(0) == 'L') {
@@ -358,9 +360,13 @@ window.onload = function() {
             var numVic = Number(msg.charAt(1));
             if(numVic >= 1)
               numVic += Number(msg.charAt(3));
-            evacMultiply = Math.pow(Victim[level],numVic);
-            console.log(msg);
+            evacMultiply = Math.pow(Victim.scoreValue[level],numVic);
             console.log("Victims: " + numVic + "   Multiplier: " + evacMultiply);
+        }        
+        if (msg.charAt(0) == 'R') {
+            kitMultiply = RescueKit.scoreValue[level * 2 + Number(msg.charAt(1))];
+            evacMultiply *= kitMultiply;
+            console.log("Rescue Kit Dropped Off");
         }
         if (msg.charAt(0) == 'P') {
             console.log(msg);

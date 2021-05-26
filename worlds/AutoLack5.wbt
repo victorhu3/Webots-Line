@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation 0.9251203630072125 0.3508348502487668 0.1451455193946019 5.442137801127191
-  position -0.07262460522737657 1.054634150491071 1.3139438506349923
+  orientation -0.7961035954451199 -0.4881745135760264 -0.35763767924278195 1.4877653059033062
+  position 1.307542848090928 2.021811656793889 1.1714720334970967
 }
 TexturedBackground {
 }
@@ -18,12 +18,14 @@ DEF BlocklySupervisor Robot {
 }
 DEF GameSupervisor Robot {
   name "Game_Supervisor"
+  description "MANUAL"
   controller "Game_Supervisor"
   supervisor TRUE
   window "scoring_window"
 }
 DEF player0 Robot {
-  rotation 0 1 0 -1.57
+  translation -0.02080408866309945 0.029257426024384182 -0.003979527419448256
+  rotation 0.016685122351523828 -0.999726694669177 0.01637506207489384 1.558143018540526
   scale 0.3 0.3 0.3
   children [
     DEF default Group {
@@ -552,23 +554,23 @@ DEF player0 Robot {
         }
         DEF CASTER_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position -0.05216071598639618
+            position 0.02411504019071375
             axis 0 1 0
             anchor 0 -0.0011939 0.191844
             staticFriction 0.05
           }
           endPoint Solid {
-            translation 0 -0.0011939 0.191844
-            rotation 0 -0.9999999999999999 0 0.05216071598639966
+            translation 6.834880215976315e-06 -0.0012443623505272975 0.19189285626525684
+            rotation 1.928357115157366e-05 0.9999999997446706 -1.1781451716005288e-05 0.015431448100132751
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
-                  position -64.42799975032122
+                  position -73.68636940588615
                   anchor 0 -0.0521014 0.012843
                 }
                 endPoint Solid {
                   translation 0 -0.0521014 0.012843
-                  rotation -1 0 0 1.596146678525355
+                  rotation 1 0 0 1.7118542802688836
                   children [
                     DEF CASTER_WHEEL_RIM_SHAPE Shape {
                       appearance PBRAppearance {
@@ -729,7 +731,7 @@ DEF player0 Robot {
         }
         DEF LEFT_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position 19.586156939260647
+            position 23.30513258195246
             axis -1 0 0
             anchor -0.165 -0.0001156 0
           }
@@ -743,8 +745,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation -0.165 -0.0001156 0
-            rotation 1 0 0 5.546584289457699
+            translation -0.16500220360576365 -0.00014400897118040684 2.9573590125681858e-05
+            rotation 0.9999999996786256 2.5333051440613707e-05 -9.925241205853382e-07 1.891532344090232
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -1007,7 +1009,7 @@ DEF player0 Robot {
         }
         DEF RIGHT_WHEEL HingeJoint {
           jointParameters HingeJointParameters {
-            position 24.55583537751417
+            position 28.658319805699982
             axis -1 0 0
             anchor 0.165032 -0.0001156 0
           }
@@ -1021,8 +1023,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation 0.165032 -0.0001156 0
-            rotation 1 0 0 0.576905851204175
+            translation 0.16503110517477204 -0.00011185045016409863 3.5770845477777116e-05
+            rotation 0.9999999997832286 9.809517737541953e-06 -1.8366171636559542e-05 2.821518689461937
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -2926,6 +2928,42 @@ DEF player0 Robot {
       ]
     }
     DEF extensionSlot Group {
+      children [
+        DEF SCOOP scoop {
+          translation 0.050000000000002064 -0.22621601215961906 -0.31908999137956706
+          rotation 3.292957111057911e-08 0.9996875167730112 -0.02499737602648677 3.1415900008173576
+        }
+        DistSensor {
+          translation 0.210007 0.06 -0.00983298
+          rotation -0.0023300889996729517 0.9999945706938158 -0.002330078999677245 0.000807337
+          name "rightDist"
+        }
+        DistSensor {
+          translation -0.210007 0.06 -0.00983298
+          rotation 9.40586e-07 1 -9.4059e-07 -3.1407853071795864
+          name "leftDist"
+        }
+        DistSensor {
+          translation 0.000143812 0.0600002 -0.180001
+          rotation 5.8671e-07 1 5.86708e-07 1.57
+          name "frontDist"
+        }
+        ColorSensor {
+          translation 0.07 -0.015 -0.18
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "rightColor"
+        }
+        ColorSensor {
+          translation 8.20113e-08 -0.015 -0.24
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "frontColor"
+        }
+        ColorSensor {
+          translation -0.0499998 -0.015 -0.18
+          rotation -0.5773509358554485 0.5773489358556708 0.5773509358554485 2.09439
+          name "leftColor"
+        }
+      ]
     }
   ]
   name "Pioneer 3-DX"
@@ -3036,17 +3074,18 @@ DEF player0 Robot {
   }
   physics Physics {
     density -1
-    mass 6.73
+    mass 0.8
     centerOfMass [
-      0 0.06 0.06
+      0 -0.1 0.05
     ]
   }
-  controller "my_controller"
+  controller ""
 }
 DEF Obstacles Group {
   children [
     Solid {
-      translation 0 0.06 0.6
+      translation 0.3 0.06298842679923096 1.18
+      rotation -0.7358344838458045 0.12067488427371333 0.6663221328223341 -1.305426248647146e-16
       scale 1.3 1.3 1.3
       children [
         Shape {
@@ -3077,99 +3116,33 @@ DEF Obstacles Group {
         mass 7
       }
     }
-    Solid {
-      translation 0.8999999999999999 0.06 0.6
-      scale 1.3 1.3 1.3
-      children [
-        Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 0.2 0.2 0.8
-            }
-          }
-          geometry Cylinder {
-            height 0.1
-            radius 0.05
-          }
-        }
-      ]
-      name "obstacle2"
-      boundingObject Shape {
-        appearance Appearance {
-          material Material {
-            diffuseColor 0.2 0.2 0.8
-          }
-        }
-        geometry Cylinder {
-          height 0.1
-          radius 0.05
-        }
-      }
-      physics Physics {
-        mass 7
-      }
-    }
-  ]
-}
-DEF Checkpoints Group {
-  children [
-    Solid {
-      translation 0.48 0 -0.12
-      children [
-        Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 1 0.666667 0
-            }
-          }
-          geometry Cylinder {
-            height 0.02
-            radius 0.03
-          }
-        }
-      ]
-      name "checkpoint0"
-      description "W1"
-    }
-    Solid {
-      translation 0.18 0 0.48
-      children [
-        Shape {
-          appearance Appearance {
-            material Material {
-              diffuseColor 1 0.666667 0
-            }
-          }
-          geometry Cylinder {
-            height 0.02
-            radius 0.03
-          }
-        }
-      ]
-      name "checkpoint1"
-      description "E1"
-    }
   ]
 }
 DEF Speedbumps Group {
   children [
     speedbump {
-      translation 0.8999999999999999 0 0.3
-      rotation 0.7071067811865475 -0.7071067811865475 0 -3.14
+      translation 0.3 0 0
+      rotation -0.5773502691896258 0.5773502691896258 -0.5773502691896258 2.09
       name "speedbump0"
+    }
+    speedbump {
+      translation 2.4 0 0.3
+      rotation 0.7071067811865475 -0.7071067811865475 0 -3.14
+      name "speedbump1"
     }
   ]
 }
 DEF Seesaw Group {
   children [
     seesaw {
-      translation 0.3 0 0
-      rotation 0 1 0 -1.57
+      translation 0.3 0 0.6
+      rotation 0 1 0 1.57
       name "seesaw0"
     }
     seesaw {
-      translation 0.3 0 0.3
-      rotation 0 1 0 -1.57
+      translation 2.4 0 0.8999999999999999
+      rotation 0 1 0 0
+      tilt 0.34889999999999954
       name "seesaw1"
     }
   ]
@@ -3177,10 +3150,10 @@ DEF Seesaw Group {
 DEF Tiles Group {
   children [
     Solid {
-      translation 0.44999999999999996 0 0.29999999999999993
-      description "3,4,;0,1,2,3,7,11,10,9,8,4,5,6,;3,9,;1,5,;11,8,;2,10,;;7,;;,,;,;,;,;"
+      translation 1.2 0 0.9
+      description "7,9,;0,1,2,3,4,13,12,13,4,3,2,11,20,19,18,27,28,37,46,55,56,47,48,39,40*,52,61,62,53,44,35,26,17,8,7,6,5,;2,12,2,18,46,62,26,6,;19,35,;37,;11,20,56,47,44,;;1,17,;;,,;,;,;"
       boundingObject Plane {
-        size 1.2 0.8999999999999999
+        size 2.6999999999999997 2.1
       }
     }
     Solid {
@@ -3226,7 +3199,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/3.png"
+                "../tiles/12.png"
               ]
             }
           }
@@ -3244,7 +3217,7 @@ DEF Tiles Group {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/19.png"
+                "../tiles/6.png"
               ]
             }
           }
@@ -3256,7 +3229,8 @@ DEF Tiles Group {
       name "solid3"
     }
     Solid {
-      translation 0 0 0.3
+      translation 1.2 0 0
+      rotation 0 1 0 4.71
       children [
         Shape {
           appearance Appearance {
@@ -3274,26 +3248,8 @@ DEF Tiles Group {
       name "solid4"
     }
     Solid {
-      translation 0.3 0 0.3
-      children [
-        Shape {
-          appearance Appearance {
-            texture ImageTexture {
-              url [
-                "../tiles/1.png"
-              ]
-            }
-          }
-          geometry Plane {
-            size 0.3 0.3
-          }
-        }
-      ]
-      name "solid5"
-    }
-    Solid {
-      translation 0.6 0 0.3
-      rotation 0 1 0 4.71
+      translation 1.5 0 0
+      rotation 0 1 0 1.57
       children [
         Shape {
           appearance Appearance {
@@ -3308,17 +3264,35 @@ DEF Tiles Group {
           }
         }
       ]
-      name "solid6"
+      name "solid5"
     }
     Solid {
-      translation 0.8999999999999999 0 0.3
+      translation 1.7999999999999998 0 0
       rotation 0 1 0 4.71
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/1.png"
+                "../tiles/18.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid6"
+    }
+    Solid {
+      translation 2.1 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/6.png"
               ]
             }
           }
@@ -3330,8 +3304,7 @@ DEF Tiles Group {
       name "solid7"
     }
     Solid {
-      translation 0 0 0.6
-      rotation 0 1 0 3.14
+      translation 2.4 0 0
       children [
         Shape {
           appearance Appearance {
@@ -3349,13 +3322,13 @@ DEF Tiles Group {
       name "solid8"
     }
     Solid {
-      translation 0.3 0 0.6
+      translation 0 0 0.3
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/15.png"
+                "../tiles/0.png"
               ]
             }
           }
@@ -3367,13 +3340,13 @@ DEF Tiles Group {
       name "solid9"
     }
     Solid {
-      translation 0.6 0 0.6
+      translation 0.3 0 0.3
       children [
         Shape {
           appearance Appearance {
             texture ImageTexture {
               url [
-                "../tiles/10.png"
+                "../tiles/0.png"
               ]
             }
           }
@@ -3385,7 +3358,45 @@ DEF Tiles Group {
       name "solid10"
     }
     Solid {
-      translation 0.8999999999999999 0 0.6
+      translation 0.6 0 0.3
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/3.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid11"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.3
+      rotation 0 1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/14.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid12"
+    }
+    Solid {
+      translation 1.2 0 0.3
       rotation 0 1 0 3.14
       children [
         Shape {
@@ -3401,7 +3412,761 @@ DEF Tiles Group {
           }
         }
       ]
-      name "solid11"
+      name "solid13"
+    }
+    Solid {
+      translation 2.4 0 0.3
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid17"
+    }
+    Solid {
+      translation 0 0 0.6
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/19.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid18"
+    }
+    Solid {
+      translation 0.3 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid19"
+    }
+    Solid {
+      translation 0.6 0 0.6
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/30.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid20"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid21"
+    }
+    Solid {
+      translation 1.2 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid22"
+    }
+    Solid {
+      translation 2.4 0 0.6
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/11.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid26"
+    }
+    Solid {
+      translation 0 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/2.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid27"
+    }
+    Solid {
+      translation 0.3 0 0.8999999999999999
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid28"
+    }
+    Solid {
+      translation 0.6 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid29"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid30"
+    }
+    Solid {
+      translation 1.2 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid31"
+    }
+    Solid {
+      translation 2.4 0 0.8999999999999999
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid35"
+    }
+    Solid {
+      translation 0 0 1.2
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid36"
+    }
+    Solid {
+      translation 0.3 0 1.2
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid37"
+    }
+    Solid {
+      translation 0.6 0 1.2
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid38"
+    }
+    Solid {
+      translation 0.8999999999999999 0 1.2
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid39"
+    }
+    Solid {
+      translation 1.2 0 1.2
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/26.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid40"
+    }
+    Solid {
+      translation 2.4 0 1.2
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/3.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid44"
+    }
+    Solid {
+      translation 0 0 1.5
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid45"
+    }
+    Solid {
+      translation 0.3 0 1.5
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/22.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid46"
+    }
+    Solid {
+      translation 0.6 0 1.5
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid47"
+    }
+    Solid {
+      translation 0.8999999999999999 0 1.5
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid48"
+    }
+    Solid {
+      translation 1.2 0 1.5
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid49"
+    }
+    Solid {
+      translation 1.5 0 1.5
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid50"
+    }
+    Solid {
+      translation 1.7999999999999998 0 1.5
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid51"
+    }
+    Solid {
+      translation 2.1 0 1.5
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/27.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid52"
+    }
+    Solid {
+      translation 2.4 0 1.5
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/5.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid53"
+    }
+    Solid {
+      translation 0 0 1.7999999999999998
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid54"
+    }
+    Solid {
+      translation 0.3 0 1.7999999999999998
+      rotation 0 1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid55"
+    }
+    Solid {
+      translation 0.6 0 1.7999999999999998
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/30.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid56"
+    }
+    Solid {
+      translation 0.8999999999999999 0 1.7999999999999998
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid57"
+    }
+    Solid {
+      translation 1.2 0 1.7999999999999998
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid58"
+    }
+    Solid {
+      translation 1.5 0 1.7999999999999998
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid59"
+    }
+    Solid {
+      translation 1.7999999999999998 0 1.7999999999999998
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/0.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid60"
+    }
+    Solid {
+      translation 2.1 0 1.7999999999999998
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/9.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid61"
+    }
+    Solid {
+      translation 2.4 0 1.7999999999999998
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/23.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid62"
+    }
+  ]
+}
+DEF RescueZone Group {
+  children [
+    rescueZone {
+      translation 2.1 0 0.3
+      rotation 0 1 0 4.71
+    }
+    rescueKit {
+      translation 0.717406 0.019487055422046966 0.4225459085810326
+      rotation 0.9999999999899787 4.476652262607927e-06 4.654748590239576e-08 4.668238176925477e-09
+    }
+  ]
+}
+DEF Checkpoints Group {
+  children [
+    Solid {
+      translation 0.48 0 0.48
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0.666667 0
+            }
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.03
+          }
+        }
+      ]
+      name "checkpoint0"
+      description "N13"
+    }
+    Solid {
+      translation 0.48 0 1.38
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0.666667 0
+            }
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.03
+          }
+        }
+      ]
+      name "checkpoint1"
+      description "S9*"
+    }
+    Solid {
+      translation 1.98 0 1.38
+      children [
+        Shape {
+          appearance Appearance {
+            material Material {
+              diffuseColor 1 0.666667 0
+            }
+          }
+          geometry Cylinder {
+            height 0.02
+            radius 0.03
+          }
+        }
+      ]
+      name "checkpoint2"
+      description "N4-"
     }
   ]
 }

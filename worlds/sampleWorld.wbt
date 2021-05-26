@@ -18,7 +18,7 @@ DEF BlocklySupervisor Robot {
 }
 DEF GameSupervisor Robot {
   name "Game_Supervisor"
-  controller "Game_Supervisor"
+  controller ""
   supervisor TRUE
   window "scoring_window"
 }
@@ -1985,8 +1985,8 @@ DEF player0 Robot {
             staticFriction 0.05
           }
           endPoint Solid {
-            translation 3.1159745374659462e-06 -0.0012443623505272975 0.19189323353476134
-            rotation 5.0413680457973855e-06 -0.9999999999833062 -2.8235267365822963e-06 0.060358804104827066
+            translation 3.1159745374670304e-06 -0.0012443623505272975 0.19189323353476134
+            rotation 5.041368045799055e-06 -0.9999999999833062 -2.8235267365832315e-06 0.060358804104827066
             children [
               DEF casterWheelRim HingeJoint {
                 jointParameters HingeJointParameters {
@@ -2170,8 +2170,8 @@ DEF player0 Robot {
             }
           ]
           endPoint Solid {
-            translation -0.16500220360576365 -7.565405206774639e-05 -9.272977959895715e-06
-            rotation 0.999999998059653 -1.5383862184266545e-05 6.0365806033682726e-05 5.610507985107178
+            translation -0.16500220360576365 -7.565405206774644e-05 -9.272977959895696e-06
+            rotation 0.999999998059653 -1.5383862184266688e-05 6.0365806033683316e-05 5.610507985107178
             children [
               DEF BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -2449,7 +2449,7 @@ DEF player0 Robot {
           ]
           endPoint Solid {
             translation 0.16503110517477204 -8.842624337373467e-05 -2.356267092210514e-05
-            rotation -0.9999999978702185 3.684027949317669e-05 5.387352515980466e-05 5.642367495684138
+            rotation -0.9999999978702185 3.684027949317791e-05 5.3873525159806454e-05 5.642367495684138
             children [
               DEF RIGHT_BLACK_CYLINDER_SHAPE Shape {
                 appearance PBRAppearance {
@@ -4355,8 +4355,8 @@ DEF player0 Robot {
     DEF extensionSlot Group {
       children [
         DEF SCOOP scoop {
-          translation 0.050000000000000905 -0.22621599788328411 -0.31909000150063743
-          rotation 3.2929600538365786e-08 0.9996875173322117 -0.024997353663096668 3.141590000817359
+          translation 0.05000000000000096 -0.22621599788328434 -0.31909000150063777
+          rotation 3.2929600542224795e-08 0.9996875173322117 -0.024997353663096664 3.141590000817359
         }
         DistSensor {
           translation 0.210007 0.06 -0.00983298

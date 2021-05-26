@@ -262,7 +262,7 @@ def makeWorld():
         for j in range(len(scoringElem[i])):
             path += str(scoringElem[i][j]) + ','
         path += ';'
-    path += ';,,;,;,;,;'
+    path += ',,;,;,;'
     print(path)
 
     eEntrance = -1
@@ -292,20 +292,21 @@ def makeWorld():
 
     print(eEntrance, eExit)
     if eEntrance != -1:
-        file.write('rescueZone {\n')
+        file.write('DEF RescueZone Group{\n  children [\n')
+        file.write('    rescueZone {\n')
         if eExit - eEntrance == -3 * numCol + 1: #N
-            file.write('  translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
-            file.write('  rotation 0 1 0 ' + str(dirAngle[0]) + '\n')
+            file.write('      translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[0]) + '\n')
         elif eExit - eEntrance == numCol + 3: #E
-            file.write('  translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
-            file.write('  rotation 0 1 0 ' + str(dirAngle[1]) + '\n')
+            file.write('      translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) - 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[1]) + '\n')
         elif eExit - eEntrance == 3 * numCol - 1: #S
-            file.write('  translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
-            file.write('  rotation 0 1 0 ' + str(dirAngle[2]) + '\n')
+            file.write('      translation ' + str((eEntrance % numCol + 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[2]) + '\n')
         elif eExit - eEntrance == -1 * numCol - 3: #W
-            file.write('  translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
-            file.write('  rotation 0 1 0 ' + str(dirAngle[3]) + '\n')
-        file.write('}\n')
+            file.write('      translation ' + str((eEntrance % numCol - 3) * 0.3) + ' 0 ' + str((int(eEntrance / numCol) + 3) * 0.3) + '\n')
+            file.write('      rotation 0 1 0 ' + str(dirAngle[3]) + '\n')
+        file.write('    }\n    rescueKit {\n    }\n  ]\n}\n')
 
     i = 0
     ind = 0
