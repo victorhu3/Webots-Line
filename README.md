@@ -32,7 +32,19 @@ Important Features:
   - Open Scene Tree, right click on BlocklySupervisor Robot, click Show Robot Window
 - Scoring window to track points
   - Open Scene Tree, right click on GameSupervisor Robot, click Show Robot Window
+- Manual Scoring
+  - Pop-up window to manually count score and call lack of progresses
+  - To enable manual scoring, open the Scene Tree, click on the drop-down for "DEF 
+    GameSupervisor Robot", and type "MANUAL" into the description field. Then,
+    be sure to save your world (Ctrl+Shift+S)
+  - To open the pop-up window, right click on "DEF GameSupervisor Robot" and click
+    on "Show Robot Window"
 - Automatic Scoring
   - Only worlds named "AutoScoring" support automatic scoring
+  - To enable automatic scoring, open the Scene Tree, click on the drop-down for "DEF 
+    GameSupervisor Robot", and type "Game_Supervisor" into the controller field. Then,
+    be sure to save your world (Ctrl+Shift+S)
+  - The automatically compiled scoring results will be put in a .csv file (Excel file)
+    in the folder "Webots-Line\worlds\results"
 - Map generator
   - Navigate to the line_generator folder, run LineGenerator.py
