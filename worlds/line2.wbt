@@ -1,0 +1,301 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.9251203630072125 0.3508348502487668 0.1451455193946019 5.442137801127191
+  position 0.1712497997173321 1.6601205483992016 2.250963790634493
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF Tiles Group {
+  children [
+    Solid {
+      translation 0.6 0 0.6
+      description "5,5,;0,1,2,7,8,9,14,19,18,17,16,21,22,23,24,;8,18,22,;;;23,;;;;,,;,;,;"
+      boundingObject Plane {
+        size 1.5 1.5
+      }
+    }
+    Solid {
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid0"
+    }
+    Solid {
+      translation 0.3 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/5.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid1"
+    }
+    Solid {
+      translation 0.6 0 0
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid2"
+    }
+    Solid {
+      translation 0.6 0 0.3
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/9.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid7"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/11.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid8"
+    }
+    Solid {
+      translation 1.2 0 0.3
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/9.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid9"
+    }
+    Solid {
+      translation 1.2 0 0.6
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/6.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid14"
+    }
+    Solid {
+      translation 0.3 0 0.8999999999999999
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/2.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid16"
+    }
+    Solid {
+      translation 0.6 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid17"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/15.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid18"
+    }
+    Solid {
+      translation 1.2 0 0.8999999999999999
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid19"
+    }
+    Solid {
+      translation 0.3 0 1.2
+      rotation 0 1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid21"
+    }
+    Solid {
+      translation 0.6 0 1.2
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/11.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid22"
+    }
+    Solid {
+      translation 0.8999999999999999 0 1.2
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/10.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid23"
+    }
+    Solid {
+      translation 1.2 0 1.2
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/25.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid24"
+    }
+  ]
+}

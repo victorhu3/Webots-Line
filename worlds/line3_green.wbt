@@ -1,0 +1,231 @@
+#VRML_SIM R2021a utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation 0.9251203630072125 0.3508348502487668 0.1451455193946019 5.442137801127191
+  position 0.05490371508833631 1.441662524624734 1.8495433911826262
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF BlocklySupervisor Robot {
+  name "Supervisor"
+  controller "supervisor"
+  supervisor TRUE
+  window "blockly"
+}
+DEF Tiles Group {
+  children [
+    Solid {
+      translation 0.44999999999999996 0 0.44999999999999996
+      description "4,4,;0,1,2,6,7,11,15,14,13,12,13,9,;1,2,6,11,15,13,12,13,;;;;;;;,,;,;,;"
+      boundingObject Plane {
+        size 1.2 1.2
+      }
+    }
+    Solid {
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid0"
+    }
+    Solid {
+      translation 0.3 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/11.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid1"
+    }
+    Solid {
+      translation 0.6 0 0
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/13.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid2"
+    }
+    Solid {
+      translation 0.6 0 0.3
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/13.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid6"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.3
+      rotation 0 1 0 4.71
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/4.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid7"
+    }
+    Solid {
+      translation 0.3 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/25.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid9"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.6
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/15.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid11"
+    }
+    Solid {
+      translation 0 0 0.8999999999999999
+      rotation 0 1 0 1.57
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/14.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid12"
+    }
+    Solid {
+      translation 0.3 0 0.8999999999999999
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/12.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid13"
+    }
+    Solid {
+      translation 0.6 0 0.8999999999999999
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/1.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid14"
+    }
+    Solid {
+      translation 0.8999999999999999 0 0.8999999999999999
+      rotation 0 1 0 3.14
+      children [
+        Shape {
+          appearance Appearance {
+            texture ImageTexture {
+              url [
+                "../tiles/16.png"
+              ]
+            }
+          }
+          geometry Plane {
+            size 0.3 0.3
+          }
+        }
+      ]
+      name "solid15"
+    }
+  ]
+}
